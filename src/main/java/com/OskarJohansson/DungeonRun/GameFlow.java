@@ -3,6 +3,7 @@ import com.OskarJohansson.DungeonRun.Model.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -11,6 +12,7 @@ public class GameFlow {
     List<Object> gameList = new ArrayList<>();
     Player player;
     Scanner sc = new Scanner(System.in);
+    private Random random = new Random();
 
     public void runApp(Player player){
 
@@ -19,6 +21,8 @@ public class GameFlow {
             player.setName(sc.nextLine());
             System.out.println("Please set game character to play. 1> Barbarian 2> Coder 3> Assassin");
             player.setCharacter(sc.nextInt());
+
+
 
 
 

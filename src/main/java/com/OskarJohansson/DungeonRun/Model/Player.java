@@ -14,7 +14,6 @@ public class Player implements Combat {
     private int experiencePoints;
     private int gold;
     private int level;
-    private Random random = new Random();
 
     public String getName() {
         return name;
@@ -29,10 +28,19 @@ public class Player implements Combat {
     }
 
     public void setCharacter(int choice) {
-        switch(choice){
-            case 1 -> this.character = Character.Barbarian;
-            case 2 -> this.character = Character.Coder;
-            case 3 -> this.character = Character.Assassin;
+        switch (choice) {
+            case 1 -> {
+                this.character = Character.Barbarian;
+                this.weapon = Weapon.Sword;
+            }
+            case 2 -> {
+                this.character = Character.Coder;
+                this.weapon = Weapon.Computer;
+            }
+            case 3 -> {
+                this.character = Character.Assassin;
+                this.weapon = Weapon.Knife;
+            }
             default -> System.out.println("Input must be an integer 1-3");
         }
     }
@@ -40,6 +48,7 @@ public class Player implements Combat {
     public Weapon getWeapon() {
         return weapon;
     }
+
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
@@ -78,9 +87,6 @@ public class Player implements Combat {
 
     @Override
     public void attack() {
-
-        Weapon weapon = getWeapon();
-
 
     }
 

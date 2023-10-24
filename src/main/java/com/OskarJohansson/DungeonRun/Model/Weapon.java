@@ -6,17 +6,65 @@ public class Weapon {
     public static Weapon Computer;
     public static Weapon Knife;
 
-    private static class Sword{
-        int damage;
-        int turnPoints = -3;
+    public static class Sword{
+        private int damage = 3;
+        private int turnPoints = 1;
+
+        public int getDamage() {
+            return damage;
+        }
+
+        public void setDamage(int damage) {
+            this.damage = damage;
+        }
+
+        public int getTurnPoints() {
+            return turnPoints;
+        }
+
+        public void setTurnPoints(int turnPoints) {
+            this.turnPoints = turnPoints;
+        }
     }
-    private static class Computer{
-        int damage;
-        int turnPoints = -2;
+    public static class Computer{
+        private int damage = 2;
+        private int turnPoints = 1;
+
+        public int getDamage() {
+            return damage;
+        }
+
+        public void setDamage(int damage) {
+            this.damage = damage;
+        }
+
+        public int getTurnPoints() {
+            return turnPoints;
+        }
+
+        public void setTurnPoints(int turnPoints) {
+            this.turnPoints = turnPoints;
+        }
     }
-    private static class Knife{
-        int damage;
-        int turnPoints = -1;
+    public static class Knife{
+        private int damage = 1;
+        private int turnPoints = 1;
+
+        public int getDamage() {
+            return damage;
+        }
+
+        public void setDamage(int damage) {
+            this.damage = damage;
+        }
+
+        public int getTurnPoints() {
+            return turnPoints;
+        }
+
+        public void setTurnPoints(int turnPoints) {
+            this.turnPoints = turnPoints;
+        }
     }
 
 }

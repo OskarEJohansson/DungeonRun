@@ -6,6 +6,8 @@ import com.OskarJohansson.DungeonRun.Model.Player;
 public class CombatControll {
     public void combat(Monster monster, Player player){
 
+        player.attack();
+
 
     }
 
