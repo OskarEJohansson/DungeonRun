@@ -14,7 +14,6 @@ public class Player implements Combat {
     private int experiencePoints;
     private int gold;
     private int level;
-    private Random random = new Random();
 
     public String getName() {
         return name;
@@ -79,7 +78,7 @@ public class Player implements Combat {
     @Override
     public void attack() {
 
-        Weapon weapon = getWeapon();
+
 
 
     }
