@@ -3,55 +3,47 @@ package com.OskarJohansson.DungeonRun.Control;
 import com.OskarJohansson.DungeonRun.Model.Monster.Monster;
 import com.OskarJohansson.DungeonRun.Model.Player;
 
-import java.util.Random;
-
 public class CombatControl {
 
-    Random randomizer = new Random();
-
-    public void combat(Monster monster, Player player) {
-        System.out.println("You are attacked by a monster!");
+    public int monsterCombatAttack(Monster monster, Player player) {
+        monster.setTurningPoints(monster.getTurningPoints() - monster.getAttackCost());
+        return monster.getDamage();
     }
 
-    public void monsterCombatTurn(Monster monster, Player player) {
-        int damage = monster.attack();
-        monster.setTurningPoints(monster.getTurningPoints() - monster.getAttackCost());
-        System.out.println(monster.getName() + "inflicts " + damage + "in damage. ");
+    public int monsterCombatAttack(Monster monster, Randomizer randomizer){
+
+        if (randomizer.block())
+        return
+    }
+
+    public void playerCombatAttack(Monster monster, Player player) {
+        int damage = player.attack();
+        player.setTurningPoints(player.getTurningPoints() - player.getWeapon().getWeaponTurnPoints());
+        System.out.println(player.getName() + " inflicts " + damage + " in damage. ");
         monster.setHealthPoints(monster.getHealthPoints() - damage);
     }
-    
-    public void playerCombatBlock(Player player){
-        int armour = player.getArmour();
-    }
 
-    public void playerCombatTurn(Monster monster, Player player) {
-            int damage = player.attack();
+    public boolean playerCombatBlock(Player player, Randomizer randomizer) {
 
-            player.setTurningPoints(player.getTurningPoints() - player.getWeapon().getWeaponTurnPoints());
+        if (randomizer.block(player.getLevel(), player.getArmour())) {
+            System.out.println("Player blocked attack successfully!");
+            return true;
 
-            System.out.println(player.getName() + " inflicts " + damage + " in damage. ");
-
-            monster.setHealthPoints(monster.getHealthPoints() - damage);
-    }
-
-    // TAKES PLAYERS LEVEL AS MIN NUMBER AND PLAYERS AGILITY AS MAX NUMBER TO GET A RANDOM NUMBER. IF ABOVE AGILITY/2 DODGE IS SUCCSESSFULL
-    public boolean dodgeRandomizer(Monster monster, Player player, Randomizer randomizer){
-        return (randomizer.randomizer(player.getLevel(), player.getAgility()) < player.getAgility()/2);
+        } else
+            System.out.println("Block botched!");
+        return false;
     }
 
     public boolean playerDodgeAttack(Monster monster, Player player, Randomizer randomizer) {
 
-        int monsterDamage = monster.attack();
-
-        if (!dodgeRandomizer(monster, player, randomizer)) {
-            player.setHealthPoints(player.getHealthPoints() - monsterDamage);
-            System.out.println("Monster inflicts " + monsterDamage + " in damage");
-            return false; //Unsuccessful  dodge
+        if (!randomizer.dodge(monster.getExperiencePoints(), player.getAgility())) {
+            player.setHealthPoints(player.getHealthPoints() - monster.getDamage());
+            System.out.println("Monster inflicts " + monster.getDamage() + " in damage");
+            return false;
 
         } else
             System.out.println(player.getName() + "dodged the attack!");
-        return true; //Successful dodge
+        return true;
     }
-
 
 }

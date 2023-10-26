@@ -165,8 +165,7 @@ public class Player implements Combat {
 
     @Override
     public int attack() {
-
-        return new Random().nextInt(2, 3);
+        return getWeapon().getDamage();
     }
 
     @Override

@@ -2,16 +2,17 @@ package com.OskarJohansson.DungeonRun.Model.Monster;
 
 import com.OskarJohansson.DungeonRun.Control.Combat;
 
-public class Monster implements Combat {
+public abstract class Monster {
 
     private String name;
-    private Monster monster;
     private int healthPoints;
     private int damage;
     private int turningPoints;
     private int attackCost;
     private int experiencePoints;
     private int gold;
+    private int level;
+    private int armour;
 
     public String getName() {
         return name;
@@ -19,13 +20,6 @@ public class Monster implements Combat {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Monster getMonster() {
-        return monster;
-    }
-    public void setMonster(Monster monster) {
-        this.monster = monster;
     }
 
     public int getHealthPoints() {
@@ -76,30 +70,19 @@ public class Monster implements Combat {
         this.gold = gold;
     }
 
-    @Override
-    public int attack() {
-
-        return 0;
+    public int getLevel() {
+        return level;
     }
 
-    @Override
-    public int block() {
-    return  0;
+    public void setLevel(int level) {
+        this.level = level;
     }
 
-    @Override
-    public int flee() {
-        return 0;
+    public int getArmour() {
+        return armour;
     }
 
-    @Override
-    public void getStatus() {
-
-    }
-
-    @Override
-    public int dodge() {
-
-        return 0;
+    public void setArmour(int armour) {
+        this.armour = armour;
     }
 }

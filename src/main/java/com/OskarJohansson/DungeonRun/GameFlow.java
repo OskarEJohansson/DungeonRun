@@ -22,7 +22,7 @@ public class GameFlow {
         Monster monster = new Minion();
         Player player1 = new Player();
 
-        player1.setCharacter();
+        player1.setCharacter(1);
         player1.setName("Oskar");
 
 

@@ -9,6 +9,8 @@ public class Minion extends Monster {
     private int attackCost;
     private int experiencePoints;
     private int gold;
+    private int level;
+    private int armour;
 
     public Minion(){
         this.name = "Minion";
@@ -18,6 +20,13 @@ public class Minion extends Monster {
         this.turningPoints = 2;
         this.experiencePoints = 1;
         this.gold = 1;
+        this.level = 1;
+        this.armour = 1;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -26,18 +35,8 @@ public class Minion extends Monster {
     }
 
     @Override
-    public void setHealthPoints(int healthPoints) {
-        this.healthPoints = healthPoints;
-    }
-
-    @Override
     public int getDamage() {
         return damage;
-    }
-
-    @Override
-    public void setDamage(int damage) {
-        this.damage = damage;
     }
 
     @Override
@@ -46,8 +45,8 @@ public class Minion extends Monster {
     }
 
     @Override
-    public void setTurningPoints(int turningPoints) {
-        this.turningPoints = turningPoints;
+    public int getAttackCost() {
+        return attackCost;
     }
 
     @Override
@@ -56,19 +55,17 @@ public class Minion extends Monster {
     }
 
     @Override
-    public void setExperiencePoints(int experiencePoints) {
-        this.experiencePoints = experiencePoints;
-    }
-
-    @Override
     public int getGold() {
         return gold;
     }
 
     @Override
-    public void setGold(int gold) {
-        this.gold = gold;
+    public int getLevel() {
+        return level;
     }
 
-
+    @Override
+    public int getArmour() {
+        return armour;
+    }
 }
