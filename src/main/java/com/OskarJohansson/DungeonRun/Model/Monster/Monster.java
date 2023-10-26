@@ -4,11 +4,29 @@ import com.OskarJohansson.DungeonRun.Control.Combat;
 
 public class Monster implements Combat {
 
+    private String name;
+    private Monster monster;
     private int healthPoints;
     private int damage;
     private int turningPoints;
+    private int attackCost;
     private int experiencePoints;
     private int gold;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Monster getMonster() {
+        return monster;
+    }
+    public void setMonster(Monster monster) {
+        this.monster = monster;
+    }
 
     public int getHealthPoints() {
         return healthPoints;
@@ -34,6 +52,14 @@ public class Monster implements Combat {
         this.turningPoints = turningPoints;
     }
 
+    public int getAttackCost() {
+        return attackCost;
+    }
+
+    public void setAttackCost(int attackCost) {
+        this.attackCost = attackCost;
+    }
+
     public int getExperiencePoints() {
         return experiencePoints;
     }
@@ -57,13 +83,13 @@ public class Monster implements Combat {
     }
 
     @Override
-    public void block() {
-
+    public int block() {
+    return  0;
     }
 
     @Override
-    public void flee() {
-
+    public int flee() {
+        return 0;
     }
 
     @Override

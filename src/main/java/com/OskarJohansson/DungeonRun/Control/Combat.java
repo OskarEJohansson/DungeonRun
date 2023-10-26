@@ -3,8 +3,9 @@ package com.OskarJohansson.DungeonRun.Control;
 public interface Combat {
 
     public int attack();
-    public void block();
-    public void flee();
+    public int block();
+    public int flee();
+
     public void getStatus();
 
     public int dodge();

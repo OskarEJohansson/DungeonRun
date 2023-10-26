@@ -10,49 +10,48 @@ public class CombatControl {
     Random randomizer = new Random();
 
     public void combat(Monster monster, Player player) {
-
         System.out.println("You are attacked by a monster!");
     }
 
+    public void monsterCombatTurn(Monster monster, Player player) {
+        int damage = monster.attack();
+        monster.setTurningPoints(monster.getTurningPoints() - monster.getAttackCost());
+        System.out.println(monster.getName() + "inflicts " + damage + "in damage. ");
+        monster.setHealthPoints(monster.getHealthPoints() - damage);
+    }
+    
+    public void playerCombatBlock(Player player){
+        int armour = player.getArmour();
+    }
 
-    public void playerAttack(Monster monster, Player player) {
-
-        if (player.getTurningPoints() > 0) {
-
+    public void playerCombatTurn(Monster monster, Player player) {
             int damage = player.attack();
-            int turningPoints = player.getWeapon().getTurnPoints();
-            player.setTurningPoints(player.getTurningPoints() - turningPoints);
-            System.out.println(player.getName() + "inflicts " + damage + "health points of damage. ");
+
+            player.setTurningPoints(player.getTurningPoints() - player.getWeapon().getWeaponTurnPoints());
+
+            System.out.println(player.getName() + " inflicts " + damage + " in damage. ");
+
             monster.setHealthPoints(monster.getHealthPoints() - damage);
-
-        }
     }
 
+    // TAKES PLAYERS LEVEL AS MIN NUMBER AND PLAYERS AGILITY AS MAX NUMBER TO GET A RANDOM NUMBER. IF ABOVE AGILITY/2 DODGE IS SUCCSESSFULL
     public boolean dodgeRandomizer(Monster monster, Player player, Randomizer randomizer){
-
-        int randomizer1 = randomizer.randomizer(monster.getExperiencePoints(), player.dodge());
-        int randomizer2 = randomizer1 * player.getLevel();
-        int randomizer3 = randomizer2/player.dodge();
-        int randomizer4 = player.dodge() * player.getLevel();
-        System.out.println(randomizer3);
-        System.out.println(randomizer4);
-
-
-        return randomizer.randomizer(monster.getExperiencePoints(), player.dodge()) * player.getLevel() / player.dodge() > player.dodge() * player.getLevel();
-
+        return (randomizer.randomizer(player.getLevel(), player.getAgility()) < player.getAgility()/2);
     }
 
-    public boolean dodgeAttack(Monster monster, Player player, Randomizer randomizer) {
+    public boolean playerDodgeAttack(Monster monster, Player player, Randomizer randomizer) {
 
         int monsterDamage = monster.attack();
 
-        if (dodgeRandomizer(monster, player, randomizer)) {
+        if (!dodgeRandomizer(monster, player, randomizer)) {
             player.setHealthPoints(player.getHealthPoints() - monsterDamage);
-            System.out.println("Monster inflicts " + monsterDamage + "health points in damage");
+            System.out.println("Monster inflicts " + monsterDamage + " in damage");
             return false; //Unsuccessful  dodge
 
         } else
             System.out.println(player.getName() + "dodged the attack!");
         return true; //Successful dodge
     }
+
+
 }

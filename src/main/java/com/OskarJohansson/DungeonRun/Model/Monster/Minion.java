@@ -2,15 +2,19 @@ package com.OskarJohansson.DungeonRun.Model.Monster;
 
 public class Minion extends Monster {
 
+    private String name;
     private int healthPoints;
     private int damage;
     private int turningPoints;
+    private int attackCost;
     private int experiencePoints;
     private int gold;
 
     public Minion(){
+        this.name = "Minion";
         this.healthPoints = 3;
         this.damage = 1;
+        this.attackCost = 1;
         this.turningPoints = 2;
         this.experiencePoints = 1;
         this.gold = 1;

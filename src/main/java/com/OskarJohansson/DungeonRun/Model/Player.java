@@ -22,16 +22,37 @@ public class Player implements Combat {
     private int agility;
     private int healthPoints = 5;
     private int turningPoints = 5;
+    private int armour = 1;
     private int experiencePoints = 0;
     private int gold = 0;
     private int level = 1;
 
-    public int getTurningPoints() {
-        return turningPoints;
+    public void setCharacter(Character character) {
+        this.character = character;
     }
 
-    public void setTurningPoints(int turningPoints) {
-        this.turningPoints = turningPoints;
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public int getIntelligence() {
+        return intelligence;
+    }
+
+    public void setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
+    }
+
+    public int getAgility() {
+        return agility;
+    }
+
+    public void setAgility(int agility) {
+        this.agility = agility;
     }
 
     public String getName() {
@@ -42,34 +63,45 @@ public class Player implements Combat {
         this.name = name;
     }
 
-    public Character getCharacter(){
+    public Character getCharacter() {
         return this.character;
     }
 
-
     public void setCharacter(int choice) {
+
+
+
 
         switch (choice) {
             case 1 -> {
-                this.character = new Barbarian();
-                this.weapon = new Sword();
-                this.strength = character.getStrength();
-                this.intelligence = character.getIntelligence();
-                this.agility = character.getAgility();
+                setCharacter(new Barbarian());
+                setWeapon(new Sword());
+                setStrength(character.getStrength());
+                setIntelligence(character.getIntelligence());
+                setAgility(character.getAgility());
+                setHealthPoints(this.healthPoints += character.getHealthPoints());
+                setTurningPoints(this.turningPoints += character.getTurningPoints());
+                setArmour(this.armour = character.getArmour());
             }
             case 2 -> {
-                character = new Coder();
-                this.weapon = new Drone();
-                this.strength = character.getStrength();
-                this.intelligence = character.getIntelligence();
-                this.agility = character.getAgility();
+                setCharacter(new Coder());
+                setWeapon(new Drone());
+                setStrength(character.getStrength());
+                setIntelligence(character.getIntelligence());
+                setAgility(character.getAgility());
+                setHealthPoints(this.healthPoints += character.getHealthPoints());
+                setTurningPoints(this.turningPoints += character.getTurningPoints());
+                setArmour(this.armour = character.getArmour());
             }
             case 3 -> {
-                this.character = new Assassin();
-                this.weapon = new Knife();
-                this.strength = character.getStrength();
-                this.intelligence = character.getIntelligence();
-                this.agility = character.getAgility();
+                setCharacter(new Assassin());
+                setWeapon(new Knife());
+                setStrength(character.getStrength());
+                setIntelligence(character.getIntelligence());
+                setAgility(character.getAgility());
+                setHealthPoints(this.healthPoints += character.getHealthPoints());
+                setTurningPoints(this.turningPoints += character.getTurningPoints());
+                setArmour(this.armour = character.getArmour());
             }
             default -> System.out.println("Input must be an integer 1-3");
         }
@@ -89,6 +121,22 @@ public class Player implements Combat {
 
     public void setHealthPoints(int healthPoints) {
         this.healthPoints = healthPoints;
+    }
+
+    public int getTurningPoints() {
+        return turningPoints;
+    }
+
+    public void setTurningPoints(int turningPoints) {
+        this.turningPoints = turningPoints;
+    }
+
+    public int getArmour() {
+        return armour;
+    }
+
+    public void setArmour(int armour) {
+        this.armour = armour;
     }
 
     public int getExperiencePoints() {
@@ -118,16 +166,17 @@ public class Player implements Combat {
     @Override
     public int attack() {
 
-        return new Random().nextInt(2, this.weapon.getDamage());
+        return new Random().nextInt(2, 3);
     }
 
     @Override
-    public void block() {
-
+    public int block() {
+        return 0;
     }
 
     @Override
-    public void flee() {
+    public int flee() {
+        return this.agility;
 
     }
 

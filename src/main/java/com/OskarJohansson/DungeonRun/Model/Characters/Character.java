@@ -6,7 +6,7 @@ public class Character {
     private int intelligence;
     private int agility;
 
-    private int armor;
+    private int armour;
     private int healthPoints;
     private int turningPoints;
 
@@ -34,12 +34,12 @@ public class Character {
         this.agility = agility;
     }
 
-    public int getArmor() {
-        return armor;
+    public int getArmour() {
+        return armour;
     }
 
-    public void setArmor(int armor) {
-        this.armor = armor;
+    public void setArmour(int armour) {
+        this.armour = armour;
     }
 
     public int getHealthPoints() {
