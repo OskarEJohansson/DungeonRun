@@ -26,12 +26,6 @@ public class Player implements Combat {
     private int gold = 0;
     private int level = 1;
 
-    public Player(){
-        this.strength = character.getStrength();
-        this.intelligence = character.getIntelligence();
-        this.agility = character.getAgility();
-    }
-
     public int getTurningPoints() {
         return turningPoints;
     }
@@ -55,19 +49,27 @@ public class Player implements Combat {
 
     public void setCharacter(int choice) {
 
-        Character character;
         switch (choice) {
             case 1 -> {
                 this.character = new Barbarian();
                 this.weapon = new Sword();
+                this.strength = character.getStrength();
+                this.intelligence = character.getIntelligence();
+                this.agility = character.getAgility();
             }
             case 2 -> {
                 character = new Coder();
                 this.weapon = new Drone();
+                this.strength = character.getStrength();
+                this.intelligence = character.getIntelligence();
+                this.agility = character.getAgility();
             }
             case 3 -> {
                 this.character = new Assassin();
                 this.weapon = new Knife();
+                this.strength = character.getStrength();
+                this.intelligence = character.getIntelligence();
+                this.agility = character.getAgility();
             }
             default -> System.out.println("Input must be an integer 1-3");
         }

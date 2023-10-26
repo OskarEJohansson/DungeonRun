@@ -2,7 +2,7 @@ package com.OskarJohansson.DungeonRun.Model.Monster;
 
 import com.OskarJohansson.DungeonRun.Control.Combat;
 
-public class Monster extends Combat {
+public class Monster implements Combat {
 
     private int healthPoints;
     private int damage;
