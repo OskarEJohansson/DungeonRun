@@ -1,7 +1,6 @@
 package com.OskarJohansson.DungeonRun.Model.Characters;
 
 public class Barbarian extends Character {
-
     private String heroClass;
     private int strength;
     private int intelligence;
