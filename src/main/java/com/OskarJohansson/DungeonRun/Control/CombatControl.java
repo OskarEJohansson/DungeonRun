@@ -10,10 +10,14 @@ public class CombatControl {
         return monster.getDamage();
     }
 
-    public int monsterCombatAttack(Monster monster, Randomizer randomizer){
+    public boolean monsterCombatAttack(Monster monster, Randomizer randomizer){
 
-        if (randomizer.block())
-        return
+        if (!randomizer.block(monster.getLevel(),monster.getArmour())){
+            System.out.println("Monster blocked attack successfully!");
+            return true;
+        }
+        System.out.println("Block botched");
+        return false;
     }
 
     public void playerCombatAttack(Monster monster, Player player) {
@@ -45,5 +49,4 @@ public class CombatControl {
             System.out.println(player.getName() + "dodged the attack!");
         return true;
     }
-
 }

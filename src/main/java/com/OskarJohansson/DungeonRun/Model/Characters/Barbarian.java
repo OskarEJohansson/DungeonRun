@@ -2,6 +2,7 @@ package com.OskarJohansson.DungeonRun.Model.Characters;
 
 public class Barbarian extends Character {
 
+    private String heroClass;
     private int strength;
     private int intelligence;
     private int agility;
@@ -11,6 +12,7 @@ public class Barbarian extends Character {
     private int turningPoints;
 
     public Barbarian() {
+        this.heroClass = "Barbarian";
         this.strength = 5;
         this.intelligence = 1;
         this.agility = 2;
@@ -20,51 +22,38 @@ public class Barbarian extends Character {
         this.turningPoints = 0;
     }
 
+    @Override
+    public String getHeroClass() {
+        return heroClass;
+    }
+
+    @Override
     public int getStrength() {
         return strength;
     }
 
-    public void setStrength(int strength) {
-        this.strength = strength;
-    }
-
+    @Override
     public int getIntelligence() {
         return intelligence;
     }
 
-    public void setIntelligence(int intelligence) {
-        this.intelligence = intelligence;
-    }
-
+    @Override
     public int getAgility() {
         return agility;
     }
 
-    public void setAgility(int agility) {
-        this.agility = agility;
-    }
-
+    @Override
     public int getArmour() {
-        return this.armour;
+        return armour;
     }
 
-    public void setArmour(int armour) {
-        this.armour = armour;
-    }
-
+    @Override
     public int getHealthPoints() {
         return healthPoints;
     }
 
-    public void setHealthPoints(int healthPoints) {
-        this.healthPoints = healthPoints;
-    }
-
+    @Override
     public int getTurningPoints() {
         return turningPoints;
-    }
-
-    public void setTurningPoints(int turningPoints) {
-        this.turningPoints = turningPoints;
     }
 }

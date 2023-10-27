@@ -2,6 +2,7 @@ package com.OskarJohansson.DungeonRun.Model.Characters;
 
 public class Character {
 
+    private String heroClass;
     private int strength;
     private int intelligence;
     private int agility;
@@ -9,6 +10,15 @@ public class Character {
     private int armour;
     private int healthPoints;
     private int turningPoints;
+
+
+    public String getHeroClass() {
+        return heroClass;
+    }
+
+    public void setHeroClass(String heroClass) {
+        this.heroClass = heroClass;
+    }
 
     public int getStrength() {
         return strength;

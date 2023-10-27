@@ -17,6 +17,7 @@ public class Player implements Combat {
     private String name;
     private Weapon weapon;
     private Character character;
+    private String heroClass;
     private int strength;
     private int intelligence;
     private int agility;
@@ -75,6 +76,7 @@ public class Player implements Combat {
         switch (choice) {
             case 1 -> {
                 setCharacter(new Barbarian());
+                setHeroClass(character.getHeroClass());
                 setWeapon(new Sword());
                 setStrength(character.getStrength());
                 setIntelligence(character.getIntelligence());
@@ -85,6 +87,7 @@ public class Player implements Combat {
             }
             case 2 -> {
                 setCharacter(new Coder());
+                setHeroClass(character.getHeroClass());
                 setWeapon(new Drone());
                 setStrength(character.getStrength());
                 setIntelligence(character.getIntelligence());
@@ -95,6 +98,7 @@ public class Player implements Combat {
             }
             case 3 -> {
                 setCharacter(new Assassin());
+                setHeroClass(character.getHeroClass());
                 setWeapon(new Knife());
                 setStrength(character.getStrength());
                 setIntelligence(character.getIntelligence());
@@ -105,6 +109,14 @@ public class Player implements Combat {
             }
             default -> System.out.println("Input must be an integer 1-3");
         }
+    }
+
+    public String getHeroClass() {
+        return heroClass;
+    }
+
+    public void setHeroClass(String heroClass) {
+        this.heroClass = heroClass;
     }
 
     public Weapon getWeapon() {
