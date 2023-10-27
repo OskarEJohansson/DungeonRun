@@ -17,11 +17,11 @@ public class Minion extends Monster {
         this.healthPoints = 3;
         this.damage = 1;
         this.attackCost = 1;
-        this.turningPoints = 2;
+        this.turningPoints = 5;
         this.experiencePoints = 1;
         this.gold = 1;
         this.level = 1;
-        this.armour = 1;
+        this.armour = 2;
     }
 
     @Override
