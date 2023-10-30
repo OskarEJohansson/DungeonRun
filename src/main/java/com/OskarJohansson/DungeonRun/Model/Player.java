@@ -1,22 +1,16 @@
 package com.OskarJohansson.DungeonRun.Model;
 
 import com.OskarJohansson.DungeonRun.Control.Combat;
-import com.OskarJohansson.DungeonRun.Model.Characters.Assassin;
 import com.OskarJohansson.DungeonRun.Model.Characters.Barbarian;
-import com.OskarJohansson.DungeonRun.Model.Characters.Character;
-import com.OskarJohansson.DungeonRun.Model.Characters.Coder;
-import com.OskarJohansson.DungeonRun.Model.Weapon.Drone;
-import com.OskarJohansson.DungeonRun.Model.Weapon.Knife;
 import com.OskarJohansson.DungeonRun.Model.Weapon.Sword;
-import com.OskarJohansson.DungeonRun.Model.Weapon.Weapon;
 
 import java.util.Random;
 
 public class Player implements Combat {
 
     private String name;
-    private Weapon weapon;
-    private Character character;
+    private Sword weapon;
+    private Barbarian barbarian;
     private String heroClass;
     private int strength;
     private int intelligence;
@@ -27,9 +21,23 @@ public class Player implements Combat {
     private int experiencePoints = 0;
     private int gold = 0;
     private int level = 1;
+    private int killList  = 0;
 
-    public void setCharacter(Character character) {
-        this.character = character;
+    public void setCharacter() {
+        this.name = "PlayerTheBarbarian";
+        this.barbarian = new Barbarian();
+        this.strength = getCharacter().getStrength();
+        this.armour = getCharacter().getArmour();
+        this.agility = getCharacter().getAgility();
+        this.weapon = new Sword();
+    }
+
+    public int getKillList() {
+        return killList;
+    }
+
+    public void setKillList(int killList) {
+        this.killList += killList;
     }
 
     public int getStrength() {
@@ -64,51 +72,12 @@ public class Player implements Combat {
         this.name = name;
     }
 
-    public Character getCharacter() {
-        return this.character;
+    public Barbarian getCharacter() {
+        return this.barbarian;
     }
 
     public void setCharacter(int choice) {
 
-
-
-
-        switch (choice) {
-            case 1 -> {
-                setCharacter(new Barbarian());
-                setHeroClass(character.getHeroClass());
-                setWeapon(new Sword());
-                setStrength(character.getStrength());
-                setIntelligence(character.getIntelligence());
-                setAgility(character.getAgility());
-                setHealthPoints(this.healthPoints += character.getHealthPoints());
-                setTurningPoints(this.turningPoints += character.getTurningPoints());
-                setArmour(this.armour = character.getArmour());
-            }
-            case 2 -> {
-                setCharacter(new Coder());
-                setHeroClass(character.getHeroClass());
-                setWeapon(new Drone());
-                setStrength(character.getStrength());
-                setIntelligence(character.getIntelligence());
-                setAgility(character.getAgility());
-                setHealthPoints(this.healthPoints += character.getHealthPoints());
-                setTurningPoints(this.turningPoints += character.getTurningPoints());
-                setArmour(this.armour = character.getArmour());
-            }
-            case 3 -> {
-                setCharacter(new Assassin());
-                setHeroClass(character.getHeroClass());
-                setWeapon(new Knife());
-                setStrength(character.getStrength());
-                setIntelligence(character.getIntelligence());
-                setAgility(character.getAgility());
-                setHealthPoints(this.healthPoints += character.getHealthPoints());
-                setTurningPoints(this.turningPoints += character.getTurningPoints());
-                setArmour(this.armour = character.getArmour());
-            }
-            default -> System.out.println("Input must be an integer 1-3");
-        }
     }
 
     public String getHeroClass() {
@@ -117,14 +86,6 @@ public class Player implements Combat {
 
     public void setHeroClass(String heroClass) {
         this.heroClass = heroClass;
-    }
-
-    public Weapon getWeapon() {
-        return weapon;
-    }
-
-    public void setWeapon(Weapon weapon) {
-        this.weapon = weapon;
     }
 
     public int getHealthPoints() {
@@ -156,7 +117,7 @@ public class Player implements Combat {
     }
 
     public void setExperiencePoints(int experiencePoints) {
-        this.experiencePoints = experiencePoints;
+        this.experiencePoints += experiencePoints;
     }
 
     public int getGold() {
@@ -177,27 +138,46 @@ public class Player implements Combat {
 
     @Override
     public int attack() {
-        return getWeapon().getDamage();
+        this.turningPoints -= weapon.getTurnPoints();
+        return this.weapon.getDamage();
     }
 
     @Override
-    public int block() {
-        return 0;
+    public boolean block() {
+
+        if (new Random().nextInt(level, agility) < 10 / 2) {
+            System.out.println("Player blocked the attack successfully!\n");
+            return true;
+        } else
+            System.out.println("Player fails to blocked the hit!\n");
+        return false;
     }
 
     @Override
-    public int flee() {
-        return this.agility;
+    public void takeDamage(Boolean block, int damage) {
+        if (!block){
+            this.healthPoints -= damage;
+        }
+    }
 
+    @Override
+    public boolean flee() {
+        return this.turningPoints > 2;
     }
 
     @Override
     public void getStatus() {
+        System.out.printf("""
+                %s
+                Health Points        %d
+                Turning Points       %d
+                Experience Points    %d
+                
+                """ , this.name, this.healthPoints, this.turningPoints, this.experiencePoints);
 
     }
 
-    @Override
-    public int dodge() {
-        return this.agility;
-    }
+
+
+
 }

@@ -1,12 +1,17 @@
 package com.OskarJohansson.DungeonRun.Control;
 
+import com.OskarJohansson.DungeonRun.Model.Monster.Minion;
+import com.OskarJohansson.DungeonRun.Model.Player;
+
 public interface Combat {
 
     public int attack();
-    public int block();
-    public int flee();
 
+    boolean block();
+
+    public boolean flee();
     public void getStatus();
 
-    public int dodge();
+    void takeDamage(Boolean takeDamage, int damage);
+
 }

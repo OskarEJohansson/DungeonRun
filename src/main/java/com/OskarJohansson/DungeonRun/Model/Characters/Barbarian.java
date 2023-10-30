@@ -1,6 +1,7 @@
 package com.OskarJohansson.DungeonRun.Model.Characters;
 
-public class Barbarian extends Character {
+public class Barbarian{
+
     private String heroClass;
     private int strength;
     private int intelligence;
@@ -13,46 +14,59 @@ public class Barbarian extends Character {
     public Barbarian() {
         this.heroClass = "Barbarian";
         this.strength = 5;
-        this.intelligence = 1;
-        this.agility = 2;
+        this.intelligence = 5;
+        this.agility = 5;
 
-        this.armour = 2;
-        this.healthPoints = 3;
-        this.turningPoints = 0;
+        this.armour = 5;
+        this.healthPoints = 5;
+        this.turningPoints = 3;
     }
 
-    @Override
-    public String getHeroClass() {
-        return heroClass;
-    }
-
-    @Override
     public int getStrength() {
         return strength;
     }
 
-    @Override
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
     public int getIntelligence() {
         return intelligence;
     }
 
-    @Override
+    public void setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
+    }
+
     public int getAgility() {
         return agility;
     }
 
-    @Override
-    public int getArmour() {
-        return armour;
+    public void setAgility(int agility) {
+        this.agility = agility;
     }
 
-    @Override
+    public int getArmour() {
+        return this.armour;
+    }
+
+    public void setArmour(int armour) {
+        this.armour = armour;
+    }
+
     public int getHealthPoints() {
         return healthPoints;
     }
 
-    @Override
+    public void setHealthPoints(int healthPoints) {
+        this.healthPoints = healthPoints;
+    }
+
     public int getTurningPoints() {
         return turningPoints;
+    }
+
+    public void setTurningPoints(int turningPoints) {
+        this.turningPoints = turningPoints;
     }
 }
