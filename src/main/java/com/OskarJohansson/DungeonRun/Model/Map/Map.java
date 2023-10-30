@@ -10,8 +10,6 @@ public class Map {
 
     List<Minion> monsterList = new ArrayList<>();
 
-
-
     public Map() {
         for (int i = 0; i < 3; i++) {
             monsterList.add(new Minion());
