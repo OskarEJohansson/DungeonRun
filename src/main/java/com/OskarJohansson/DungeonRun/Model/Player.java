@@ -2,15 +2,18 @@ package com.OskarJohansson.DungeonRun.Model;
 
 import com.OskarJohansson.DungeonRun.Control.Combat;
 import com.OskarJohansson.DungeonRun.Model.Characters.Barbarian;
+import com.OskarJohansson.DungeonRun.Model.Characters.Hero;
 import com.OskarJohansson.DungeonRun.Model.Weapon.Sword;
+import com.OskarJohansson.DungeonRun.Model.Weapon.Weapon;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Player implements Combat {
 
     private String name;
-    private Sword weapon;
-    private Barbarian barbarian;
+    private Weapon weapon;
+    private Hero hero;
     private String heroClass;
     private int strength;
     private int intelligence;
@@ -21,15 +24,41 @@ public class Player implements Combat {
     private int experiencePoints = 0;
     private int gold = 0;
     private int level = 1;
-    private int killList  = 0;
+    private int killList = 0;
+
+    public Player() {
+        setCharacter();
+        System.out.printf("You have chosen to play as a %s", getHeroClass());
+        System.out.println("Chose a name for your Hero: ");
+        setName(new Scanner(System.in).nextLine());
+        System.out.printf("Welcome %s the %s ", getName(), getHeroClass());
+    }
 
     public void setCharacter() {
-        this.name = "PlayerTheBarbarian";
-        this.barbarian = new Barbarian();
-        this.strength = getCharacter().getStrength();
-        this.armour = getCharacter().getArmour();
-        this.agility = getCharacter().getAgility();
-        this.weapon = new Sword();
+
+        System.out.printf("""
+                Pick a Hero:
+                                
+                #1 - Barbarian
+                #2 - Coder
+                #3 - Assassin
+                                
+                """);
+
+        switch (new Scanner(System.in).nextInt()) {
+            case 1 -> {
+                this.hero = new Barbarian();
+                this.strength = getCharacter().getStrength();
+                this.armour = getCharacter().getArmour();
+                this.agility = getCharacter().getAgility();
+                this.weapon = new Sword();
+            }
+            case 2 -> System.out.println("CODER");
+            case 3 -> System.out.println("ASSASSIN");
+
+        }
+
+
     }
 
     public int getKillList() {
@@ -72,8 +101,8 @@ public class Player implements Combat {
         this.name = name;
     }
 
-    public Barbarian getCharacter() {
-        return this.barbarian;
+    public Hero getCharacter() {
+        return this.hero;
     }
 
     public void setCharacter(int choice) {
@@ -125,7 +154,7 @@ public class Player implements Combat {
     }
 
     public void setGold(int gold) {
-        this.gold = gold;
+        this.gold += gold;
     }
 
     public int getLevel() {
@@ -134,6 +163,17 @@ public class Player implements Combat {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public void levelUp() {
+        if (this.experiencePoints > 10) {
+            System.out.println("Level Up!");
+            this.strength += 1;
+            this.intelligence += 1;
+            this.agility += 1;
+            this.healthPoints += 1;
+            this.turningPoints += 1;
+        }
     }
 
     @Override
@@ -155,7 +195,7 @@ public class Player implements Combat {
 
     @Override
     public void takeDamage(Boolean block, int damage) {
-        if (!block){
+        if (!block) {
             this.healthPoints -= damage;
         }
     }
@@ -172,12 +212,10 @@ public class Player implements Combat {
                 Health Points        %d
                 Turning Points       %d
                 Experience Points    %d
-                
-                """ , this.name, this.healthPoints, this.turningPoints, this.experiencePoints);
+                                
+                """, this.name, this.healthPoints, this.turningPoints, this.experiencePoints);
 
     }
-
-
 
 
 }

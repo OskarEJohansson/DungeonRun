@@ -5,6 +5,7 @@ import com.OskarJohansson.DungeonRun.Model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Map {
 
@@ -18,6 +19,24 @@ public class Map {
         allMonstersKilled.setAllMonstersKilled(true);
         monsterList.add(allMonstersKilled);
     }
+
+    public void mapStructure(Player player) {
+        System.out.println("Welcome to Level 1!");
+        boolean on = true;
+
+        do
+            switch (new Scanner(System.in).nextInt()) {
+                case 1 -> {
+                    System.out.println("Enter kill zone!");
+                    battle(player);
+                }
+                case 2 -> {
+                    System.out.println("You are leaving the Level!");
+                    on = false;
+                }
+            } while (on);
+    }
+
 
     public void battle(Player player) {
 
@@ -56,10 +75,12 @@ public class Map {
                     System.out.printf("You killed the monster and gained %d experience points! \n", monster.getExperiencePoints());
                     player.setKillList(1);
                     player.setExperiencePoints(monster.getExperiencePoints());
+                    player.setGold(monster.getGold());
                     monster.setKilled(true);
                 }
-                if(monster.isAllMonstersKilled() == true){
+                if (monster.isAllMonstersKilled() == true) {
                     System.out.println("You have killed all the monsters!");
+                    player.levelUp();
                     player.getStatus();
                     return;
                 }

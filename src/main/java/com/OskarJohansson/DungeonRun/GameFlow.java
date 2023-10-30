@@ -2,29 +2,26 @@ package com.OskarJohansson.DungeonRun;
 
 import com.OskarJohansson.DungeonRun.Model.*;
 import com.OskarJohansson.DungeonRun.Model.Map.Map;
+import com.OskarJohansson.DungeonRun.Model.Menu.MainMenu;
 import com.OskarJohansson.DungeonRun.Model.Monster.Minion;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class GameFlow {
 
+    Player player;
 
-    public static void main(String[] args) {
-
-
-        List<Object> gameList = new ArrayList<>();
-        Minion monster = new Minion();
-        Player player1 = new Player();
-        gameList.add(new Minion());
-        gameList.add(new Minion());
-        gameList.add(new Minion());
-        gameList.add(player1);
-        player1.setCharacter();
+    public GameFlow(){
+        this.player = new Player();
+    }
 
 
-        Map battle = new Map();
+    public void main(String[] args) {
 
-        battle.battle(player1);
+        MainMenu menu = new MainMenu();
+        menu.mainMenu(this.player, new Map());
 
 
 //        gameList.forEach(c -> {

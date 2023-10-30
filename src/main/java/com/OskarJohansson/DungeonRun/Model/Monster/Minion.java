@@ -25,7 +25,7 @@ public class Minion implements Combat {
         this.damage = 1;
         this.attackCost = 1;
         this.turningPoints = 1;
-        this.experiencePoints = 1;
+        this.experiencePoints = 3;
         this.gold = 1;
         this.level = 1;
         this.armour = 2;
@@ -71,6 +71,14 @@ public class Minion implements Combat {
 
     public void setAllMonstersKilled(boolean allMonstersKilled) {
         this.allMonstersKilled = allMonstersKilled;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
     }
 
     @Override
