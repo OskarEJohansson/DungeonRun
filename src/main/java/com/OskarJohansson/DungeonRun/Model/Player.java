@@ -28,7 +28,7 @@ public class Player implements Combat {
 
     public Player() {
         setCharacter();
-        System.out.printf("You have chosen to play as a %s", getHeroClass());
+        System.out.printf("You have chosen to play as a %s\n", getHeroClass());
         System.out.println("Chose a name for your Hero: ");
         setName(new Scanner(System.in).nextLine());
         System.out.printf("Welcome %s the %s ", getName(), getHeroClass());
@@ -48,6 +48,7 @@ public class Player implements Combat {
         switch (new Scanner(System.in).nextInt()) {
             case 1 -> {
                 this.hero = new Barbarian();
+                this.heroClass = getCharacter().getHeroClass();
                 this.strength = getCharacter().getStrength();
                 this.armour = getCharacter().getArmour();
                 this.agility = getCharacter().getAgility();
@@ -209,13 +210,13 @@ public class Player implements Combat {
     public void getStatus() {
         System.out.printf("""
                 %s
+                Level                %d
                 Health Points        %d
                 Turning Points       %d
                 Experience Points    %d
+                Gold                 %d
                                 
-                """, this.name, this.healthPoints, this.turningPoints, this.experiencePoints);
+                """, this.name, this.level, this.healthPoints, this.turningPoints, this.experiencePoints, this.gold);
 
     }
-
-
 }

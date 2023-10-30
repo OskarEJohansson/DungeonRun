@@ -11,6 +11,14 @@ public class Hero {
     private int healthPoints;
     private int turningPoints;
 
+    public String getHeroClass() {
+        return heroClass;
+    }
+
+    public void setHeroClass(String heroClass) {
+        this.heroClass = heroClass;
+    }
+
     public int getStrength() {
         return strength;
     }
