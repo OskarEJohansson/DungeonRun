@@ -4,19 +4,19 @@ import com.OskarJohansson.DungeonRun.Control.Combat;
 
 import java.util.Random;
 
-public class Minion extends Monster implements Combat {
+public class Grunt extends Monster implements Combat {
 
-    public Minion() {
+    public Grunt() {
         super();
-        this.setName("Minion");
-        this.setHealthPoints(3);
-        this.setDamage(1);
+        this.setName("Grunt");
+        this.setHealthPoints(5);
+        this.setDamage(2);
         this.setAttackCost(1);
-        this.setTurningPoints(1);
-        this.setExperiencePoints(3);
-        this.setGold(1);
-        this.setLevel(1);
-        this.setArmour(2);
+        this.setTurningPoints(2);
+        this.setExperiencePoints(5);
+        this.setGold(3);
+        this.setLevel(2);
+        this.setArmour(3);
     }
     @Override
     public int attack() {
@@ -26,7 +26,7 @@ public class Minion extends Monster implements Combat {
 
     @Override
     public boolean block() {
-        if (new Random().nextInt(1, 10) > 10) {
+        if (new Random().nextInt(1, 10) > 8) {
             System.out.println("Monster blocked the attack successfully!");
             return true;
         }

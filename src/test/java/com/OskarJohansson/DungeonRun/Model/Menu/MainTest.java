@@ -1,14 +1,14 @@
 package com.OskarJohansson.DungeonRun.Model.Menu;
 
-import com.OskarJohansson.DungeonRun.Control.Player;
+import com.OskarJohansson.DungeonRun.Control.PlayerControl;
 import junit.framework.TestCase;
 
 public class MainTest extends TestCase {
 
-    Player player;
+    PlayerControl player;
 
     public MainTest(){
-        this.player = new Player();
+        this.player = new PlayerControl();
     }
 
 }

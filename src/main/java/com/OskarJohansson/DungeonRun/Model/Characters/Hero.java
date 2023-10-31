@@ -59,6 +59,7 @@ public class Hero {
         this.healthPoints = healthPoints;
     }
 
+
     public int getTurningPoints() {
         return turningPoints;
     }

@@ -1,7 +1,8 @@
 package com.OskarJohansson.DungeonRun.Control;
 
-import com.OskarJohansson.DungeonRun.Control.Combat;
+import com.OskarJohansson.DungeonRun.Model.Characters.Assassin;
 import com.OskarJohansson.DungeonRun.Model.Characters.Barbarian;
+import com.OskarJohansson.DungeonRun.Model.Characters.CodeMonkey;
 import com.OskarJohansson.DungeonRun.Model.Characters.Hero;
 import com.OskarJohansson.DungeonRun.Model.Weapon.Sword;
 import com.OskarJohansson.DungeonRun.Model.Weapon.Weapon;
@@ -9,7 +10,7 @@ import com.OskarJohansson.DungeonRun.Model.Weapon.Weapon;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Player implements Combat {
+public class PlayerControl implements Combat {
 
     private String name;
     private Weapon weapon;
@@ -19,15 +20,16 @@ public class Player implements Combat {
     private int intelligence;
     private int agility;
     private int healthPoints = 5;
+    private int healthPointsBase = 5;
     private int turningPoints = 5;
-    private int turningpointsBase =5;
+    private int turningPointsBase = 5;
     private int armour = 1;
     private int experiencePoints = 0;
     private int gold = 0;
     private int level = 1;
     private int killList = 0;
 
-    public Player() {
+    public PlayerControl() {
         setCharacter();
         System.out.printf("You have chosen to play as a %s\n", getHeroClass());
         System.out.println("Chose a name for your Hero: ");
@@ -38,28 +40,55 @@ public class Player implements Combat {
     public void setCharacter() {
 
         System.out.printf("""
-                Pick a Hero:
+                          
+                ++++|        Pick a Hero        |++++
                                 
-                #1 - Barbarian
-                #2 - Coder
-                #3 - Assassin
+                #1 - Barbarian  |   #2 - Code Monkey  |   #3 - Assassin
                                 
                 """);
 
         switch (new Scanner(System.in).nextInt()) {
             case 1 -> {
                 this.hero = new Barbarian();
-                this.heroClass = getCharacter().getHeroClass();
-                this.strength = getCharacter().getStrength();
-                this.armour = getCharacter().getArmour();
-                this.agility = getCharacter().getAgility();
+                this.heroClass = getHero().getHeroClass();
+                this.strength += getHero().getStrength();
+                this.intelligence += getHero().getIntelligence();
+                this.armour += getHero().getArmour();
+                this.agility += getHero().getAgility();
                 this.weapon = new Sword();
-                this.turningpointsBase = getCharacter().getTurningPoints();
-                this.turningPoints = getCharacter().getTurningPoints();
+                this.healthPoints += getHero().getHealthPoints();
+                this.healthPointsBase += getHero().getHealthPoints();
+                this.turningPointsBase += getHero().getTurningPoints();
+                this.turningPoints += getHero().getTurningPoints();
             }
-            case 2 -> System.out.println("CODER");
-            case 3 -> System.out.println("ASSASSIN");
+            case 2 -> {
+                this.hero = new CodeMonkey();
+                this.heroClass = getHero().getHeroClass();
+                this.strength += getHero().getStrength();
+                this.intelligence += getHero().getIntelligence();
+                this.armour += getHero().getArmour();
+                this.agility += getHero().getAgility();
+                this.weapon = new Sword();
+                this.healthPoints += getHero().getHealthPoints();
+                this.healthPointsBase += getHero().getHealthPoints();
+                this.turningPointsBase += getHero().getTurningPoints();
+                this.turningPoints += getHero().getTurningPoints();
+            }
+            case 3 -> {
+                this.hero = new Assassin();
+                this.heroClass = getHero().getHeroClass();
+                this.strength += getHero().getStrength();
+                this.intelligence += getHero().getIntelligence();
+                this.armour += getHero().getArmour();
+                this.agility += getHero().getAgility();
+                this.weapon = new Sword();
+                this.healthPoints += getHero().getHealthPoints();
+                this.healthPointsBase += getHero().getHealthPoints();
+                this.turningPointsBase += getHero().getTurningPoints();
+                this.turningPoints += getHero().getTurningPoints();
+            }
 
+            default -> throw new IllegalStateException("Unexpected value: " + new Scanner(System.in).nextInt());
         }
     }
 
@@ -103,7 +132,7 @@ public class Player implements Combat {
         this.name = name;
     }
 
-    public Hero getCharacter() {
+    public Hero getHero() {
         return this.hero;
     }
 
@@ -174,11 +203,24 @@ public class Player implements Combat {
             this.strength += 1;
             this.intelligence += 1;
             this.agility += 1;
-            this.healthPoints += 1;
-            this.turningpointsBase += 1;
-            this.turningPoints += 1;
+            this.healthPoints += 3;
+            this.healthPointsBase += 3;
+            this.turningPointsBase += 2;
+            this.turningPoints += 2;
         }
     }
+
+    public void getPlayerStats() {
+        System.out.printf("""
+                ++++|        Stats        |++++
+                                
+                Strength    %d  |   Intelligence   %d  |   Agility   %d  |   
+                Turning Points  %d |   Health Points   %d  |
+                                
+                """, this.strength, this.intelligence, this.agility, this.turningPoints, this.healthPoints);
+
+    }
+
 
     @Override
     public int attack() {
@@ -189,7 +231,7 @@ public class Player implements Combat {
     @Override
     public boolean block() {
 
-        if (new Random().nextInt(level, agility) < 10 / 2) {
+        if (new Random().nextInt(1, 10) < 5) {
             System.out.println("Player blocked the attack successfully!\n");
             return true;
         } else
@@ -206,12 +248,12 @@ public class Player implements Combat {
 
     @Override
     public void resetTurningPoints() {
-        this.turningPoints = this.turningpointsBase;
+        this.turningPoints = this.turningPointsBase;
     }
 
     @Override
     public boolean flee() {
-        if(this.turningPoints > 2){
+        if (this.turningPoints > 2) {
             System.out.println("You are fleeing like a coward");
             return true;
         }
@@ -222,14 +264,12 @@ public class Player implements Combat {
     @Override
     public void getStatus() {
         System.out.printf("""
-                %s
-                Level                %d
-                Health Points        %d
-                Turning Points       %d
-                Experience Points    %d
-                Gold                 %d
+                ++++|        Stats        |++++
                                 
-                """, this.name, this.level, this.healthPoints, this.turningPoints, this.experiencePoints, this.gold);
+                %s the %s  |   Level   %d  |   Health Points   %d/%d  |   
+                Turning Points  %d/%d  |   Experience Points   %d  |   Gold    %d
+                                
+                """, this.name, this.heroClass, this.level, this.healthPoints, this.healthPointsBase, this.turningPoints, this.turningPointsBase, this.experiencePoints, this.gold);
 
     }
 }

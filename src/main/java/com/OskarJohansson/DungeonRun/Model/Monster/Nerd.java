@@ -4,20 +4,19 @@ import com.OskarJohansson.DungeonRun.Control.Combat;
 
 import java.util.Random;
 
-public class icaBoss extends Monster implements Combat {
+public class Nerd extends Monster implements Combat {
 
-    public icaBoss() {
+    public Nerd() {
         super();
-        this.setName("Ica Boss");
-        this.setHealthPoints(10);
+        this.setName("Nerd");
+        this.setHealthPoints(7);
         this.setDamage(3);
-        this.setAttackCost(2);
-        this.setTurningPoints(5);
-        this.setTurningpointsBase(5);
+        this.setAttackCost(1);
+        this.setTurningPoints(3);
         this.setExperiencePoints(5);
-        this.setGold(10);
-        this.setLevel(2);
-        this.setArmour(3);
+        this.setGold(5);
+        this.setLevel(3);
+        this.setArmour(4);
     }
     @Override
     public int attack() {
@@ -27,7 +26,7 @@ public class icaBoss extends Monster implements Combat {
 
     @Override
     public boolean block() {
-        if (new Random().nextInt(1, 2) > 10) {
+        if (new Random().nextInt(1, 10) > 6) {
             System.out.println("Monster blocked the attack successfully!");
             return true;
         }
@@ -44,9 +43,7 @@ public class icaBoss extends Monster implements Combat {
     public void getStatus() {
         System.out.printf("""
                                 
-                Enemy                %s
-                Health Points        %d
-                Turning Points       %d
+                Enemy   %s  |   Health Points   %d  |   Turning Points  %d
                                 
                 """, this.getName(), this.getHealthPoints(), this.getTurningPoints());
     }

@@ -1,6 +1,6 @@
-package com.OskarJohansson.DungeonRun.Model.Menu;
+package com.OskarJohansson.DungeonRun.Control.Menu;
 
-import com.OskarJohansson.DungeonRun.Control.Player;
+import com.OskarJohansson.DungeonRun.Control.PlayerControl;
 
 import java.util.Scanner;
 
@@ -8,7 +8,7 @@ public class Shop {
 
 
 
-    public void shop(Player player){
+    public void shop(PlayerControl player){
 
         boolean on = true;
         System.out.println("Welcome to the Shop!");

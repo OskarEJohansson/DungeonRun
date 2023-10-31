@@ -2,7 +2,7 @@ package com.OskarJohansson.DungeonRun.Model.Map;
 
 import com.OskarJohansson.DungeonRun.Model.Monster.Minion;
 import com.OskarJohansson.DungeonRun.Model.Monster.Monster;
-import com.OskarJohansson.DungeonRun.Model.Monster.icaBoss;
+import com.OskarJohansson.DungeonRun.Model.Monster.IcaBoss;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,8 @@ public class ICA extends Level {
             setMinionMonsterList.add(new Minion());
         }
         this.setMinionMonsterList(setMinionMonsterList);
-        this.setFinalBoss(new icaBoss());
+        this.setFinalBoss(new IcaBoss());
+        this.setLevelNumber("1");
+        this.setLevelName("Dungeon of Ica");
     }
 }

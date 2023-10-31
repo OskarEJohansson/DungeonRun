@@ -1,7 +1,6 @@
 package com.OskarJohansson.DungeonRun.Model.Characters;
 
-public class Barbarian extends Hero{
-
+public class Assassin extends Hero{
     private String heroClass;
     private int strength;
     private int intelligence;
@@ -11,8 +10,8 @@ public class Barbarian extends Hero{
     private int healthPoints;
     private int turningPoints;
 
-    public Barbarian() {
-        this.setHeroClass("Barbarian");
+    public Assassin() {
+        this.setHeroClass("Assassin");
         this.setStrength(5);
         this.setIntelligence(5);
         this.setAgility(5);

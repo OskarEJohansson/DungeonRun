@@ -1,11 +1,11 @@
 package com.OskarJohansson.DungeonRun;
 
-import com.OskarJohansson.DungeonRun.Control.GameFlow;
+import com.OskarJohansson.DungeonRun.Control.GameControl;
 
 public class Main {
     public static void main(String[] args) {
 
-        GameFlow game = new GameFlow();
+        GameControl game = new GameControl();
 
         game.gameFlow();
 
