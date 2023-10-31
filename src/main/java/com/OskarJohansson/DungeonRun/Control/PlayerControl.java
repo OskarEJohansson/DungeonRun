@@ -39,7 +39,8 @@ public class PlayerControl implements Combat {
 
     public void setCharacter() {
 
-        System.out.printf("""
+        boolean on = true;
+        do {System.out.printf("""
                           
                 ++++|        Pick a Hero        |++++
                                 
@@ -47,7 +48,7 @@ public class PlayerControl implements Combat {
                                 
                 """);
 
-        switch (new Scanner(System.in).nextInt()) {
+        switch (new UserInput().inputInt(new Scanner(System.in))) {
             case 1 -> {
                 this.hero = new Barbarian();
                 this.heroClass = getHero().getHeroClass();
@@ -60,6 +61,7 @@ public class PlayerControl implements Combat {
                 this.healthPointsBase += getHero().getHealthPoints();
                 this.turningPointsBase += getHero().getTurningPoints();
                 this.turningPoints += getHero().getTurningPoints();
+                on = false;
             }
             case 2 -> {
                 this.hero = new CodeMonkey();
@@ -73,6 +75,7 @@ public class PlayerControl implements Combat {
                 this.healthPointsBase += getHero().getHealthPoints();
                 this.turningPointsBase += getHero().getTurningPoints();
                 this.turningPoints += getHero().getTurningPoints();
+                on = false;
             }
             case 3 -> {
                 this.hero = new Assassin();
@@ -86,10 +89,11 @@ public class PlayerControl implements Combat {
                 this.healthPointsBase += getHero().getHealthPoints();
                 this.turningPointsBase += getHero().getTurningPoints();
                 this.turningPoints += getHero().getTurningPoints();
+                on = false;
             }
-
-            default -> throw new IllegalStateException("Unexpected value: " + new Scanner(System.in).nextInt());
+            default -> System.out.println("Input must be 1 - 3!");
         }
+        }while (on);
     }
 
     public int getKillList() {

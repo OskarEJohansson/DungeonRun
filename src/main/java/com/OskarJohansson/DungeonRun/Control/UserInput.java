@@ -1,24 +1,23 @@
 package com.OskarJohansson.DungeonRun.Control;
 
+
 import java.util.Scanner;
 
 public class UserInput {
 
+    public int inputInt(Scanner scanner) {
+        boolean invalidInput = true;
+        int result = 0;
 
+        while (invalidInput) {
+            result = checkInputForInvalidInputs(scanner.nextLine());
 
-//    public int inputInt(int scanner) {
-//        boolean invalidInput = true;
-//        int result = 0;
-//
-//        while (invalidInput) {
-//            result = checkInputForInvalidInputs(scanner);
-//
-//            if (result != -1) {
-//                invalidInput = false;
-//            }
-//        }
-//        return result;
-//    }
+            if (result != -1) {
+                invalidInput = false;
+            }
+        }
+        return result;
+    }
 
     public int checkInputForInvalidInputs(String inputValue) {
         int intValue = 0;

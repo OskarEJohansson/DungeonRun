@@ -17,10 +17,11 @@ public class MenuControl {
                                         
                     """, player.getName(), player.getHeroClass());
 
-            switch (new Scanner(System.in).nextInt()) {
+            switch (new UserInput().inputInt(new Scanner(System.in))) {
                 case 1 -> player.getPlayerStats();
                 case 2 -> mapMenu(map, mainMenu, player);
                 case 3 -> System.out.println("ENTER SHOP");
+                default -> System.out.println("Input must be 1 - 3!");
             }
         } while (on);
     }
@@ -33,7 +34,7 @@ public class MenuControl {
                                 
                 """);
 
-        switch(new Scanner(System.in).nextInt()){
+        switch(new UserInput().inputInt(new Scanner(System.in))){
             case 1 -> {
                 map.setMap(1);
                 System.out.println("Entering the Dungeons of Ica");
@@ -49,6 +50,7 @@ public class MenuControl {
                 System.out.println("Entering the Dungeons of Kjell & Co");
                 mapStructure(map, player);
             }
+            default -> System.out.println("Input must be 1 - 3!");
         }
     }
     public void mapStructure(MapControl map, PlayerControl player) {
@@ -61,7 +63,7 @@ public class MenuControl {
                     +++++|        %s        |+++++
                     #1 - Enter Kill Zone!    |   #2 - Enter Boss Zone!    |   #3 - Leave Level!
                     """, map.getLevelNumber(), map.getLevelName());
-            switch (new Scanner(System.in).nextInt()) {
+            switch (new UserInput().inputInt(new Scanner(System.in))) {
                 case 1 -> {
                     System.out.println("You are entering the kill zone!");
                     map.minionBattleControl(player);
@@ -75,6 +77,8 @@ public class MenuControl {
                     System.out.println("You are leaving the Level!");
                     on = false;
                 }
+                default -> System.out.println("Input must be 1 - 3!");
+
             }
         } while (on) ;
     }
