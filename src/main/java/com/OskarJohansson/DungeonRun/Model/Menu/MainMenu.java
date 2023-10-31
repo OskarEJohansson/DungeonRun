@@ -59,14 +59,20 @@ public class MainMenu {
             System.out.println("""
                     Menu - Level 1
                     #1 - Enter KillZone!
-                    #2 - Leave Level!
+                    #2 - Enter BossZone!
+                    #3 - Leave Level!
                     """);
             switch (new Scanner(System.in).nextInt()) {
                 case 1 -> {
                     System.out.println("Enter kill zone!");
-                    map.battle(player, mainMenu, map);
+                    map.minionBattleControl(player, mainMenu, map);
                 }
                 case 2 -> {
+                    System.out.println("Enter Boss fight zone!");
+                    map.bossBattleControl(player);
+                    on = false;
+                }
+                case 3 -> {
                     System.out.println("You are leaving the Level!");
                     on = false;
                 }

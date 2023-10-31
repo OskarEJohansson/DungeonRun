@@ -4,19 +4,20 @@ import com.OskarJohansson.DungeonRun.Control.Combat;
 
 import java.util.Random;
 
-public class Minion extends Monster implements Combat {
+public class icaBoss extends Monster implements Combat {
 
-    public Minion() {
+    public icaBoss() {
         super();
-        this.setName("Minion");
-        this.setHealthPoints(3);
-        this.setDamage(1);
-        this.setAttackCost(1);
-        this.setTurningPoints(1);
-        this.setExperiencePoints(3);
-        this.setGold(1);
-        this.setLevel(1);
-        this.setArmour(2);
+        this.setName("Ica Boss");
+        this.setHealthPoints(10);
+        this.setDamage(3);
+        this.setAttackCost(2);
+        this.setTurningPoints(5);
+        this.setTurningpointsBase(5);
+        this.setExperiencePoints(5);
+        this.setGold(10);
+        this.setLevel(2);
+        this.setArmour(3);
     }
     @Override
     public int attack() {

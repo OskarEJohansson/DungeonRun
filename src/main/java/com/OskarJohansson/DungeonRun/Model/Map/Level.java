@@ -2,36 +2,29 @@ package com.OskarJohansson.DungeonRun.Model.Map;
 
 import com.OskarJohansson.DungeonRun.Model.Monster.Minion;
 import com.OskarJohansson.DungeonRun.Control.Player;
+import com.OskarJohansson.DungeonRun.Model.Monster.Monster;
 
 import java.util.List;
 
 public class Level {
 
-    List<Minion> minionMonsterList;
-    private int goldchest;
-    private boolean levelCompleted;
-    private Object stash;
+    List<Monster> minionMonsterList;
+    private Monster finalBoss;
 
-
-    public int getGoldchest() {
-        return goldchest;
+    public List<Monster> getMinionMonsterList() {
+        return minionMonsterList;
     }
 
-    public void setGoldchest(int goldchest) {
-        this.goldchest = goldchest;
+    public void setMinionMonsterList(List<Monster> minionMonsterList) {
+        this.minionMonsterList = minionMonsterList;
     }
 
-    public Object getStash() {
-        return stash;
+    public Monster getFinalBoss() {
+        return finalBoss;
     }
 
-    public void setStash(Object stash) {
-        this.stash = stash;
+    public void setFinalBoss(Monster finalBoss) {
+        this.finalBoss = finalBoss;
     }
 
-    public void mapStructure(Player player) {
-    }
-
-    public void battle(Player player) {
-    }
 }
