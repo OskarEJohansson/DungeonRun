@@ -1,14 +1,13 @@
 package com.OskarJohansson.DungeonRun.Model.Map;
 
 import com.OskarJohansson.DungeonRun.Model.Monster.Minion;
-import com.OskarJohansson.DungeonRun.Model.Monster.Monster;
-import com.OskarJohansson.DungeonRun.Model.Player;
+import com.OskarJohansson.DungeonRun.Control.Player;
 
 import java.util.List;
 
 public class Level {
 
-    List<Monster> monsterList;
+    List<Minion> minionMonsterList;
     private int goldchest;
     private boolean levelCompleted;
     private Object stash;

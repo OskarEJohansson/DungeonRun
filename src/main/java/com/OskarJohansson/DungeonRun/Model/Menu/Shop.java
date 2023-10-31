@@ -1,6 +1,6 @@
 package com.OskarJohansson.DungeonRun.Model.Menu;
 
-import com.OskarJohansson.DungeonRun.Model.Player;
+import com.OskarJohansson.DungeonRun.Control.Player;
 
 import java.util.Scanner;
 

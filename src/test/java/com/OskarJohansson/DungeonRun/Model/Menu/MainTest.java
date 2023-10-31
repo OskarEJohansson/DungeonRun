@@ -1,8 +1,7 @@
 package com.OskarJohansson.DungeonRun.Model.Menu;
 
-import com.OskarJohansson.DungeonRun.Model.Player;
+import com.OskarJohansson.DungeonRun.Control.Player;
 import junit.framework.TestCase;
-import org.junit.Test;
 
 public class MainTest extends TestCase {
 

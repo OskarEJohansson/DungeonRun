@@ -1,14 +1,14 @@
 package com.OskarJohansson.DungeonRun.Model.Menu;
 
-import com.OskarJohansson.DungeonRun.Model.MapObject;
-import com.OskarJohansson.DungeonRun.Model.Player;
+import com.OskarJohansson.DungeonRun.Control.MapObject;
+import com.OskarJohansson.DungeonRun.Control.Player;
 
 import java.util.Scanner;
 
 public class MainMenu {
 
 
-    public void mainMenu(Player player, MapObject map) {
+    public void mainMenu(Player player,MainMenu mainMenu, MapObject map) {
         boolean on = true;
 
         do {
@@ -24,13 +24,13 @@ public class MainMenu {
 
             switch (new Scanner(System.in).nextInt()) {
                 case 1 -> player.getStatus();
-                case 2 -> mapMenu(map, player);
+                case 2 -> mapMenu(map, mainMenu, player);
                 case 3 -> System.out.println("ENTER SHOP");
             }
         } while (on);
     }
 
-    public void mapMenu(MapObject map, Player player) {
+    public void mapMenu(MapObject map, MainMenu mainMenu, Player player) {
         System.out.println("""
                 Explore the world of STI!
                                 
@@ -44,32 +44,34 @@ public class MainMenu {
             case 1 -> {
                 map.setMap(1);
                 System.out.println("Get ready for battle!");
-                mapStructure(map, player);
+                mapStructure(map, mainMenu, player);
             }
             case 2 -> System.out.println("MAP.SETMAP(SATS)");
             case 3 -> System.out.println("MAP.SETMAP(KJELLCO)");
         }
     }
-    public void mapStructure(MapObject map, Player player) {
+    public void mapStructure(MapObject map, MainMenu mainMenu, Player player) {
 
         System.out.println("Welcome to Level 1!");
         boolean on = true;
 
-        System.out.println("""
-                #1 - Enter KillZone!
-                #2 - Leave Level!
-                """);
-        do
+        do {
+            System.out.println("""
+                    Menu - Level 1
+                    #1 - Enter KillZone!
+                    #2 - Leave Level!
+                    """);
             switch (new Scanner(System.in).nextInt()) {
                 case 1 -> {
                     System.out.println("Enter kill zone!");
-                    map.battle(player);
+                    map.battle(player, mainMenu, map);
                 }
                 case 2 -> {
                     System.out.println("You are leaving the Level!");
                     on = false;
                 }
-            } while (on);
+            }
+        } while (on) ;
     }
 }
 

@@ -1,4 +1,4 @@
-package com.OskarJohansson.DungeonRun.Model;
+package com.OskarJohansson.DungeonRun.Control;
 
 import com.OskarJohansson.DungeonRun.Control.Combat;
 import com.OskarJohansson.DungeonRun.Model.Characters.Barbarian;
@@ -20,6 +20,7 @@ public class Player implements Combat {
     private int agility;
     private int healthPoints = 5;
     private int turningPoints = 5;
+    private int turningpointsBase =5;
     private int armour = 1;
     private int experiencePoints = 0;
     private int gold = 0;
@@ -53,13 +54,13 @@ public class Player implements Combat {
                 this.armour = getCharacter().getArmour();
                 this.agility = getCharacter().getAgility();
                 this.weapon = new Sword();
+                this.turningpointsBase = getCharacter().getTurningPoints();
+                this.turningPoints = getCharacter().getTurningPoints();
             }
             case 2 -> System.out.println("CODER");
             case 3 -> System.out.println("ASSASSIN");
 
         }
-
-
     }
 
     public int getKillList() {
@@ -169,10 +170,12 @@ public class Player implements Combat {
     public void levelUp() {
         if (this.experiencePoints > 10) {
             System.out.println("Level Up!");
+            this.level += 1;
             this.strength += 1;
             this.intelligence += 1;
             this.agility += 1;
             this.healthPoints += 1;
+            this.turningpointsBase += 1;
             this.turningPoints += 1;
         }
     }
@@ -202,8 +205,18 @@ public class Player implements Combat {
     }
 
     @Override
+    public void resetTurningPoints() {
+        this.turningPoints = this.turningpointsBase;
+    }
+
+    @Override
     public boolean flee() {
-        return this.turningPoints > 2;
+        if(this.turningPoints > 2){
+            System.out.println("You are fleeing like a coward");
+            return true;
+        }
+        System.out.println("You are to tired to flee!");
+        return false;
     }
 
     @Override

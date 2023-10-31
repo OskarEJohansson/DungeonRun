@@ -1,28 +1,27 @@
 package com.OskarJohansson.DungeonRun.Model.Map;
 
 import com.OskarJohansson.DungeonRun.Model.Monster.Minion;
-import com.OskarJohansson.DungeonRun.Model.Monster.Monster;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ICA extends Level {
 
-    private List<Monster> monsterList;
+    private List<Minion> minionMonsterList;
     private int goldchest;
     private Object stash;
     private boolean levelCompleted;
 
     public ICA() {
-        this.monsterList = new ArrayList<>();
+        this.minionMonsterList = new ArrayList<>();
         this.goldchest = 10;
 
         for (int i = 0; i < 3; i++) {
-            monsterList.add(new Minion());
+            minionMonsterList.add(new Minion());
         }
         Minion allMonstersKilled = new Minion();
         allMonstersKilled.setAllMonstersKilled(true);
-        monsterList.add(allMonstersKilled);
+        minionMonsterList.add(allMonstersKilled);
     }
 
     public int getGoldchest() {
@@ -41,11 +40,11 @@ public class ICA extends Level {
         this.stash = stash;
     }
 
-    public List<Monster> getMonsterList() {
-        return monsterList;
+    public List<Minion> getMinionMonsterList() {
+        return minionMonsterList;
     }
 
-    public void setMonsterList(List<Monster> monsterList) {
-        this.monsterList = monsterList;
+    public void setMinionMonsterList(List<Minion> minionMonsterList) {
+        this.minionMonsterList = minionMonsterList;
     }
 }

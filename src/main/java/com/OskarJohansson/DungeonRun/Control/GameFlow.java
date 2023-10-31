@@ -1,7 +1,5 @@
-package com.OskarJohansson.DungeonRun;
+package com.OskarJohansson.DungeonRun.Control;
 
-import com.OskarJohansson.DungeonRun.Model.*;
-import com.OskarJohansson.DungeonRun.Model.MapObject;
 import com.OskarJohansson.DungeonRun.Model.Menu.MainMenu;
 
 public class GameFlow {
@@ -24,7 +22,7 @@ public class GameFlow {
     }
 
     public void gameFlow(){
-        mainMenu.mainMenu(player, map);
+        mainMenu.mainMenu(player,mainMenu, map);
 
 
 

@@ -1,10 +1,6 @@
 package com.OskarJohansson.DungeonRun.Model.Monster;
 
-import com.OskarJohansson.DungeonRun.Control.Combat;
-
-import java.util.Random;
-
-public class Monster implements Combat {
+public class Monster {
 
     private String name;
     private int healthPoints;
@@ -75,43 +71,5 @@ public class Monster implements Combat {
         this.gold = gold;
     }
 
-    @Override
-    public int attack() {
-        this.turningPoints -= this.attackCost;
-        return this.damage;
-    }
 
-    @Override
-    public boolean block() {
-
-        if (new Random().nextInt(1, 2) > 10) {
-            System.out.println("Monster blocked the attack successfully!");
-            return true;
-        }
-        System.out.println("Monster fails to blocked the attack\n");
-        return false;
-    }
-
-    @Override
-    public boolean flee() {
-        return true;
-    }
-
-    @Override
-    public void getStatus() {
-        System.out.printf("""
-                                
-                Enemey               %s
-                Health Points        %d
-                Turning Points       %d
-                                
-                """, this.name, this.healthPoints, this.turningPoints);
-    }
-
-    @Override
-    public void takeDamage(Boolean takeDamage, int damage) {
-        if (!takeDamage) {
-            this.healthPoints -= damage;
-        }
-    }
 }
