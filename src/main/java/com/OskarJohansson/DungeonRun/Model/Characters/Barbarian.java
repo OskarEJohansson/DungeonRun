@@ -1,5 +1,7 @@
 package com.OskarJohansson.DungeonRun.Model.Characters;
 
+import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponClassOne.Sword;
+
 public class Barbarian extends Hero{
 
     private String heroClass;
@@ -19,6 +21,7 @@ public class Barbarian extends Hero{
         this.setArmour(5);
         this.setHealthPoints(5);
         this.setTurningPoints(5);
+        this.setWeapon(new Sword());
     }
 
     public String getHeroClass() {

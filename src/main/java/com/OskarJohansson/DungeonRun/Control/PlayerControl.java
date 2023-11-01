@@ -1,12 +1,9 @@
 package com.OskarJohansson.DungeonRun.Control;
 
-import com.OskarJohansson.DungeonRun.Model.Characters.Assassin;
 import com.OskarJohansson.DungeonRun.Model.Characters.Barbarian;
 import com.OskarJohansson.DungeonRun.Model.Characters.CodeMonkey;
 import com.OskarJohansson.DungeonRun.Model.Characters.Hero;
 import com.OskarJohansson.DungeonRun.Model.Items.Potions.HealthPotion;
-import com.OskarJohansson.DungeonRun.Model.Items.Weapon.Sword;
-import com.OskarJohansson.DungeonRun.Model.Items.Weapon.Weapon;
 
 import java.util.*;
 
@@ -34,7 +31,7 @@ public class PlayerControl implements CombatInterface {
                               
                     ++++|                 Pick a Hero                   |++++
                     _________________________________________________________              
-                    #1 - Barbarian  |   #2 - Code Monkey  |   #3 - Assassin |
+                          |   #1 - Barbarian  |   #2 - Code Monkey   |
                                     
                     """);
 
@@ -47,11 +44,8 @@ public class PlayerControl implements CombatInterface {
                     this.hero = new CodeMonkey();
                     on = false;
                 }
-                case 3 -> {
-                    this.hero = new Assassin();
-                    on = false;
-                }
-                default -> System.out.println("Input must be 1 - 3!");
+
+                default -> System.out.println("Input must be 1 - 2!");
             }
         } while (on);
     }
@@ -146,25 +140,38 @@ public class PlayerControl implements CombatInterface {
     }
 
     public void levelUp() {
-        if (this.hero.getExperiencePoints() > 10) {
+        if (this.hero.getExperiencePoints() >= 10 && this.hero.getLevel() < 2) {
+            levelUpTraits();
+        }
+        if (this.hero.getExperiencePoints() >= 30&& this.hero.getLevel() < 3) {
+            levelUpTraits();
+        }
+        if (this.hero.getExperiencePoints() >= 50 && this.hero.getLevel() < 4) {
+            levelUpTraits();
+        }
+        if (this.hero.getExperiencePoints() >= 80 && this.hero.getLevel() < 5) {
+            levelUpTraits();
+        }
+    }
 
-            System.out.printf("""
+    public void levelUpTraits(){
+        System.out.printf("""
                     //////////
                     Level Up!|
                     //////////
                     """);
 
-            this.hero.setLevel(1);
-            this.hero.setStrength(1);
-            this.hero.setIntelligence(1);
-            this.hero.setAgility(1);
-            this.hero.setHealthPointsBase(3);
-            this.hero.setTurningPoints(2);
-            this.hero.setTurningPointsBase(2);
+        this.hero.setLevel(1);
+        this.hero.setStrength(1);
+        this.hero.setIntelligence(1);
+        this.hero.setAgility(1);
+        this.hero.setHealthPointsBase(3);
+        this.hero.setTurningPoints(2);
+        this.hero.setTurningPointsBase(2);
 
 
-            this.hero.setHealthPoints(this.hero.getHealthPointsBase());
-        }
+        this.hero.setHealthPoints(this.hero.getHealthPointsBase());
+
     }
 
 

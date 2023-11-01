@@ -1,7 +1,7 @@
 package com.OskarJohansson.DungeonRun.Model.Characters;
 
 import com.OskarJohansson.DungeonRun.Model.Items.Potions.HealthPotion;
-import com.OskarJohansson.DungeonRun.Model.Items.Weapon.Weapon;
+import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponParentModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 public class Hero {
 
     private String name;
-    private Weapon weapon;
+    private WeaponParentModel weapon;
     private String heroClass;
     private int strength;
     private int intelligence;
@@ -34,11 +34,11 @@ public class Hero {
         this.name = name;
     }
 
-    public Weapon getWeapon() {
+    public WeaponParentModel getWeapon() {
         return weapon;
     }
 
-    public void setWeapon(Weapon weapon) {
+    public void setWeapon(WeaponParentModel weapon) {
         this.weapon = weapon;
     }
 
@@ -131,7 +131,7 @@ public class Hero {
     }
 
     public void setGold(int gold) {
-        this.gold = gold;
+        this.gold += gold;
     }
 
     public int getLevel() {
@@ -139,7 +139,7 @@ public class Hero {
     }
 
     public void setLevel(int level) {
-        this.level = level;
+        this.level += level;
     }
 
     public int getKillList() {

@@ -5,11 +5,6 @@ public class HealthPotion {
     private int hP = 10;
     private boolean isUsed = false;
 
-    public int drinkHealthPotion(){
-        this.isUsed = true;
-        return this.hP;
-    }
-
     public int gethP() {
         return hP;
     }
@@ -24,5 +19,10 @@ public class HealthPotion {
 
     public void setUsed(boolean used) {
         isUsed = used;
+    }
+
+    public int drinkHealthPotion() {
+        this.isUsed = true;
+        return this.hP;
     }
 }

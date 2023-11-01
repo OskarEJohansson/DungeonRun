@@ -9,14 +9,18 @@ public class CombatControl {
 
     public void playerBattleOptions(PlayerControl player, MapControl mapControl) {
         System.out.printf("""
-                                     
+                   
                    +++++|                                   Actions                                             |+++++
                    ____________________________________________________________________________________________________                         
                    #1 - Attack!  |   #2 - Drink Potion |   #3 - Prepare Block for next Round   |   #4 - Flee!  |
                 
-                >>>>  Turning points %d  <<<<\n
+                >>>>    %s's turn! <<<<
+                >>>>  Turning points: %d  <<<<
                 
-                """, player.getHero().getTurningPoints());
+                Choose Action: 
+                
+                """,player.getHero().getName(), player.getHero().getTurningPoints());
+
 
 
         boolean on = true;
@@ -56,14 +60,6 @@ public class CombatControl {
     }
 
     public void playerBattle(PlayerControl player, MapControl mapControl) {
-        System.out.printf("""
-                %s's turn!
-                Press enter to continue!
-                                
-                """, player.getHero().getName());
-
-        new Scanner(System.in).nextLine();
-
         for (EnemyParentModel monster : mapControl.getMonsterList()) {
             if (player.getHero().getTurningPoints() >= 0) {
                 if (monster.getHealthPoints() > 0 && !monster.isKilled()) {
@@ -111,13 +107,6 @@ public class CombatControl {
     }
 
     public void playerBossBattle(PlayerControl player, MapControl mapControl) {
-        System.out.printf("""
-                %s's turn!
-                Press enter to continue!
-                                
-                """, player.getHero().getName());
-
-        new Scanner(System.in).nextLine();
         if (player.getHero().getTurningPoints() >= 0) {
             if (mapControl.getBoss().getHealthPoints() > 0 && !mapControl.getBoss().isKilled()) {
                 mapControl.getBoss().getStatus();

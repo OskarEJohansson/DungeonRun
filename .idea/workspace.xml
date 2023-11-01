@@ -5,11 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7d1dfb9-99e4-4db1-b4d6-e7ef04fd8683" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Items/Weapon/WeaponClassOne/Drone.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Items/Weapon/WeaponClassThree/AtlanteanSword.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Items/Weapon/WeaponClassThree/PredatorDrone.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Items/Weapon/WeaponClassTwo/Spot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Items/Weapon/WeaponClassTwo/TwoHandSword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/CombatControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/CombatControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/MenuControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/MenuControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/PlayerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/PlayerControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/ShopControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/ShopControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Characters/Assassin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Characters/Barbarian.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Characters/Barbarian.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Characters/CodeMonkey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Characters/CodeMonkey.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Characters/Hero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Characters/Hero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Items/Potions/HealthPotion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Items/Potions/HealthPotion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Items/Weapon/Sword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Items/Weapon/WeaponClassOne/Sword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Items/Weapon/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Items/Weapon/WeaponParentModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +34,7 @@
         <option value="Interface" />
         <option value="JUnit3 Test Class" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -64,7 +76,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit3",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit3": "junit.framework.TestCase",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "attSeparation",
+    "git-widget-placeholder": "newWeapons",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
