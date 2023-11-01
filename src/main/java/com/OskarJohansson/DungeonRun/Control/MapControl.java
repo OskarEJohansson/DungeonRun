@@ -5,7 +5,7 @@ import com.OskarJohansson.DungeonRun.Model.Map.Level;
 import com.OskarJohansson.DungeonRun.Model.Map.ICA;
 
 import com.OskarJohansson.DungeonRun.Model.Map.Sats;
-import com.OskarJohansson.DungeonRun.Model.Monster.Monster;
+import com.OskarJohansson.DungeonRun.Model.Monster.EnemyParentModel;
 
 
 import java.util.ArrayList;
@@ -15,12 +15,12 @@ import java.util.Scanner;
 
 public class MapControl {
 
-    List<Monster> monsterList;
+    List<EnemyParentModel> monsterList;
     Level level;
     ICA ica;
     Sats sats;
     KjellCO kjellCo;
-    Monster boss;
+    EnemyParentModel boss;
     String levelName;
     String levelNumber;
 
@@ -30,15 +30,15 @@ public class MapControl {
         this.ica = new ICA();
         this.sats = new Sats();
         this.kjellCo = new KjellCO();
-        this.boss = new Monster();
+        this.boss = new EnemyParentModel();
         this.levelName = "";
         this.levelNumber = "";
     }
 
-    public List<Monster> getMonsterList() {
+    public List<EnemyParentModel> getMonsterList() {
         return monsterList;
     }
-    public void setMonsterList(List<Monster> monsterList) {
+    public void setMonsterList(List<EnemyParentModel> monsterList) {
         this.monsterList = monsterList;
     }
     public Level getLevel() {
@@ -102,7 +102,7 @@ public class MapControl {
 
         if (player.getTurningPoints() >= 0) {
 
-            for (Monster monster : monsterList) {
+            for (EnemyParentModel monster : monsterList) {
                 if (monster.getHealthPoints() > 0 && !monster.isKilled()) {
                     monster.getStatus();
                     monster.takeDamage(monster.block(), player.attack());
@@ -123,7 +123,7 @@ public class MapControl {
         System.out.printf("""
                 You are being attacked by %d monsters!
                                 
-                """, monsterList.size() - 1);
+                """, monsterList.size());
 
         do {
             minionBattle(player);
@@ -143,10 +143,10 @@ public class MapControl {
     }
 
     private int checkEnemyList() {
-        Iterator<Monster> iterator = this.monsterList.iterator();
+        Iterator<EnemyParentModel> iterator = this.monsterList.iterator();
 
         while (iterator.hasNext()) {
-            Monster c = iterator.next();
+            EnemyParentModel c = iterator.next();
             if (c.getHealthPoints() <= 0) {
                 iterator.remove();
             }
@@ -176,7 +176,7 @@ public class MapControl {
                 boss.takeDamage(boss.block(), player.attack());
             }
             if (boss.getHealthPoints() <= 0 && !boss.isKilled()) {
-                System.out.printf("You killed the %s and gained %d experience points! \n", boss.getName(), boss.getExperiencePoints());
+                System.out.printf("You killed %s and gained %d experience points! \n", boss.getName(), boss.getExperiencePoints());
                 player.setKillList(1);
                 player.setExperiencePoints(boss.getExperiencePoints());
                 player.setGold(boss.getGold());
@@ -195,7 +195,6 @@ public class MapControl {
             bossBattle(player);
             playerBossBattle(player);
             if (this.boss.isKilled()) {
-                System.out.printf("You have killed %s!", boss.getName());
                 player.levelUp();
                 player.resetTurningPoints();
             }

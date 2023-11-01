@@ -11,7 +11,6 @@ public class GameControl {
         System.out.printf("""
                 
                 ++++|        Welcome to STI Dungeon Run!        |++++
-                
                 """);
         this.player = new PlayerControl();
         this.map = new MapControl();

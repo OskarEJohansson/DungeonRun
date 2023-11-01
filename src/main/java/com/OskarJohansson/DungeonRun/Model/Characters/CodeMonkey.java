@@ -1,7 +1,5 @@
 package com.OskarJohansson.DungeonRun.Model.Characters;
 
-import com.OskarJohansson.DungeonRun.Model.Monster.Monster;
-
 public class CodeMonkey extends Hero {
 
     private String heroClass;

@@ -1,10 +1,8 @@
-package com.OskarJohansson.DungeonRun.Control.Menu;
-
-import com.OskarJohansson.DungeonRun.Control.PlayerControl;
+package com.OskarJohansson.DungeonRun.Control;
 
 import java.util.Scanner;
 
-public class Shop {
+public class ShopControl {
 
 
 

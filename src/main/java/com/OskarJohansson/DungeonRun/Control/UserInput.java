@@ -46,14 +46,14 @@ public class UserInput {
         }
         return intValue;
     }
-
-    public int maxNumberOfInput(int input, String noun, int maxNumber) {
-        if (input > maxNumber) {
-            System.out.println("Maximum number of " + noun + " are " + maxNumber + ". Try Again! ");
-            return -1;
-        }
-        return input;
-    }
+//
+//    public int maxNumberOfInput(int input, String noun, int maxNumber) {
+//        if (input > maxNumber) {
+//            System.out.println("Maximum number of " + noun + " are " + maxNumber + ". Try Again! ");
+//            return -1;
+//        }
+//        return input;
+//    }
 }
 
 

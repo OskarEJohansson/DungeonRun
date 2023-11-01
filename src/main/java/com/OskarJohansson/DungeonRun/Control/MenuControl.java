@@ -11,9 +11,9 @@ public class MenuControl {
         do {
             System.out.printf("""
                                         
-                   +++++|        Main Menu        |+++++
-                                        
-                    #1 - Show %s the %s STATS  |   #2 - Show MAP   |   #3 - Enter SHOP
+                   +++++|                       Main Menu                          |+++++
+                   ______________________________________________________________________                    
+                   #1 - Show %s the %s STATS  |   #2 - Show MAP   |   #3 - Enter SHOP   |
                                         
                     """, player.getName(), player.getHeroClass());
 
@@ -28,9 +28,9 @@ public class MenuControl {
 
     public void mapMenu(MapControl map, MenuControl mainMenu, PlayerControl player) {
         System.out.println("""
-                +++++|        Explore the world of STI!        |+++++
-                                
-                #1 - Battle the Minions of ICA  |   #2 - Defeat the PT's of Sats    |   #3 - Challenge the Wizards of Kjell&Co
+                +++++|                                  Explore the world of STI!                                          |+++++
+                _________________________________________________________________________________________________________________               
+                #1 - Battle the Minions of ICA  |   #2 - Defeat the PT's of Sats    |   #3 - Challenge the Wizards of Kjell&Co  |
                                 
                 """);
 
@@ -59,9 +59,10 @@ public class MenuControl {
 
         do {
             System.out.printf("""
-                    +++++|        Level %s        |+++++
-                    +++++|        %s        |+++++
-                    #1 - Enter Kill Zone!    |   #2 - Enter Boss Zone!    |   #3 - Leave Level!
+                    +++++|                              Level %s                           |+++++
+                    +++++|                              %s                                 |+++++
+                    _____________________________________________________________________________
+                    #1 - Enter Kill Zone!    |   #2 - Enter Boss Zone!    |   #3 - Leave Level! |
                     """, map.getLevelNumber(), map.getLevelName());
             switch (new UserInput().inputInt(new Scanner(System.in))) {
                 case 1 -> {

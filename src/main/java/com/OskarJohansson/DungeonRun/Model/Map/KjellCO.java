@@ -1,6 +1,8 @@
 package com.OskarJohansson.DungeonRun.Model.Map;
 
 import com.OskarJohansson.DungeonRun.Model.Monster.*;
+import com.OskarJohansson.DungeonRun.Model.Monster.Bosses.KjellCOBoss;
+import com.OskarJohansson.DungeonRun.Model.Monster.Minions.Nerd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +11,7 @@ public class KjellCO extends Level{
 
     public KjellCO() {
         super();
-        List<Monster> setMinionMonsterList = new ArrayList<>();
+        List<EnemyParentModel> setMinionMonsterList = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
             setMinionMonsterList.add(new Nerd());
         }

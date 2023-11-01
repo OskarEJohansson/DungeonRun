@@ -1,6 +1,6 @@
 package com.OskarJohansson.DungeonRun.Control;
 
-public interface Combat {
+public interface CombatInterface {
 
     public int attack();
 

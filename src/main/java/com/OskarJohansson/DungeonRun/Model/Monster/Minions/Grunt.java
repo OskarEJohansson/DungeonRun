@@ -1,10 +1,11 @@
-package com.OskarJohansson.DungeonRun.Model.Monster;
+package com.OskarJohansson.DungeonRun.Model.Monster.Minions;
 
-import com.OskarJohansson.DungeonRun.Control.Combat;
+import com.OskarJohansson.DungeonRun.Control.CombatInterface;
+import com.OskarJohansson.DungeonRun.Model.Monster.EnemyParentModel;
 
 import java.util.Random;
 
-public class Grunt extends Monster implements Combat {
+public class Grunt extends EnemyParentModel implements CombatInterface {
 
     public Grunt() {
         super();
@@ -27,10 +28,10 @@ public class Grunt extends Monster implements Combat {
     @Override
     public boolean block() {
         if (new Random().nextInt(1, 10) > 8) {
-            System.out.println("Monster blocked the attack successfully!");
+            System.out.println(">>>>    Monster blocked the attack successfully!    <<<<\n");
             return true;
         }
-        System.out.println("Monster fails to block the attack\n");
+        System.out.println(">>>>    Monster fails to block the attack   <<<<\n");
         return false;
     }
 
@@ -42,8 +43,9 @@ public class Grunt extends Monster implements Combat {
     @Override
     public void getStatus() {
         System.out.printf("""
-                                
-                Enemy   %s  |   Health Points   %d  |   Turning Points  %d
+                ++++                    Enemy Stats                     ++++
+                ____________________________________________________________                
+                Enemy   %s  |   Health Points   %d  |   Turning Points  %d  |
                                 
                 """, this.getName(), this.getHealthPoints(), this.getTurningPoints());
     }

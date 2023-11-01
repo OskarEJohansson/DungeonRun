@@ -1,10 +1,8 @@
 package com.OskarJohansson.DungeonRun.Model.Monster;
 
-import com.OskarJohansson.DungeonRun.Control.Combat;
+import com.OskarJohansson.DungeonRun.Control.CombatInterface;
 
-import java.util.Random;
-
-public class Monster implements Combat {
+public class EnemyParentModel implements CombatInterface {
 
     private String name;
     private int healthPoints;

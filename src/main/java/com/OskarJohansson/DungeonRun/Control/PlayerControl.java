@@ -10,7 +10,7 @@ import com.OskarJohansson.DungeonRun.Model.Weapon.Weapon;
 import java.util.Random;
 import java.util.Scanner;
 
-public class PlayerControl implements Combat {
+public class PlayerControl implements CombatInterface {
 
     private String name;
     private Weapon weapon;
@@ -42,9 +42,9 @@ public class PlayerControl implements Combat {
         boolean on = true;
         do {System.out.printf("""
                           
-                ++++|        Pick a Hero        |++++
-                                
-                #1 - Barbarian  |   #2 - Code Monkey  |   #3 - Assassin
+                ++++|                 Pick a Hero                   |++++
+                _________________________________________________________              
+                #1 - Barbarian  |   #2 - Code Monkey  |   #3 - Assassin |
                                 
                 """);
 
@@ -202,7 +202,11 @@ public class PlayerControl implements Combat {
 
     public void levelUp() {
         if (this.experiencePoints > 10) {
-            System.out.println("Level Up!");
+            System.out.printf("""
+                    //////////
+                    Level Up!|
+                    //////////
+                    """);
             this.level += 1;
             this.strength += 1;
             this.intelligence += 1;
@@ -211,15 +215,16 @@ public class PlayerControl implements Combat {
             this.healthPointsBase += 3;
             this.turningPointsBase += 2;
             this.turningPoints += 2;
+
+            this.healthPoints = this.healthPointsBase;
         }
     }
 
     public void getPlayerStats() {
         System.out.printf("""
-                ++++|        Stats        |++++
-                                
-                Strength    %d  |   Intelligence   %d  |   Agility   %d  |   
-                Turning Points  %d |   Health Points   %d  |
+                ++++|                                           Stats                                               |++++
+                _________________________________________________________________________________________________________              
+                Strength    %d  |   Intelligence   %d  |   Agility   %d  |   Turning Points  %d |   Health Points   %d  |
                                 
                 """, this.strength, this.intelligence, this.agility, this.turningPoints, this.healthPoints);
 
@@ -236,10 +241,10 @@ public class PlayerControl implements Combat {
     public boolean block() {
 
         if (new Random().nextInt(1, 10) < 5) {
-            System.out.println("Player blocked the attack successfully!\n");
+            System.out.println(">>>>    Player blocked the attack successfully!     <<<<\n");
             return true;
         } else
-            System.out.println("Player fails to blocked the hit!\n");
+            System.out.println(">>>>    Player fails to block the attack!    <<<<\n");
         return false;
     }
 
@@ -268,10 +273,9 @@ public class PlayerControl implements Combat {
     @Override
     public void getStatus() {
         System.out.printf("""
-                ++++|        Stats        |++++
-                                
-                %s the %s  |   Level   %d  |   Health Points   %d/%d  |   
-                Turning Points  %d/%d  |   Experience Points   %d  |   Gold    %d
+                ++++|                                                       Stats                                                       |++++
+                _____________________________________________________________________________________________________________________________
+                %s the %s  |   Level   %d  |   Health Points   %d/%d  |   Turning Points  %d/%d  |   Experience Points   %d  |   Gold    %d |
                                 
                 """, this.name, this.heroClass, this.level, this.healthPoints, this.healthPointsBase, this.turningPoints, this.turningPointsBase, this.experiencePoints, this.gold);
 
