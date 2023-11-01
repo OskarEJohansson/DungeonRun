@@ -20,7 +20,7 @@ public class ShopControl {
                     #1 - Buy WEAPON  |   #2 - Buy ARMOUR  |   #3 - Buy Health Potion  |   #4 - Exit SHOP   |
                                     
                     You have %d gold
-                    """, player.getGold());
+                    """, player.getHero().getGold());
 
             switch (new UserInputControl().inputInt(new Scanner(System.in))) {
                 case 1 -> System.out.println("BUY WEAPON");
@@ -36,11 +36,11 @@ public class ShopControl {
     }
 
     public void buyPotion(PlayerControl player) {
-        if (player.getGold() < 5) {
+        if (player.getHero().getGold() < 5) {
             System.out.println("You can't afford the potion. Kill more minions and collect more gold!");
         } else {
             System.out.println("You purchased a 10 hp Potion for 5 gold.");
-            player.setGold(-5);
+            player.getHero().setGold(-5);
             player.addHealthPoition(new HealthPotion());
         }
     }

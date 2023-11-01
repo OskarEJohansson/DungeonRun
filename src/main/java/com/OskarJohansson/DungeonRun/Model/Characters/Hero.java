@@ -1,15 +1,46 @@
 package com.OskarJohansson.DungeonRun.Model.Characters;
 
+import com.OskarJohansson.DungeonRun.Model.Items.Potions.HealthPotion;
+import com.OskarJohansson.DungeonRun.Model.Items.Weapon.Weapon;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Hero {
 
+    private String name;
+    private Weapon weapon;
     private String heroClass;
     private int strength;
     private int intelligence;
     private int agility;
+    private int healthPoints = 5;
+    private int healthPointsBase = 5;
+    private int turningPoints = 5;
+    private int turningPointsBase = 5;
+    private int armour = 1;
+    private int experiencePoints = 0;
+    private int gold = 10;
+    private int level = 1;
+    private int killList = 0;
+    private List<HealthPotion> potionStash = new ArrayList<>();
 
-    private int armour;
-    private int healthPoints;
-    private int turningPoints;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
 
     public String getHeroClass() {
         return heroClass;
@@ -43,14 +74,6 @@ public class Hero {
         this.agility = agility;
     }
 
-    public int getArmour() {
-        return this.armour;
-    }
-
-    public void setArmour(int armour) {
-        this.armour = armour;
-    }
-
     public int getHealthPoints() {
         return healthPoints;
     }
@@ -59,12 +82,81 @@ public class Hero {
         this.healthPoints = healthPoints;
     }
 
+    public void addHealthPoints(int healthPoints){
+        this.healthPoints += healthPoints;
+    }
+
+    public int getHealthPointsBase() {
+        return healthPointsBase;
+    }
+
+    public void setHealthPointsBase(int healthPointsBase) {
+        this.healthPointsBase = healthPointsBase;
+    }
 
     public int getTurningPoints() {
         return turningPoints;
     }
 
     public void setTurningPoints(int turningPoints) {
-        this.turningPoints = turningPoints;
+        this.turningPoints -= turningPoints;
     }
+
+    public int getTurningPointsBase() {
+        return turningPointsBase;
+    }
+
+    public void setTurningPointsBase(int turningPointsBase) {
+        this.turningPointsBase = turningPointsBase;
+    }
+
+    public int getArmour() {
+        return armour;
+    }
+
+    public void setArmour(int armour) {
+        this.armour = armour;
+    }
+
+    public int getExperiencePoints() {
+        return experiencePoints;
+    }
+
+    public void setExperiencePoints(int experiencePoints) {
+        this.experiencePoints = experiencePoints;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getKillList() {
+        return killList;
+    }
+
+    public void setKillList(int killList) {
+        this.killList += killList;
+    }
+
+    public List<HealthPotion> getPotionStash() {
+        return potionStash;
+    }
+
+    public void addPotionStash(HealthPotion potion) {
+        this.potionStash.add(potion);
+    }
+
+
 }

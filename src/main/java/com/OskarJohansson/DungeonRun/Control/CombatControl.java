@@ -16,7 +16,7 @@ public class CombatControl {
                 
                 >>>>  Turning points %d  <<<<\n
                 
-                """, player.getTurningPoints());
+                """, player.getHero().getTurningPoints());
 
 
         boolean on = true;
@@ -60,12 +60,12 @@ public class CombatControl {
                 %s's turn!
                 Press enter to continue!
                                 
-                """, player.getName());
+                """, player.getHero().getName());
 
         new Scanner(System.in).nextLine();
 
         for (EnemyParentModel monster : mapControl.getMonsterList()) {
-            if (player.getTurningPoints() >= 0) {
+            if (player.getHero().getTurningPoints() >= 0) {
                 if (monster.getHealthPoints() > 0 && !monster.isKilled()) {
                     monster.getStatus();
                     monster.takeDamage(monster.block(), player.attack());
@@ -115,19 +115,19 @@ public class CombatControl {
                 %s's turn!
                 Press enter to continue!
                                 
-                """, player.getName());
+                """, player.getHero().getName());
 
         new Scanner(System.in).nextLine();
-        if (player.getTurningPoints() >= 0) {
+        if (player.getHero().getTurningPoints() >= 0) {
             if (mapControl.getBoss().getHealthPoints() > 0 && !mapControl.getBoss().isKilled()) {
                 mapControl.getBoss().getStatus();
                 mapControl.getBoss().takeDamage(mapControl.getBoss().block(), player.attack());
             }
             if (mapControl.getBoss().getHealthPoints() <= 0 && !mapControl.getBoss().isKilled()) {
                 System.out.printf("////     You killed %s and gained %d experience points!      ////\n", mapControl.getBoss().getName(), mapControl.getBoss().getExperiencePoints());
-                player.setKillList(1);
-                player.setExperiencePoints(mapControl.getBoss().getExperiencePoints());
-                player.setGold(mapControl.getBoss().getGold());
+                player.getHero().setKillList(1);
+                player.getHero().setExperiencePoints(mapControl.getBoss().getExperiencePoints());
+                player.getHero().setGold(mapControl.getBoss().getGold());
                 mapControl.getBoss().setKilled(true);
             }
         }
@@ -166,8 +166,8 @@ public class CombatControl {
 
     private void ifEnemyIsKilled(PlayerControl player, EnemyParentModel monster) {
         System.out.printf("////     You killed the monster and gained %d experience points!     //// \n", monster.getExperiencePoints());
-        player.setKillList(1);
-        player.setExperiencePoints(monster.getExperiencePoints());
-        player.setGold(monster.getGold());
+        player.getHero().setKillList(1);
+        player.getHero().setExperiencePoints(monster.getExperiencePoints());
+        player.getHero().setGold(monster.getGold());
     }
 }

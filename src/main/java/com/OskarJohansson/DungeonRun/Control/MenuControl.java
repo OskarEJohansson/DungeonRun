@@ -15,7 +15,7 @@ public class MenuControl {
                    ____________________________________________________________________________________________________                         
                    #1 - Show %s the %s Level  |   #2 - Show Stats  |   #3 - Show MAP   |   #4 - Enter SHOP   |
                                         
-                    """, player.getName(), player.getHeroClass());
+                    """, player.getHero().getName(), player.getHero().getHeroClass());
 
             switch (new UserInputControl().inputInt(new Scanner(System.in))) {
                 case 1 -> player.getPlayerStats();
@@ -28,31 +28,39 @@ public class MenuControl {
     }
 
     public void mapMenu(MapControl mapControl, MenuControl mainMenu, PlayerControl player, CombatControl combatControl) {
-        System.out.println("""
-                +++++|                                  Explore the world of STI!                                          |+++++
-                _________________________________________________________________________________________________________________               
-                #1 - Battle the Minions of ICA  |   #2 - Defeat the PT's of Sats    |   #3 - Challenge the Wizards of Kjell&Co  |
-                                
-                """);
 
-        switch(new UserInputControl().inputInt(new Scanner(System.in))){
-            case 1 -> {
-                mapControl.setMap(1);
-                System.out.println("Entering the Dungeons of Ica");
-                mapStructure(mapControl, player, combatControl);
+        boolean on = true;
+        do {
+            System.out.println("""
+                    +++++|                                                    Explore the world of STI!                                                           |+++++
+                    ______________________________________________________________________________________________________________________________________________                
+                    #1 - Battle the Minions of ICA  |   #2 - Defeat the PT's of Sats    |   #3 - Challenge the Wizards of Kjell&Co  |   #4 - Return to main menu  |
+                                    
+                    """);
+
+            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
+                case 1 -> {
+                    mapControl.setMap(1);
+                    System.out.println("Entering the Dungeons of Ica");
+                    mapStructure(mapControl, player, combatControl);
+                }
+                case 2 -> {
+                    mapControl.setMap(2);
+                    System.out.println("Entering the Dungeons of Sats");
+                    mapStructure(mapControl, player, combatControl);
+                }
+                case 3 -> {
+                    mapControl.setMap(3);
+                    System.out.println("Entering the Dungeons of Kjell & Co");
+                    mapStructure(mapControl, player, combatControl);
+                }
+                case 4 -> {
+                    System.out.println("Returning to Main Menu");
+                    on = false;
+                }
+                default -> System.out.println("Input must be 1 - 3!");
             }
-            case 2 -> {
-                mapControl.setMap(2);
-                System.out.println("Entering the Dungeons of Sats");
-                mapStructure(mapControl, player, combatControl);
-            }
-            case 3 -> {
-                mapControl.setMap(3);
-                System.out.println("Entering the Dungeons of Kjell & Co");
-                mapStructure(mapControl, player, combatControl);
-            }
-            default -> System.out.println("Input must be 1 - 3!");
-        }
+        }while (on);
     }
     public void mapStructure(MapControl mapControl, PlayerControl player, CombatControl combatControl) {
 
