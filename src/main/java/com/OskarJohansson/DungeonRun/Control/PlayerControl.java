@@ -4,11 +4,11 @@ import com.OskarJohansson.DungeonRun.Model.Characters.Assassin;
 import com.OskarJohansson.DungeonRun.Model.Characters.Barbarian;
 import com.OskarJohansson.DungeonRun.Model.Characters.CodeMonkey;
 import com.OskarJohansson.DungeonRun.Model.Characters.Hero;
-import com.OskarJohansson.DungeonRun.Model.Weapon.Sword;
-import com.OskarJohansson.DungeonRun.Model.Weapon.Weapon;
+import com.OskarJohansson.DungeonRun.Model.Items.Potions.HealthPotion;
+import com.OskarJohansson.DungeonRun.Model.Items.Weapon.Sword;
+import com.OskarJohansson.DungeonRun.Model.Items.Weapon.Weapon;
 
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class PlayerControl implements CombatInterface {
 
@@ -25,9 +25,10 @@ public class PlayerControl implements CombatInterface {
     private int turningPointsBase = 5;
     private int armour = 1;
     private int experiencePoints = 0;
-    private int gold = 0;
+    private int gold = 10;
     private int level = 1;
     private int killList = 0;
+    private List<Object> stash = new ArrayList<>();
 
     public PlayerControl() {
         setCharacter();
@@ -40,60 +41,61 @@ public class PlayerControl implements CombatInterface {
     public void setCharacter() {
 
         boolean on = true;
-        do {System.out.printf("""
-                          
-                ++++|                 Pick a Hero                   |++++
-                _________________________________________________________              
-                #1 - Barbarian  |   #2 - Code Monkey  |   #3 - Assassin |
-                                
-                """);
+        do {
+            System.out.printf("""
+                              
+                    ++++|                 Pick a Hero                   |++++
+                    _________________________________________________________              
+                    #1 - Barbarian  |   #2 - Code Monkey  |   #3 - Assassin |
+                                    
+                    """);
 
-        switch (new UserInput().inputInt(new Scanner(System.in))) {
-            case 1 -> {
-                this.hero = new Barbarian();
-                this.heroClass = getHero().getHeroClass();
-                this.strength += getHero().getStrength();
-                this.intelligence += getHero().getIntelligence();
-                this.armour += getHero().getArmour();
-                this.agility += getHero().getAgility();
-                this.weapon = new Sword();
-                this.healthPoints += getHero().getHealthPoints();
-                this.healthPointsBase += getHero().getHealthPoints();
-                this.turningPointsBase += getHero().getTurningPoints();
-                this.turningPoints += getHero().getTurningPoints();
-                on = false;
+            switch (new UserInput().inputInt(new Scanner(System.in))) {
+                case 1 -> {
+                    this.hero = new Barbarian();
+                    this.heroClass = getHero().getHeroClass();
+                    this.strength += getHero().getStrength();
+                    this.intelligence += getHero().getIntelligence();
+                    this.armour += getHero().getArmour();
+                    this.agility += getHero().getAgility();
+                    this.weapon = new Sword();
+                    this.healthPoints += getHero().getHealthPoints();
+                    this.healthPointsBase += getHero().getHealthPoints();
+                    this.turningPointsBase += getHero().getTurningPoints();
+                    this.turningPoints += getHero().getTurningPoints();
+                    on = false;
+                }
+                case 2 -> {
+                    this.hero = new CodeMonkey();
+                    this.heroClass = getHero().getHeroClass();
+                    this.strength += getHero().getStrength();
+                    this.intelligence += getHero().getIntelligence();
+                    this.armour += getHero().getArmour();
+                    this.agility += getHero().getAgility();
+                    this.weapon = new Sword();
+                    this.healthPoints += getHero().getHealthPoints();
+                    this.healthPointsBase += getHero().getHealthPoints();
+                    this.turningPointsBase += getHero().getTurningPoints();
+                    this.turningPoints += getHero().getTurningPoints();
+                    on = false;
+                }
+                case 3 -> {
+                    this.hero = new Assassin();
+                    this.heroClass = getHero().getHeroClass();
+                    this.strength += getHero().getStrength();
+                    this.intelligence += getHero().getIntelligence();
+                    this.armour += getHero().getArmour();
+                    this.agility += getHero().getAgility();
+                    this.weapon = new Sword();
+                    this.healthPoints += getHero().getHealthPoints();
+                    this.healthPointsBase += getHero().getHealthPoints();
+                    this.turningPointsBase += getHero().getTurningPoints();
+                    this.turningPoints += getHero().getTurningPoints();
+                    on = false;
+                }
+                default -> System.out.println("Input must be 1 - 3!");
             }
-            case 2 -> {
-                this.hero = new CodeMonkey();
-                this.heroClass = getHero().getHeroClass();
-                this.strength += getHero().getStrength();
-                this.intelligence += getHero().getIntelligence();
-                this.armour += getHero().getArmour();
-                this.agility += getHero().getAgility();
-                this.weapon = new Sword();
-                this.healthPoints += getHero().getHealthPoints();
-                this.healthPointsBase += getHero().getHealthPoints();
-                this.turningPointsBase += getHero().getTurningPoints();
-                this.turningPoints += getHero().getTurningPoints();
-                on = false;
-            }
-            case 3 -> {
-                this.hero = new Assassin();
-                this.heroClass = getHero().getHeroClass();
-                this.strength += getHero().getStrength();
-                this.intelligence += getHero().getIntelligence();
-                this.armour += getHero().getArmour();
-                this.agility += getHero().getAgility();
-                this.weapon = new Sword();
-                this.healthPoints += getHero().getHealthPoints();
-                this.healthPointsBase += getHero().getHealthPoints();
-                this.turningPointsBase += getHero().getTurningPoints();
-                this.turningPoints += getHero().getTurningPoints();
-                on = false;
-            }
-            default -> System.out.println("Input must be 1 - 3!");
-        }
-        }while (on);
+        } while (on);
     }
 
     public int getKillList() {
@@ -279,5 +281,18 @@ public class PlayerControl implements CombatInterface {
                                 
                 """, this.name, this.heroClass, this.level, this.healthPoints, this.healthPointsBase, this.turningPoints, this.turningPointsBase, this.experiencePoints, this.gold);
 
+    }
+
+    public void addHealthPoition(HealthPotion healthPotion) {
+        this.stash.add(healthPotion);
+    }
+
+    public void drinkHealthPotion() {
+        this.stash.forEach(c -> {
+            if(c instanceof HealthPotion && !((HealthPotion) c).isUsed()){
+                this.healthPoints += ((HealthPotion) c).drinkHealthPotion();
+                ((HealthPotion) c).setUsed(true);
+            }
+        });
     }
 }

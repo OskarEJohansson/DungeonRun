@@ -35,15 +35,6 @@ public class MapControl {
         this.levelNumber = "";
     }
 
-    public List<EnemyParentModel> getMonsterList() {
-        return monsterList;
-    }
-    public void setMonsterList(List<EnemyParentModel> monsterList) {
-        this.monsterList = monsterList;
-    }
-    public Level getLevel() {
-        return level;
-    }
 
     public String getLevelName() {
         return levelName;
@@ -76,6 +67,30 @@ public class MapControl {
                 this.levelName = this.level.getLevelName();
                 this.levelNumber = this.level.getLevelNumber();
             }
+        }
+    }
+
+
+    public void playerBattleOptions(PlayerControl player) {
+        System.out.println("Pick what action to take!");
+        boolean on = true;
+        switch (new UserInput().inputInt(new Scanner(System.in))) {
+            case 1 -> {
+                on = false;
+            }// attack
+            case 2 -> {
+                player.drinkHealthPotion();
+            }
+            case 3 -> {
+                on = false;
+            }// block-position
+            case 4 -> {
+                on = false;
+            }// flee
+            default -> {
+                System.out.println("Input must be 1-4!");
+            }
+
         }
     }
 
@@ -203,6 +218,3 @@ public class MapControl {
         } while (!boss.isKilled());
     }
 }
-
-
-

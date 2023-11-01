@@ -1,4 +1,4 @@
-package com.OskarJohansson.DungeonRun.Model.Weapon;
+package com.OskarJohansson.DungeonRun.Model.Items.Weapon;
 
 public class Sword extends Weapon {
 

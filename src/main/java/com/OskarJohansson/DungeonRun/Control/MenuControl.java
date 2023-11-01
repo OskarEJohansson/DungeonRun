@@ -64,6 +64,7 @@ public class MenuControl {
                     _____________________________________________________________________________
                     #1 - Enter Kill Zone!    |   #2 - Enter Boss Zone!    |   #3 - Leave Level! |
                     """, map.getLevelNumber(), map.getLevelName());
+
             switch (new UserInput().inputInt(new Scanner(System.in))) {
                 case 1 -> {
                     System.out.println("You are entering the kill zone!");
