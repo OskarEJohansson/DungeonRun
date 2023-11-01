@@ -10,17 +10,28 @@ public class ShopControl {
     public void shop(PlayerControl player) {
 
         boolean on = true;
-        System.out.println("Welcome to the Shop!");
 
-        do switch (new UserInput().inputInt(new Scanner(System.in))) {
-            case 1 -> System.out.println("BUY WEAPON");
-            case 2 -> System.out.println("BUY ARMOUR");
-            case 3 -> System.out.println("BUY POTION");
-            case 4 -> {
-                System.out.println("EXIT SHOP");
-                on = false;
+        do {
+            System.out.printf("""
+                    Welcome to the Shop!
+                                    
+                    +++++|                                   Shop Menu                                  |+++++
+                    ____________________________________________________________________________________________________
+                    #1 - Buy WEAPON  |   #2 - Buy ARMOUR  |   #3 - Buy Health Potion  |   #4 - Exit SHOP   |
+                                    
+                    You have %d gold
+                    """, player.getGold());
+
+            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
+                case 1 -> System.out.println("BUY WEAPON");
+                case 2 -> System.out.println("BUY ARMOUR");
+                case 3 -> buyPotion(player);
+                case 4 -> {
+                    System.out.println("You are leaving the Shop");
+                    on = false;
+                }
+                case 5 -> System.out.println("Input must be 1-4!");
             }
-            case 5 -> System.out.println("Input must be 1-4!");
         } while (on);
     }
 
@@ -29,8 +40,10 @@ public class ShopControl {
             System.out.println("You can't afford the potion. Kill more minions and collect more gold!");
         } else {
             System.out.println("You purchased a 10 hp Potion for 5 gold.");
-            player.setGold(-10);
-            player.buy(new HealthPotion());
+            player.setGold(-5);
+            player.addHealthPoition(new HealthPotion());
         }
     }
 }
+
+

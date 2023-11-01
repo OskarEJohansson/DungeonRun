@@ -5,28 +5,29 @@ import java.util.Scanner;
 public class MenuControl {
 
 
-    public void mainMenu(PlayerControl player, MenuControl mainMenu, MapControl map) {
+    public void mainMenu(PlayerControl player, MenuControl mainMenu, MapControl mapControl, ShopControl shopControl, CombatControl combatControl) {
         boolean on = true;
 
         do {
             System.out.printf("""
                                         
-                   +++++|                       Main Menu                          |+++++
-                   ______________________________________________________________________                    
-                   #1 - Show %s the %s STATS  |   #2 - Show MAP   |   #3 - Enter SHOP   |
+                   +++++|                                   Main Menu                                  |+++++
+                   ____________________________________________________________________________________________________                         
+                   #1 - Show %s the %s Level  |   #2 - Show Stats  |   #3 - Show MAP   |   #4 - Enter SHOP   |
                                         
                     """, player.getName(), player.getHeroClass());
 
-            switch (new UserInput().inputInt(new Scanner(System.in))) {
+            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
                 case 1 -> player.getPlayerStats();
-                case 2 -> mapMenu(map, mainMenu, player);
-                case 3 -> System.out.println("ENTER SHOP");
-                default -> System.out.println("Input must be 1 - 3!");
+                case 2 -> player.getStatus();
+                case 3 -> mapMenu(mapControl, mainMenu, player, combatControl);
+                case 4 -> shopControl.shop(player);
+                default -> System.out.println("Input must be 1 - 4!");
             }
         } while (on);
     }
 
-    public void mapMenu(MapControl map, MenuControl mainMenu, PlayerControl player) {
+    public void mapMenu(MapControl mapControl, MenuControl mainMenu, PlayerControl player, CombatControl combatControl) {
         System.out.println("""
                 +++++|                                  Explore the world of STI!                                          |+++++
                 _________________________________________________________________________________________________________________               
@@ -34,26 +35,26 @@ public class MenuControl {
                                 
                 """);
 
-        switch(new UserInput().inputInt(new Scanner(System.in))){
+        switch(new UserInputControl().inputInt(new Scanner(System.in))){
             case 1 -> {
-                map.setMap(1);
+                mapControl.setMap(1);
                 System.out.println("Entering the Dungeons of Ica");
-                mapStructure(map, player);
+                mapStructure(mapControl, player, combatControl);
             }
             case 2 -> {
-                map.setMap(2);
+                mapControl.setMap(2);
                 System.out.println("Entering the Dungeons of Sats");
-                mapStructure(map, player);
+                mapStructure(mapControl, player, combatControl);
             }
             case 3 -> {
-                map.setMap(3);
+                mapControl.setMap(3);
                 System.out.println("Entering the Dungeons of Kjell & Co");
-                mapStructure(map, player);
+                mapStructure(mapControl, player, combatControl);
             }
             default -> System.out.println("Input must be 1 - 3!");
         }
     }
-    public void mapStructure(MapControl map, PlayerControl player) {
+    public void mapStructure(MapControl mapControl, PlayerControl player, CombatControl combatControl) {
 
         boolean on = true;
 
@@ -63,16 +64,16 @@ public class MenuControl {
                     +++++|                              %s                                 |+++++
                     _____________________________________________________________________________
                     #1 - Enter Kill Zone!    |   #2 - Enter Boss Zone!    |   #3 - Leave Level! |
-                    """, map.getLevelNumber(), map.getLevelName());
+                    """, mapControl.getLevelNumber(), mapControl.getLevelName());
 
-            switch (new UserInput().inputInt(new Scanner(System.in))) {
+            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
                 case 1 -> {
                     System.out.println("You are entering the kill zone!");
-                    map.minionBattleControl(player);
+                    combatControl.minionBattleControl(player, mapControl);
                 }
                 case 2 -> {
                     System.out.println("You are about to challenging the stage Boss!");
-                    map.bossBattleControl(player);
+                    combatControl.bossBattleControl(player, mapControl);
                     on = false;
                 }
                 case 3 -> {

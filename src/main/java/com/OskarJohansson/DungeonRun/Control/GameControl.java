@@ -5,6 +5,8 @@ public class GameControl {
     PlayerControl player;
     MapControl map;
     MenuControl mainMenu;
+    ShopControl shopControl;
+    CombatControl combatControl;
 
 
     public GameControl(){
@@ -15,11 +17,13 @@ public class GameControl {
         this.player = new PlayerControl();
         this.map = new MapControl();
         this.mainMenu = new MenuControl();
+        this.shopControl = new ShopControl();
+        this.combatControl = new CombatControl();
 
     }
 
     public void gameFlow(){
-        mainMenu.mainMenu(player,mainMenu, map);
+        mainMenu.mainMenu(player,mainMenu, map, shopControl, combatControl);
 
 
 

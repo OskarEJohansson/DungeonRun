@@ -50,7 +50,7 @@ public class PlayerControl implements CombatInterface {
                                     
                     """);
 
-            switch (new UserInput().inputInt(new Scanner(System.in))) {
+            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
                 case 1 -> {
                     this.hero = new Barbarian();
                     this.heroClass = getHero().getHeroClass();
@@ -224,11 +224,11 @@ public class PlayerControl implements CombatInterface {
 
     public void getPlayerStats() {
         System.out.printf("""
-                ++++|                                           Stats                                               |++++
-                _________________________________________________________________________________________________________              
-                Strength    %d  |   Intelligence   %d  |   Agility   %d  |   Turning Points  %d |   Health Points   %d  |
+                ++++|                                         Stats                                              |++++
+                ______________________________________________________________________________________________________             
+                Level  %d   |   Experience Points   %d  |   Strength    %d  |   Intelligence   %d  |   Agility   %d  |
                                 
-                """, this.strength, this.intelligence, this.agility, this.turningPoints, this.healthPoints);
+                """,this.level, this.experiencePoints, this.strength, this.intelligence, this.agility);
 
     }
 
@@ -247,6 +247,7 @@ public class PlayerControl implements CombatInterface {
             return true;
         } else
             System.out.println(">>>>    Player fails to block the attack!    <<<<\n");
+            checkHealthPoints();
         return false;
     }
 
@@ -295,4 +296,18 @@ public class PlayerControl implements CombatInterface {
             }
         });
     }
+
+    public void checkHealthPoints(){
+        if (this.healthPoints < 3){
+            System.out.println("You are running low in Health! Drink a potion or flee the battle!");
+        }
+    }
+
+    public void isKilled(){
+        if (this.healthPoints <= 0){
+            System.out.println("You have been killed!");
+            // BUILD A REST FUNCTION THAT SENDS PLAYER BACK TO MAIN MENU AND RESTORES HEALTH OF ENEMIES FROM CURRENT ROUND!
+        }
+    }
+
 }

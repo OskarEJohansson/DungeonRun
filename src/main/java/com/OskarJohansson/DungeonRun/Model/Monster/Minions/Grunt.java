@@ -28,10 +28,10 @@ public class Grunt extends EnemyParentModel implements CombatInterface {
     @Override
     public boolean block() {
         if (new Random().nextInt(1, 10) > 8) {
-            System.out.println(">>>>    Monster blocked the attack successfully!    <<<<\n");
+            System.out.println(">>>>    Monster blocked the attack successfully!    <<<<");
             return true;
         }
-        System.out.println(">>>>    Monster fails to block the attack   <<<<\n");
+        System.out.println(">>>>    Monster fails to block the attack   <<<<");
         return false;
     }
 
