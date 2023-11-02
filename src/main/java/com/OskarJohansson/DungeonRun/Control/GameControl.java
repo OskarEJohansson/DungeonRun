@@ -25,8 +25,6 @@ public class GameControl {
     public void gameFlow(){
         mainMenu.mainMenu(player,mainMenu, map, shopControl, combatControl);
 
-
-
     }
 }
 

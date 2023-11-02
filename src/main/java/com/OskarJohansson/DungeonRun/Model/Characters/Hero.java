@@ -18,7 +18,6 @@ public class Hero {
     private int healthPointsBase = 5;
     private int turningPoints = 5;
     private int turningPointsBase = 5;
-    private int armour = 1;
     private int experiencePoints = 0;
     private int gold = 10;
     private int level = 1;
@@ -110,20 +109,13 @@ public class Hero {
         this.turningPointsBase = turningPointsBase;
     }
 
-    public int getArmour() {
-        return armour;
-    }
-
-    public void setArmour(int armour) {
-        this.armour = armour;
-    }
 
     public int getExperiencePoints() {
         return experiencePoints;
     }
 
     public void setExperiencePoints(int experiencePoints) {
-        this.experiencePoints = experiencePoints;
+        this.experiencePoints += experiencePoints;
     }
 
     public int getGold() {

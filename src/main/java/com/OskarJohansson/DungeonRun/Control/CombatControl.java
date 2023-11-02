@@ -27,6 +27,7 @@ public class CombatControl {
             switch (new UserInputControl().inputInt(new Scanner(System.in))) {
                 case 1 -> {
                     playerMinionBattle(player, mapControl);
+                    on = false;
                 }
                 case 2 -> player.drinkHealthPotion();
                 case 3 -> {
@@ -78,41 +79,8 @@ public class CombatControl {
         } while (on);
     }
 
-    public void minionBattleControl(PlayerControl player, MapControl mapControl) {
-        System.out.printf("""
-                You are being attacked by %d monsters!
-                                
-                """,mapControl.currentLevel.getMinionMonsterList().size());
-
-        boolean on = true;
-
-        while (on) {
-
-            player.resetTurningPoints();
-            minionResetTurningPoints(mapControl);
-
-            minionBattle(player, mapControl);
-            checkEnemyList(mapControl);
-            if (mapControl.currentLevel.getMinionMonsterList().size() == 0) {
-                player.levelUp();
-                return;
-            }
-            if (player.checkHealthPoints()) {
-                isPlayerKilled(mapControl);
-                return;
-            }
-            if (isAllMinionsKilled(mapControl, player)) {
-                return;
-            }
-            playerMinionBattleOptions(player, mapControl);
-
-            System.out.println("End of round! Press Enter to continue");
-            new Scanner(System.in).nextLine();
-        }
-    }
-
     private void minionResetTurningPoints(MapControl mapControl) {
-        mapControl.currentLevel.getMinionMonsterList().forEach(c -> c.resetTurningPoints() );
+        mapControl.currentLevel.getMinionMonsterList().forEach(c -> c.resetTurningPoints());
     }
 
     public void isPlayerKilled(MapControl mapControl) {
@@ -120,19 +88,6 @@ public class CombatControl {
             c.resetTurningPoints();
             c.resetHealthPoints();
         });
-    }
-
-    public boolean isAllMinionsKilled(MapControl mapControl, PlayerControl player) {
-
-        if (mapControl.currentLevel.getMinionMonsterList().size() <= 0) {
-
-            System.out.println("////    You have killed all the monsters!   ////\n");
-
-            player.levelUp();
-            return true;
-
-        }
-        return false;
     }
 
     public void minionBattle(PlayerControl player, MapControl mapControl) {
@@ -214,6 +169,37 @@ public class CombatControl {
         }
     }
 
+    public void minionBattleControl(PlayerControl player, MapControl mapControl) {
+        System.out.printf("""
+                You are being attacked by %d monsters!
+                                
+                """, mapControl.currentLevel.getMinionMonsterList().size());
+
+        boolean on = true;
+
+        while (on) {
+
+            player.resetTurningPoints();
+            minionResetTurningPoints(mapControl);
+
+            minionBattle(player, mapControl);
+
+            if (checkEnemyList(mapControl) == 0) {
+
+                System.out.println("////    You have killed all the monsters!   ////\n");
+                player.levelUp();
+                return;
+            }
+
+            if (player.checkHealthPoints()) {
+                isPlayerKilled(mapControl);
+                return;
+            }
+
+            playerMinionBattleOptions(player, mapControl);
+        }
+    }
+
     public void bossBattleControl(PlayerControl player, MapControl mapControl) {
 
         System.out.printf("""
@@ -239,13 +225,8 @@ public class CombatControl {
                 isPlayerKilled(mapControl);
                 return;
             }
-            if (isAllMinionsKilled(mapControl, player)) {
-                return;
-            }
-            playerBossBattleOptions(player, mapControl);
 
-            System.out.println("End of round! Press Enter to continue");
-            new Scanner(System.in).nextLine();
+            playerBossBattleOptions(player, mapControl);
         }
     }
 }

@@ -9,7 +9,6 @@ public class CodeMonkey extends Hero {
         this.setStrength(5);
         this.setIntelligence(5);
         this.setAgility(5);
-        this.setArmour(5);
         this.setHealthPoints(5);
         this.setHealthPointsBase(5);
         this.setTurningPoints(5);

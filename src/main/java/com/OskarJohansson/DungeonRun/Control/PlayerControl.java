@@ -132,12 +132,13 @@ public class PlayerControl implements CombatInterface {
     }
 
     public boolean checkHealthPoints() {
-        if(this.hero.getHealthPoints() <= 0){
+        if (this.hero.getHealthPoints() <= 0) {
             System.out.println("You have been killed. You dropped all your gold!");
             this.hero.resetGold();
             resetHealthPoints();
             resetTurningPoints();
-            return true;}
+            return true;
+        }
 
         if (this.hero.getHealthPoints() < 3) {
             System.out.println("You are running low in Health! Drink a potion or flee the battle!");
@@ -149,23 +150,23 @@ public class PlayerControl implements CombatInterface {
         if (this.hero.getExperiencePoints() >= 10 && this.hero.getLevel() < 2) {
             levelUpTraits();
         }
-        if (this.hero.getExperiencePoints() >= 30&& this.hero.getLevel() < 3) {
+        if (this.hero.getExperiencePoints() >= 20 && this.hero.getLevel() < 3) {
             levelUpTraits();
         }
-        if (this.hero.getExperiencePoints() >= 50 && this.hero.getLevel() < 4) {
+        if (this.hero.getExperiencePoints() >= 30 && this.hero.getLevel() < 4) {
             levelUpTraits();
         }
-        if (this.hero.getExperiencePoints() >= 80 && this.hero.getLevel() < 5) {
+        if (this.hero.getExperiencePoints() >= 40 && this.hero.getLevel() < 5) {
             levelUpTraits();
         }
     }
 
-    public void levelUpTraits(){
+    public void levelUpTraits() {
         System.out.printf("""
-                    //////////
-                    Level Up!|
-                    //////////
-                    """);
+                //////////
+                Level Up!|
+                //////////
+                """);
 
         this.hero.setLevel(1);
         this.hero.setStrength(1);

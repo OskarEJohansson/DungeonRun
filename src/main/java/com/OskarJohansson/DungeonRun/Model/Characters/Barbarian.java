@@ -18,7 +18,6 @@ public class Barbarian extends Hero{
         this.setStrength(5);
         this.setIntelligence(5);
         this.setAgility(5);
-        this.setArmour(5);
         this.setHealthPoints(5);
         this.setHealthPointsBase(5);
         this.setTurningPoints(5);
@@ -55,14 +54,6 @@ public class Barbarian extends Hero{
 
     public void setAgility(int agility) {
         this.agility = agility;
-    }
-
-    public int getArmour() {
-        return this.armour;
-    }
-
-    public void setArmour(int armour) {
-        this.armour = armour;
     }
 
     public int getHealthPoints() {
