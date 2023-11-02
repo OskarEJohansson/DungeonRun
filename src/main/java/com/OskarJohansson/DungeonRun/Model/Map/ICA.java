@@ -9,8 +9,13 @@ import java.util.List;
 
 public class ICA extends Level {
 
+    private String levelName;
+    private String levelNumber;
+    private List<EnemyParentModel> minionMonsterList;
+    private EnemyParentModel finalBoss;
+
     public ICA() {
-        super();
+
         List<EnemyParentModel> setMinionMonsterList = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             setMinionMonsterList.add(new Minion());
@@ -20,4 +25,5 @@ public class ICA extends Level {
         this.setLevelNumber("1");
         this.setLevelName("Dungeon of Ica");
     }
+
 }

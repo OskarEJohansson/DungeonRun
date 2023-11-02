@@ -72,7 +72,7 @@ public class MenuControl {
                     +++++|                              %s                                 |+++++
                     _____________________________________________________________________________
                     #1 - Enter Kill Zone!    |   #2 - Enter Boss Zone!    |   #3 - Leave Level! |
-                    """, mapControl.getLevelNumber(), mapControl.getLevelName());
+                    """, mapControl.currentLevel.getLevelNumber(), mapControl.currentLevel.getLevelName());
 
             switch (new UserInputControl().inputInt(new Scanner(System.in))) {
                 case 1 -> {
