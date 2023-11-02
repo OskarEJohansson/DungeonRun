@@ -6,9 +6,10 @@ public class EnemyParentModel implements CombatInterface {
 
     private String name;
     private int healthPoints;
+    private int healthPointsBase;
     private int damage;
     private int turningPoints;
-    private int turningpointsBase;
+    private int turningPointsBase;
     private int attackCost;
     private int experiencePoints;
     private int gold;
@@ -16,7 +17,6 @@ public class EnemyParentModel implements CombatInterface {
     private int armour;
     private boolean killed;
     private boolean allMonstersKilled;
-
 
     public String getName() {
         return name;
@@ -34,6 +34,10 @@ public class EnemyParentModel implements CombatInterface {
         this.healthPoints = healthPoints;
     }
 
+    public int getHealthPointsBase() {return healthPointsBase;}
+
+    public void setHealthPointsBase(int healthPointsBase) {this.healthPointsBase = healthPointsBase;}
+
     public int getDamage() {
         return damage;
     }
@@ -50,12 +54,12 @@ public class EnemyParentModel implements CombatInterface {
         this.turningPoints = turningPoints;
     }
 
-    public int getTurningpointsBase() {
-        return turningpointsBase;
+    public int getTurningPointsBase() {
+        return turningPointsBase;
     }
 
-    public void setTurningpointsBase(int turningpointsBase) {
-        this.turningpointsBase = turningpointsBase;
+    public void setTurningPointsBase(int turningPointsBase) {
+        this.turningPointsBase = turningPointsBase;
     }
 
     public int getAttackCost() {
@@ -132,15 +136,26 @@ public class EnemyParentModel implements CombatInterface {
 
     @Override
     public void getStatus() {
+        System.out.printf("""
+                ++++                    Enemy Stats                     ++++
+                 ____________________________________________________________                
+                 Enemy   %s  |   Health Points   %d  |   Turning Points  %d  |
+                                 
+                 """, this.getName(), this.getHealthPoints(), this.getTurningPoints());
     }
 
     @Override
     public void takeDamage(Boolean takeDamage, int damage) {
-
     }
 
     @Override
     public void resetTurningPoints() {
-        this.turningPoints = this.turningpointsBase;
+        this.turningPoints = this.turningPointsBase;
     }
+
+    @Override
+    public void resetHealthPoints() {
+        this.healthPoints = this.healthPointsBase;
+    }
+
 }

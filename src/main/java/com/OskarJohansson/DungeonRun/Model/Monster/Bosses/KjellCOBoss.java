@@ -11,10 +11,11 @@ public class KjellCOBoss extends EnemyParentModel implements CombatInterface {
         super();
         this.setName("Nerd Wizard");
         this.setHealthPoints(10);
+        this.setHealthPointsBase(10);
         this.setDamage(3);
         this.setAttackCost(2);
         this.setTurningPoints(5);
-        this.setTurningpointsBase(5);
+        this.setTurningPointsBase(5);
         this.setExperiencePoints(5);
         this.setGold(10);
         this.setLevel(2);
@@ -39,16 +40,6 @@ public class KjellCOBoss extends EnemyParentModel implements CombatInterface {
     @Override
     public boolean flee() {
         return true;
-    }
-
-    @Override
-    public void getStatus() {
-        System.out.printf("""
-                ++++                    Enemy Stats                     ++++
-                ____________________________________________________________                
-                Enemy   %s  |   Health Points   %d  |   Turning Points  %d  |
-                                
-                """, this.getName(), this.getHealthPoints(), this.getTurningPoints());
     }
 
     @Override

@@ -134,6 +134,10 @@ public class Hero {
         this.gold += gold;
     }
 
+    public void resetGold(){
+        this.gold = 0;
+    }
+
     public int getLevel() {
         return level;
     }
@@ -157,6 +161,5 @@ public class Hero {
     public void addPotionStash(HealthPotion potion) {
         this.potionStash.add(potion);
     }
-
 
 }

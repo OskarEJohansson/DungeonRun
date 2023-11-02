@@ -13,42 +13,92 @@ public class CombatControl {
                    +++++|                                   Actions                                             |+++++
                    ____________________________________________________________________________________________________                         
                    #1 - Attack!  |   #2 - Drink Potion |   #3 - Prepare Block for next Round   |   #4 - Flee!  |
-                
+                                
                 >>>>    %s's turn! <<<<
                 >>>>  Turning points: %d  <<<<
-                
+                                
                 Choose Action: 
-                
-                """,player.getHero().getName(), player.getHero().getTurningPoints());
-
+                                
+                """, player.getHero().getName(), player.getHero().getTurningPoints());
 
 
         boolean on = true;
-        switch (new UserInputControl().inputInt(new Scanner(System.in))) {
-            case 1 -> { playerBattle(player, mapControl);
-                on = false;
+        do {
+            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
+                case 1 -> {
+                    playerBattle(player, mapControl);
+                    on = false;
+                }
+                case 2 -> player.drinkHealthPotion();
+                case 3 -> {
+                    System.out.println("BUILD A BLOCK METHOD");
+                    on = false;
+                }
+                case 4 -> {
+                    player.flee();
+                    on = false;
+                }
+                default -> System.out.println("Input must be 1-4!");
             }
-            case 2 -> {
-                player.drinkHealthPotion();
+        } while (on);
+    }
+
+    public void minionBattleControl(PlayerControl player, MapControl mapControl) {
+        System.out.printf("""
+                You are being attacked by %d monsters!
+                                
+                """, mapControl.getMonsterList().size());
+
+        boolean on = true;
+
+        while (on) {
+
+            player.resetTurningPoints();
+
+            minionBattle(player, mapControl);
+            checkEnemyList(mapControl);
+            if (mapControl.getMonsterList().size() == 0) {
+                return;
             }
-            case 3 -> {
-                System.out.println("BUILD A BLOCK METHOD");
-                on = false;
+            if (player.checkHealthPoints()) {
+                isPlayerKilled(mapControl);
+                return;
             }
-            case 4 -> {player.flee();
-                on = false;
+            if (isAllMinionsKilled(mapControl, player)) {
+                return;
             }
-            default -> {
-                System.out.println("Input must be 1-4!");
-            }
-        }while (on);
+            playerBattleOptions(player, mapControl);
+
+            System.out.println("End of round! Press Enter to continue");
+            new Scanner(System.in).nextLine();
+        }
+    }
+
+    public void isPlayerKilled(MapControl mapControl) {
+        mapControl.getMonsterList().forEach(c -> {
+            c.resetTurningPoints();
+            c.resetHealthPoints();
+        });
+    }
+
+    public boolean isAllMinionsKilled(MapControl mapControl, PlayerControl player) {
+
+        if (mapControl.getMonsterList().size() <= 0) {
+
+            System.out.println("////    You have killed all the monsters!   ////\n");
+
+            player.levelUp();
+            player.resetTurningPoints();
+            return true;
+
+        }
+        return false;
     }
 
     public void minionBattle(PlayerControl player, MapControl mapControl) {
         mapControl.getMonsterList().forEach(monster -> {
             while (monster.getTurningPoints() > 0) {
                 minionAttack(player, monster, mapControl);
-                break; // IS THIS BREAK NEEDED?
             }
         });
     }
@@ -60,8 +110,9 @@ public class CombatControl {
     }
 
     public void playerBattle(PlayerControl player, MapControl mapControl) {
+
         for (EnemyParentModel monster : mapControl.getMonsterList()) {
-            if (player.getHero().getTurningPoints() >= 0) {
+            if (player.getHero().getTurningPoints() >= player.getHero().getWeapon().getTurnPoints()) {
                 if (monster.getHealthPoints() > 0 && !monster.isKilled()) {
                     monster.getStatus();
                     monster.takeDamage(monster.block(), player.attack());
@@ -70,40 +121,33 @@ public class CombatControl {
                     ifEnemyIsKilled(player, monster);
                     monster.setKilled(true);
                 }
-            } else System.out.println("You are out of TurningPoints!");
-        }
-    }
 
-    public void minionBattleControl(PlayerControl player, MapControl mapControl) {
-        System.out.printf("""
-                You are being attacked by %d monsters!
-                                
-                """, mapControl.getMonsterList().size());
-        do {
-            minionBattle(player, mapControl);
-            playerBattleOptions(player, mapControl);
-            checkEnemyList(mapControl);
-            player.isKilled();
-            if (mapControl.getMonsterList().size() <= 0) {
-                System.out.println("////    You have killed all the monsters!   ////\n");
-                player.levelUp();
-                player.resetTurningPoints();
             }
-            player.resetTurningPoints();
-            System.out.println("End of round! Press Enter to continue");
-            player.getStatus();
-            new Scanner(System.in).nextLine();
+            if (player.getHero().getTurningPoints() > 0) {
+                System.out.println("You dont have enough Turning Points!");
 
-        } while (checkEnemyList(mapControl) != 0);
+            } else System.out.println("You are out of Turning Points!");
+        }
     }
 
+    private int checkEnemyList(MapControl mapControl) {
+        Iterator<EnemyParentModel> iterator = mapControl.getMonsterList().iterator();
 
-    public void bossBattle(PlayerControl player, MapControl mapControl) {
-        while (mapControl.getBoss().getTurningPoints() > 0) {
-            System.out.printf(">>>>     %s attacks!     <<<<\n", mapControl.getBoss().getName());
-            player.takeDamage(player.block(), mapControl.getBoss().attack());
-            player.getStatus();
+        while (iterator.hasNext()) {
+            EnemyParentModel c = iterator.next();
+            if (c.getHealthPoints() <= 0) {
+                iterator.remove();
+            }
         }
+        return mapControl.getMonsterList().size();
+    }
+
+    private boolean ifEnemyIsKilled(PlayerControl player, EnemyParentModel monster) {
+        System.out.printf("////     You killed the monster and gained %d experience points!     //// \n", monster.getExperiencePoints());
+        player.getHero().setKillList(1);
+        player.getHero().setExperiencePoints(monster.getExperiencePoints());
+        player.getHero().setGold(monster.getGold());
+        return true;
     }
 
     public void playerBossBattle(PlayerControl player, MapControl mapControl) {
@@ -122,6 +166,14 @@ public class CombatControl {
         }
     }
 
+    public void bossBattle(PlayerControl player, MapControl mapControl) {
+        while (mapControl.getBoss().getTurningPoints() > 0) {
+            System.out.printf(">>>>     %s attacks!     <<<<\n", mapControl.getBoss().getName());
+            player.takeDamage(player.block(), mapControl.getBoss().attack());
+            player.getStatus();
+        }
+    }
+
     public void bossBattleControl(PlayerControl player, MapControl mapControl) {
 
         System.out.printf("""
@@ -131,7 +183,6 @@ public class CombatControl {
         do {
             bossBattle(player, mapControl);
             playerBossBattle(player, mapControl);
-            player.isKilled();
             if (mapControl.getBoss().isKilled()) {
                 player.levelUp();
                 player.resetTurningPoints();
@@ -139,24 +190,5 @@ public class CombatControl {
             player.resetTurningPoints();
             mapControl.getBoss().resetTurningPoints();
         } while (!mapControl.getBoss().isKilled());
-    }
-
-    private int checkEnemyList(MapControl mapControl) {
-        Iterator<EnemyParentModel> iterator = mapControl.getMonsterList().iterator();
-
-        while (iterator.hasNext()) {
-            EnemyParentModel c = iterator.next();
-            if (c.getHealthPoints() <= 0) {
-                iterator.remove();
-            }
-        }
-        return mapControl.getMonsterList().size();
-    }
-
-    private void ifEnemyIsKilled(PlayerControl player, EnemyParentModel monster) {
-        System.out.printf("////     You killed the monster and gained %d experience points!     //// \n", monster.getExperiencePoints());
-        player.getHero().setKillList(1);
-        player.getHero().setExperiencePoints(monster.getExperiencePoints());
-        player.getHero().setGold(monster.getGold());
     }
 }

@@ -11,10 +11,11 @@ public class SatsBoss extends EnemyParentModel implements CombatInterface {
         super();
         this.setName("PT Super Grunt");
         this.setHealthPoints(15);
+        this.setHealthPointsBase(15);
         this.setDamage(5);
         this.setAttackCost(3);
         this.setTurningPoints(12);
-        this.setTurningpointsBase(12);
+        this.setTurningPointsBase(12);
         this.setExperiencePoints(10);
         this.setGold(10);
         this.setLevel(5);
@@ -39,16 +40,6 @@ public class SatsBoss extends EnemyParentModel implements CombatInterface {
     @Override
     public boolean flee() {
         return true;
-    }
-
-    @Override
-    public void getStatus() {
-        System.out.printf("""
-                ++++                    Enemy Stats                     ++++
-                ____________________________________________________________                
-                Enemy   %s  |   Health Points   %d  |   Turning Points  %d  |
-                                
-                """, this.getName(), this.getHealthPoints(), this.getTurningPoints());
     }
 
     @Override

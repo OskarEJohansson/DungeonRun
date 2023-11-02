@@ -11,5 +11,7 @@ public interface CombatInterface {
 
     void takeDamage(Boolean takeDamage, int damage);
 
-    abstract void resetTurningPoints();
+    public void resetTurningPoints();
+
+    public void resetHealthPoints();
 }

@@ -69,7 +69,7 @@ public class PlayerControl implements CombatInterface {
     @Override
     public boolean block() {
 
-        if (new Random().nextInt(1, 10) < 5) {
+        if (new Random().nextInt(1, 10) == 1) {
             System.out.println(">>>>    Player blocked the attack successfully!     <<<<\n");
             return true;
         } else
@@ -81,7 +81,7 @@ public class PlayerControl implements CombatInterface {
     @Override
     public void takeDamage(Boolean block, int damage) {
         if (!block) {
-            this.hero.setHealthPoints(damage);
+            this.hero.setHealthPoints(-damage);
         }
     }
 
@@ -112,6 +112,11 @@ public class PlayerControl implements CombatInterface {
 
     }
 
+    @Override
+    public void resetHealthPoints() {
+        this.hero.setHealthPoints(this.hero.getHealthPointsBase());
+    }
+
     public void addHealthPoition(HealthPotion healthPotion) {
         this.hero.addPotionStash(healthPotion);
     }
@@ -126,17 +131,18 @@ public class PlayerControl implements CombatInterface {
         });
     }
 
-    public void checkHealthPoints() {
+    public boolean checkHealthPoints() {
+        if(this.hero.getHealthPoints() <= 0){
+            System.out.println("You have been killed. You dropped all your gold!");
+            this.hero.resetGold();
+            resetHealthPoints();
+            resetTurningPoints();
+            return true;}
+
         if (this.hero.getHealthPoints() < 3) {
             System.out.println("You are running low in Health! Drink a potion or flee the battle!");
         }
-    }
-
-    public void isKilled() {
-        if (this.hero.getHealthPoints() <= 0) {
-            System.out.println("You have been killed!");
-            // BUILD A REST FUNCTION THAT SENDS PLAYER BACK TO MAIN MENU AND RESTORES HEALTH OF ENEMIES FROM CURRENT ROUND!
-        }
+        return false;
     }
 
     public void levelUp() {

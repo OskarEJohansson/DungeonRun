@@ -10,6 +10,7 @@ public class Minion extends EnemyParentModel implements CombatInterface {
     public Minion() {
         this.setName("Minion");
         this.setHealthPoints(3);
+        this.setHealthPointsBase(3);
         this.setDamage(1);
         this.setAttackCost(1);
         this.setTurningPoints(1);
@@ -38,16 +39,6 @@ public class Minion extends EnemyParentModel implements CombatInterface {
     @Override
     public boolean flee() {
         return true;
-    }
-
-    @Override
-    public void getStatus() {
-        System.out.printf("""
-                ++++                    Enemy Stats                     ++++
-                 ____________________________________________________________                
-                 Enemy   %s  |   Health Points   %d  |   Turning Points  %d  |
-                                 
-                 """, this.getName(), this.getHealthPoints(), this.getTurningPoints());
     }
 
     @Override
