@@ -69,7 +69,7 @@ public class PlayerControl implements CombatInterface {
     @Override
     public boolean block() {
 
-        if (new Random().nextInt(1, 10) == 1) {
+        if (new Random().nextInt(1, 10) > 1) {
             System.out.println(">>>>    Player blocked the attack successfully!     <<<<\n");
             return true;
         } else

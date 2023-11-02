@@ -19,7 +19,6 @@ public class IcaBoss extends EnemyParentModel implements CombatInterface {
         this.setExperiencePoints(5);
         this.setGold(10);
         this.setLevel(2);
-        this.setArmour(3);
     }
     @Override
     public int attack() {

@@ -14,10 +14,10 @@ public class Minion extends EnemyParentModel implements CombatInterface {
         this.setDamage(1);
         this.setAttackCost(1);
         this.setTurningPoints(1);
-        this.setExperiencePoints(3);
+        this.setTurningPointsBase(1);
+        this.setExperiencePoints(1);
         this.setGold(1);
         this.setLevel(1);
-        this.setArmour(2);
     }
 
     @Override

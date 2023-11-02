@@ -19,7 +19,6 @@ public class SatsBoss extends EnemyParentModel implements CombatInterface {
         this.setExperiencePoints(10);
         this.setGold(10);
         this.setLevel(5);
-        this.setArmour(3);
     }
     @Override
     public int attack() {

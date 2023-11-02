@@ -15,10 +15,10 @@ public class Nerd extends EnemyParentModel implements CombatInterface {
         this.setDamage(3);
         this.setAttackCost(1);
         this.setTurningPoints(3);
+        this.setTurningPointsBase(3);
         this.setExperiencePoints(5);
         this.setGold(5);
         this.setLevel(3);
-        this.setArmour(4);
     }
     @Override
     public int attack() {

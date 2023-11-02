@@ -14,7 +14,6 @@ public class EnemyParentModel implements CombatInterface {
     private int experiencePoints;
     private int gold;
     private int level;
-    private int armour;
     private boolean killed;
     private boolean allMonstersKilled;
 
@@ -92,14 +91,6 @@ public class EnemyParentModel implements CombatInterface {
 
     public void setLevel(int level) {
         this.level = level;
-    }
-
-    public int getArmour() {
-        return armour;
-    }
-
-    public void setArmour(int armour) {
-        this.armour = armour;
     }
 
     public boolean isKilled() {
