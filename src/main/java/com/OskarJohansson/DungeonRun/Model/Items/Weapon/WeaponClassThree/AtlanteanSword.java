@@ -6,6 +6,7 @@ public class AtlanteanSword extends WeaponParentModel {
 
     public AtlanteanSword(){
         this.setName("Atlantean - Sword of Conan The Barbarian");
+        this.setWeaponClass("Sword");
         this.setDamage(10);
         this.setTurnPoints(3);
         this.setMinimumLevel(5);

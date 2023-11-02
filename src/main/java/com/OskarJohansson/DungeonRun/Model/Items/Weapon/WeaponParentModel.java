@@ -3,6 +3,7 @@ package com.OskarJohansson.DungeonRun.Model.Items.Weapon;
 public class WeaponParentModel {
 
     private String name;
+    private String weaponClass;
     private int damage;
     private int turnPoints;
     private int minimumLevel;
@@ -11,6 +12,13 @@ public class WeaponParentModel {
     public String getName() {return name;}
 
     public void setName(String name) {this.name = name;}
+
+    public String getWeaponClass() {
+        return weaponClass;
+    }
+    public void setWeaponClass(String weaponClass) {
+        this.weaponClass = weaponClass;
+    }
 
     public int getDamage() {
         return damage;

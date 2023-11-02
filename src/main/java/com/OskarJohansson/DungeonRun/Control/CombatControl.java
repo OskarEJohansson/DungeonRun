@@ -195,7 +195,6 @@ public class CombatControl {
                 isPlayerKilled(mapControl);
                 return;
             }
-
             playerMinionBattleOptions(player, mapControl);
         }
     }

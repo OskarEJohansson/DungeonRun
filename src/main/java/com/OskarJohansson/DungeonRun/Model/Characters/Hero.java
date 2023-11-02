@@ -19,8 +19,8 @@ public class Hero {
     private int turningPoints = 5;
     private int turningPointsBase = 5;
     private int experiencePoints = 0;
-    private int gold = 0;
-    private int level = 1;
+    private int gold = 100;
+    private int level = 10;
     private int killList = 0;
     private List<HealthPotion> potionStash = new ArrayList<>();
 

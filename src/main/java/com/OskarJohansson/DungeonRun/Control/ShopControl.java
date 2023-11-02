@@ -1,5 +1,6 @@
 package com.OskarJohansson.DungeonRun.Control;
 
+import com.OskarJohansson.DungeonRun.Model.Characters.Barbarian;
 import com.OskarJohansson.DungeonRun.Model.Items.Potions.HealthPotion;
 import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponClassThree.AtlanteanSword;
 import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponClassThree.PredatorDrone;
@@ -17,11 +18,12 @@ public class ShopControl {
 
         boolean on = true;
 
+        System.out.println("Welcome to the Shop!");
+
         do {
             System.out.printf("""
-                    Welcome to the Shop!
                                     
-                    +++++|                                   Shop Menu                                  |+++++
+                    +++++|                                \033[0;32m    Shop Menu   \033[0m                                 |+++++
                     ____________________________________________________________________________________________________
                     #1 - Buy Swords  |   #2 - Buy Drones  |   #3 - Buy Health Potion  |   #4 - Exit SHOP   |
                                     
@@ -53,6 +55,13 @@ public class ShopControl {
 
     /// ADD STRENGHT REQUIERMENTS!
     public void buyWeapon(PlayerControl player, WeaponParentModel weapon){
+        if(weapon.getWeaponClass()=="Barbarian" && player.getHero().getHeroClass() != weapon.getWeaponClass()){
+            if(player.getHero().getHeroClass() == "Code Monkey"){System.out.println("You must be a Barbarian to be able to lift this sword!");
+                return;}
+            if(weapon.getWeaponClass()=="Code Monkey" && player.getHero().getHeroClass() == "Barbarian"){
+                System.out.println("You must be a Code Monkey to be able to control this Drone!");
+                return;}
+        }
         if(player.getHero().getLevel() < weapon.getMinimumLevel()){
             System.out.println("You need to level up to equip this weapon!");
             return;
@@ -69,20 +78,25 @@ public class ShopControl {
     public void buyDrone(PlayerControl player){
 
         boolean on = true;
+
+        System.out.printf("""
+                                    
+                    +++++|                                \033[0;32m    Drone Menu   \033[0m                                 |+++++
+                    ____________________________________________________________________________________________________
+                    #1 - Buy Spot - The Killer Robot Dog    -   20 Gold     |     #2 - Buy Predator Drone  -  50 gold  |    #2 - Leave Drone menu  |
+                    """);
+
         do {
             switch (new UserInputControl().inputInt(new Scanner(System.in))) {
                 case 1 -> {
-                    System.out.println("Buy Spot the Killer Robot Dog for 20 gold");
                     buyWeapon(player, new Spot());
                     on = false;
                 }
                 case 2 -> {
-                    System.out.println("Buy a Predator Drone for 50 gold");
                     buyWeapon(player, new PredatorDrone());
                     on = false;
                 }
                 case 3 -> {
-                    System.out.println("Leave Drone Menu");
                     on = false;
                 }
                 default -> System.out.println("Input must be 1 - 3!");
@@ -92,11 +106,18 @@ public class ShopControl {
 
     public void buySwords(PlayerControl player){
 
+        System.out.printf("""
+                                    
+                    +++++|                                \033[0;32m    Sword Menu   \033[0m                                 |+++++
+                    ____________________________________________________________________________________________________
+                    #1 - Buy Two-handed Sword    -   20 Gold     |     #2 - Buy Atlantean Sword  -  50 gold  | 
+                    """);
+
         boolean on = true;
         do {
             switch (new UserInputControl().inputInt(new Scanner(System.in))) {
                 case 1 -> {
-                    System.out.println("Buy Twohanded Sword for 20 gold");
+                    System.out.println("Buy Two-handed Sword for 20 gold");
                     buyWeapon(player, new TwoHandSword());
                     on = false;
                 }

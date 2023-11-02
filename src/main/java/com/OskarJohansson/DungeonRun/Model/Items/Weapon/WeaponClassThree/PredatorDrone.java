@@ -6,6 +6,7 @@ public class PredatorDrone extends WeaponParentModel {
 
     public PredatorDrone(){
         this.setName("Predator Drone delivering Hell Fire");
+        this.setWeaponClass("Drone");
         this.setDamage(10);
         this.setTurnPoints(3);
         this.setMinimumLevel(5);
