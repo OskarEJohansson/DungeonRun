@@ -19,7 +19,7 @@ public class Hero {
     private int turningPoints = 5;
     private int turningPointsBase = 5;
     private int experiencePoints = 0;
-    private int gold = 10;
+    private int gold = 0;
     private int level = 1;
     private int killList = 0;
     private List<HealthPotion> potionStash = new ArrayList<>();
@@ -54,7 +54,7 @@ public class Hero {
     }
 
     public void setStrength(int strength) {
-        this.strength = strength;
+        this.strength += strength;
     }
 
     public int getIntelligence() {
@@ -62,7 +62,7 @@ public class Hero {
     }
 
     public void setIntelligence(int intelligence) {
-        this.intelligence = intelligence;
+        this.intelligence += intelligence;
     }
 
     public int getAgility() {
@@ -70,7 +70,7 @@ public class Hero {
     }
 
     public void setAgility(int agility) {
-        this.agility = agility;
+        this.agility += agility;
     }
 
     public int getHealthPoints() {
@@ -78,10 +78,10 @@ public class Hero {
     }
 
     public void setHealthPoints(int healthPoints) {
-        this.healthPoints = healthPoints;
+        this.healthPoints += healthPoints;
     }
 
-    public void addHealthPoints(int healthPoints){
+    public void addHealthPoints(int healthPoints) {
         this.healthPoints += healthPoints;
     }
 
@@ -90,15 +90,18 @@ public class Hero {
     }
 
     public void setHealthPointsBase(int healthPointsBase) {
-        this.healthPointsBase = healthPointsBase;
+        this.healthPointsBase += healthPointsBase;
+    }
+
+    public void resetHealthPoinst(){
+        this.healthPoints = this.healthPointsBase;
     }
 
     public int getTurningPoints() {
         return turningPoints;
     }
-
     public void setTurningPoints(int turningPoints) {
-        this.turningPoints -= turningPoints;
+        this.turningPoints += turningPoints;
     }
 
     public int getTurningPointsBase() {
@@ -106,9 +109,12 @@ public class Hero {
     }
 
     public void setTurningPointsBase(int turningPointsBase) {
-        this.turningPointsBase = turningPointsBase;
+        this.turningPointsBase += turningPointsBase;
     }
 
+    public void resetTurningPoints(){
+        this.turningPoints = turningPointsBase;
+    }
 
     public int getExperiencePoints() {
         return experiencePoints;
@@ -126,7 +132,7 @@ public class Hero {
         this.gold += gold;
     }
 
-    public void resetGold(){
+    public void resetGold() {
         this.gold = 0;
     }
 

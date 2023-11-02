@@ -128,7 +128,7 @@ public class EnemyParentModel implements CombatInterface {
     @Override
     public void getStatus() {
         System.out.printf("""
-                ++++                    Enemy Stats                     ++++
+                 ++++                    Enemy Stats                     ++++
                  ____________________________________________________________                
                  Enemy   %s  |   Health Points   %d  |   Turning Points  %d  |
                                  

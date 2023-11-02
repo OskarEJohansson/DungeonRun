@@ -1,5 +1,7 @@
 package com.OskarJohansson.DungeonRun.Control;
 
+import java.util.Scanner;
+
 public class GameControl {
 
     PlayerControl player;
@@ -9,11 +11,12 @@ public class GameControl {
     CombatControl combatControl;
 
 
-    public GameControl(){
+    public GameControl() {
         System.out.printf("""
-                
+                                
                 ++++|        Welcome to STI Dungeon Run!        |++++
                 """);
+
         this.player = new PlayerControl();
         this.map = new MapControl();
         this.mainMenu = new MenuControl();
@@ -23,7 +26,10 @@ public class GameControl {
     }
 
     public void gameFlow(){
-        mainMenu.mainMenu(player,mainMenu, map, shopControl, combatControl);
+
+        player.setNameAndCharacter();
+
+        mainMenu.mainMenu(player, mainMenu, map, shopControl, combatControl);
 
     }
 }

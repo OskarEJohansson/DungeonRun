@@ -46,7 +46,7 @@ public class CombatControl {
     public void playerBossBattleOptions(PlayerControl player, MapControl mapControl) {
         System.out.printf("""
                    
-                   +++++|                                   Actions                                             |+++++
+                   +++++|                                   \033[0;32m    Actions      \033[0m                                            |+++++
                    ____________________________________________________________________________________________________                         
                    #1 - Attack!  |   #2 - Drink Potion |   #3 - Prepare Block for next Round   |   #4 - Flee!  |
                                 
@@ -99,7 +99,7 @@ public class CombatControl {
     }
 
     public void minionAttack(PlayerControl player, EnemyParentModel monster, MapControl mapControl) {
-        System.out.printf(">>>>     Monster %d attacks!     <<<<\n", mapControl.currentLevel.getMinionMonsterList().indexOf(monster) + 1);
+        System.out.printf(">>>>     \033[4;31mMonster %d attacks!\033[0m     <<<<\n", mapControl.currentLevel.getMinionMonsterList().indexOf(monster) + 1);
         player.takeDamage(player.block(), monster.attack());
         player.getStatus();
     }
@@ -152,7 +152,7 @@ public class CombatControl {
                 mapControl.currentLevel.getFinalBoss().takeDamage(mapControl.currentLevel.getFinalBoss().block(), player.attack());
             }
             if (mapControl.currentLevel.getFinalBoss().getHealthPoints() <= 0 && !mapControl.currentLevel.getFinalBoss().isKilled()) {
-                System.out.printf("////     You killed %s and gained %d experience points!      ////\n", mapControl.currentLevel.getFinalBoss().getName(), mapControl.currentLevel.getFinalBoss().getExperiencePoints());
+                System.out.printf("////     \033[0;31mYou killed %s and gained %d experience points!\033[0m      ////\n", mapControl.currentLevel.getFinalBoss().getName(), mapControl.currentLevel.getFinalBoss().getExperiencePoints());
                 player.getHero().setKillList(1);
                 player.getHero().setExperiencePoints(mapControl.currentLevel.getFinalBoss().getExperiencePoints());
                 player.getHero().setGold(mapControl.currentLevel.getFinalBoss().getGold());
@@ -163,7 +163,7 @@ public class CombatControl {
 
     public void bossBattle(PlayerControl player, MapControl mapControl) {
         while (mapControl.currentLevel.getFinalBoss().getTurningPoints() > 0) {
-            System.out.printf(">>>>     %s attacks!     <<<<\n", mapControl.currentLevel.getFinalBoss().getName());
+            System.out.printf(">>>>     \033[4;31m%s attacks!\033[0m     <<<<\n", mapControl.currentLevel.getFinalBoss().getName());
             player.takeDamage(player.block(), mapControl.currentLevel.getFinalBoss().attack());
             player.getStatus();
         }
@@ -186,7 +186,7 @@ public class CombatControl {
 
             if (checkEnemyList(mapControl) == 0) {
 
-                System.out.println("////    You have killed all the monsters!   ////\n");
+                System.out.println("////    \033[0;31m  You have killed all the monsters!   \033[0m   ////\n");
                 player.levelUp();
                 return;
             }

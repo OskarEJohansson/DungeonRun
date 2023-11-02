@@ -10,12 +10,12 @@ public class MenuControl {
 
         do {
             System.out.printf("""
-                                        
-                   +++++|                                   Main Menu                                  |+++++
-                   ____________________________________________________________________________________________________                         
-                   #1 - Show %s the %s Level  |   #2 - Show Stats  |   #3 - Show MAP   |   #4 - Enter SHOP   |
-                                        
-                    """, player.getHero().getName(), player.getHero().getHeroClass());
+                                         
+                    +++++|                                \033[42m   Main Menu   \033[0m                                         |+++++
+                    ____________________________________________________________________________________________________                         
+                    #1 - Show %s the %s Level  |   #2 - Show Stats  |   #3 - Show MAP   |   #4 - Enter SHOP   |
+                                         
+                     """, player.getHero().getName(), player.getHero().getHeroClass());
 
             switch (new UserInputControl().inputInt(new Scanner(System.in))) {
                 case 1 -> player.getPlayerStats();
@@ -32,7 +32,7 @@ public class MenuControl {
         boolean on = true;
         do {
             System.out.println("""
-                    +++++|                                                    Explore the world of STI!                                                           |+++++
+                    +++++|                                   \033[42m   Explore the world of STI!   \033[0m                                                                    |+++++
                     ______________________________________________________________________________________________________________________________________________                
                     #1 - Battle the Minions of ICA  |   #2 - Defeat the PT's of Sats    |   #3 - Challenge the Wizards of Kjell&Co  |   #4 - Return to main menu  |
                                     
@@ -45,11 +45,19 @@ public class MenuControl {
                     mapStructure(mapControl, player, combatControl);
                 }
                 case 2 -> {
+                    if (player.getHero().getLevel() < 2) {
+                        System.out.println("You must be level 2 to enter Sats!");
+                        break;
+                    }
                     mapControl.setMap(2);
                     System.out.println("Entering the Dungeons of Sats");
                     mapStructure(mapControl, player, combatControl);
                 }
                 case 3 -> {
+                    if (player.getHero().getLevel() < 3) {
+                        System.out.println("You must be level 3 to enter Kjell & Co !");
+                        break;
+                    }
                     mapControl.setMap(3);
                     System.out.println("Entering the Dungeons of Kjell & Co");
                     mapStructure(mapControl, player, combatControl);
@@ -60,16 +68,17 @@ public class MenuControl {
                 }
                 default -> System.out.println("Input must be 1 - 3!");
             }
-        }while (on);
+        } while (on);
     }
+
     public void mapStructure(MapControl mapControl, PlayerControl player, CombatControl combatControl) {
 
         boolean on = true;
 
         do {
             System.out.printf("""
-                    +++++|                              Level %s                           |+++++
-                    +++++|                              %s                                 |+++++
+                    +++++|                          \033[42m   Level %s   \033[0m                           |+++++
+                    +++++|                      \033[42m    %s  \033[0m                     |+++++
                     _____________________________________________________________________________
                     #1 - Enter Kill Zone!    |   #2 - Enter Boss Zone!    |   #3 - Leave Level! |
                     """, mapControl.currentLevel.getLevelNumber(), mapControl.currentLevel.getLevelName());
@@ -91,7 +100,7 @@ public class MenuControl {
                 default -> System.out.println("Input must be 1 - 3!");
 
             }
-        } while (on) ;
+        } while (on);
     }
 }
 

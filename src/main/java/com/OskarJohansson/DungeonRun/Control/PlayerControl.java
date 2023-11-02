@@ -15,7 +15,11 @@ public class PlayerControl implements CombatInterface {
         return hero;
     }
 
-    public PlayerControl() {
+    public void setHero(Hero hero) {
+        this.hero = hero;
+    }
+
+    public void setNameAndCharacter() {
         setCharacter();
         System.out.printf("You have chosen to play as a %s\n", this.hero.getHeroClass());
         System.out.println("Chose a name for your Hero: ");
@@ -29,7 +33,7 @@ public class PlayerControl implements CombatInterface {
         do {
             System.out.printf("""
                               
-                    ++++|                 Pick a Hero                   |++++
+                    ++++|                 \033[0;92m    Pick a Hero \033[0m               |++++
                     _________________________________________________________              
                           |   #1 - Barbarian  |   #2 - Code Monkey   |
                                     
@@ -52,28 +56,28 @@ public class PlayerControl implements CombatInterface {
 
     public void getPlayerStats() {
         System.out.printf("""
-                ++++|                                         Stats                                              |++++
+                ++++|                                         \033[0;35m    Stats   \033[0m                                        |++++
                 ______________________________________________________________________________________________________             
-                Level  %d   |   Experience Points   %d  |   Strength    %d  |   Intelligence   %d  |   Agility   %d  |
+                Level  \033[1;33m%d\033[0m   |   Experience Points   \033[1;33m%d\033[0m  |   Strength    \033[1;35m%d\033[0m  |   Intelligence   \033[1;32m%d\033[0m  |   Agility   \033[1;31m%d\033[0m  |     Weapon   \033[4;31m%s\033[0m      |
                                 
-                """, this.hero.getLevel(), this.hero.getExperiencePoints(), this.hero.getStrength(), this.hero.getIntelligence(), this.hero.getAgility());
+                """, this.hero.getLevel(), this.hero.getExperiencePoints(), this.hero.getStrength(), this.hero.getIntelligence(), this.hero.getAgility(), this.hero.getWeapon().getName());
 
     }
 
     @Override
     public int attack() {
-        this.hero.setTurningPoints(this.hero.getWeapon().getTurnPoints());
+        this.hero.setTurningPoints(- this.hero.getWeapon().getTurnPoints());
         return this.hero.getWeapon().getDamage();
     }
 
-    @Override
+
     public boolean block() {
 
-        if (new Random().nextInt(1, 10) > 1) {
-            System.out.println(">>>>    Player blocked the attack successfully!     <<<<\n");
+        if (new Random().nextInt(1, 10) > 3) {
+            System.out.println(">>>>    \033[0;32m  Player blocked the attack successfully! \033[0m     <<<<\n");
             return true;
         } else
-            System.out.println(">>>>    Player fails to block the attack!    <<<<\n");
+            System.out.println(">>>>    \033[0;31m  Player fails to block the attack!   \033[0m    <<<<\n");
         checkHealthPoints();
         return false;
     }
@@ -82,12 +86,13 @@ public class PlayerControl implements CombatInterface {
     public void takeDamage(Boolean block, int damage) {
         if (!block) {
             this.hero.setHealthPoints(-damage);
+            System.out.printf("Player takes %d damage!", damage);
         }
     }
 
     @Override
     public void resetTurningPoints() {
-        this.hero.setTurningPoints(this.hero.getTurningPointsBase());
+        this.hero.resetTurningPoints();
     }
 
     @Override
@@ -97,14 +102,14 @@ public class PlayerControl implements CombatInterface {
             this.hero.setTurningPoints(-2);
             return true;
         }
-        System.out.println("Not enough TurningPoints, you are to tired to flee!");
+        System.out.println("You are to tired to flee!");
         return false;
     }
 
     @Override
     public void getStatus() {
         System.out.printf("""
-                ++++|                                                       Stats                                                       |++++
+                ++++|                                           \033[0;35m  Stats   \033[0m                                                                |++++
                 _____________________________________________________________________________________________________________________________
                 %s the %s  |   Level   %d  |   Health Points   %d/%d  |   Turning Points  %d/%d  |   Experience Points   %d  |   Gold    %d |
                                 
@@ -114,7 +119,7 @@ public class PlayerControl implements CombatInterface {
 
     @Override
     public void resetHealthPoints() {
-        this.hero.setHealthPoints(this.hero.getHealthPointsBase());
+        this.hero.resetHealthPoinst();
     }
 
     public void addHealthPoition(HealthPotion healthPotion) {
@@ -140,7 +145,7 @@ public class PlayerControl implements CombatInterface {
             return true;
         }
 
-        if (this.hero.getHealthPoints() < 3) {
+        if (this.hero.getHealthPoints() <= 3) {
             System.out.println("You are running low in Health! Drink a potion or flee the battle!");
         }
         return false;
@@ -177,7 +182,7 @@ public class PlayerControl implements CombatInterface {
         this.hero.setTurningPointsBase(2);
 
 
-        this.hero.setHealthPoints(this.hero.getHealthPointsBase());
+        this.hero.resetHealthPoinst();
 
     }
 
