@@ -27,6 +27,14 @@ public class MenuControl {
         } while (on);
     }
 
+    public void loadPlayer(){
+
+    }
+
+    public void createNewPlayer(){
+
+    }
+
     public void mapMenu(MapControl mapControl, MenuControl mainMenu, PlayerControl player, CombatControl combatControl) {
 
         boolean on = true;

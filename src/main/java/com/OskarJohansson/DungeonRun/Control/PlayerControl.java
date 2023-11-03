@@ -130,6 +130,7 @@ public class PlayerControl implements CombatInterface {
             if (!c.isUsed()) {
                 this.hero.addHealthPoints(c.drinkHealthPotion());
                 c.setUsed(true);
+                return;
             }
         });
     }
