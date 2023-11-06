@@ -9,11 +9,6 @@ import java.util.List;
 
 public class ICA extends Level {
 
-    private String levelName;
-    private String levelNumber;
-    private List<EnemyParentModel> minionMonsterList;
-    private EnemyParentModel finalBoss;
-
     public ICA() {
 
         List<EnemyParentModel> setMinionMonsterList = new ArrayList<>();

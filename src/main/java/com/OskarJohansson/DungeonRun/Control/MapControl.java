@@ -12,6 +12,10 @@ public class MapControl {
     Sats sats;
     KjellCO kjellCO;
 
+    public Level getCurrentLevel() {
+        return currentLevel;
+    }
+
     MapControl(){
         this.currentLevel = new Level();
         this.ica  = new ICA();

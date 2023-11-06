@@ -15,7 +15,6 @@ public class EnemyParentModel implements CombatInterface {
     private int gold;
     private int level;
     private boolean killed;
-    private boolean allMonstersKilled;
 
     public String getName() {
         return name;
@@ -99,14 +98,6 @@ public class EnemyParentModel implements CombatInterface {
 
     public void setKilled(boolean killed) {
         this.killed = killed;
-    }
-
-    public boolean isAllMonstersKilled() {
-        return allMonstersKilled;
-    }
-
-    public void setAllMonstersKilled(boolean allMonstersKilled) {
-        this.allMonstersKilled = allMonstersKilled;
     }
 
     @Override

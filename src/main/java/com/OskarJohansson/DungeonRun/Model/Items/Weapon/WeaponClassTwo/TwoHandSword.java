@@ -11,6 +11,6 @@ public class TwoHandSword extends WeaponParentModel {
         this.setTurnPoints(2);
         this.setMinimumLevel(3);
         this.setCost(20);
+        this.setSoundOfAttack("Slash slash hack hack!");
     }
-
 }

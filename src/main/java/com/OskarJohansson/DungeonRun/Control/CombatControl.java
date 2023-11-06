@@ -48,7 +48,7 @@ public class CombatControl {
                    
                    +++++|                                   \033[0;32m    Actions      \033[0m                                            |+++++
                    ____________________________________________________________________________________________________                         
-                   #1 - Attack!  |   #2 - Drink Potion |   #3 - Prepare Block for next Round   |   #4 - Flee!  |
+                   #1   -   Attack!   |   #2   -   Drink Potion   |   #3   -   Flee!  |
                                 
                 >>>>    %s's turn! <<<<
                 >>>>  Turning points: %d  <<<<
@@ -67,14 +67,10 @@ public class CombatControl {
                 }
                 case 2 -> player.drinkHealthPotion();
                 case 3 -> {
-                    System.out.println("BUILD A BLOCK METHOD");
-                    on = false;
-                }
-                case 4 -> {
                     player.flee();
                     on = false;
                 }
-                default -> System.out.println("Input must be 1-4!");
+                default -> System.out.println("Input must be 1-3!");
             }
         } while (on);
     }
@@ -91,12 +87,15 @@ public class CombatControl {
     }
 
     public void minionBattle(PlayerControl player, MapControl mapControl) {
+        outerLoop:
         mapControl.currentLevel.getMinionMonsterList().forEach(monster -> {
+
             while (monster.getTurningPoints() > 0) {
                 minionAttack(player, monster, mapControl);
             }
         });
     }
+
 
     public void minionAttack(PlayerControl player, EnemyParentModel monster, MapControl mapControl) {
         System.out.printf(">>>>     \033[4;31mMonster %d attacks!\033[0m     <<<<\n", mapControl.currentLevel.getMinionMonsterList().indexOf(monster) + 1);
@@ -116,11 +115,10 @@ public class CombatControl {
                     ifEnemyIsKilled(player, monster);
                     monster.setKilled(true);
                 }
-
             }
-            if (player.getHero().getTurningPoints() > 0) {
-
-            } else System.out.println("You are out of Turning Points!");
+            if (player.getHero().getTurningPoints() <= 0) {
+                System.out.println("You are out of Turning Points!");
+            }
         }
     }
 
@@ -175,27 +173,30 @@ public class CombatControl {
                 """, mapControl.currentLevel.getMinionMonsterList().size());
 
         boolean on = true;
+        do {
 
-        while (on) {
 
             player.resetTurningPoints();
             minionResetTurningPoints(mapControl);
-
             minionBattle(player, mapControl);
-
             if (checkEnemyList(mapControl) == 0) {
 
                 System.out.println("////    \033[0;31m  You have killed all the monsters!   \033[0m   ////\n");
                 player.levelUp();
                 return;
             }
-
             if (player.checkHealthPoints()) {
                 isPlayerKilled(mapControl);
                 return;
             }
+
             playerMinionBattleOptions(player, mapControl);
-        }
+
+            System.out.println("\n \033[42mGet ready for a new round!\033[0m\n \033[42mPress Enter to continue \033[0m\n");
+            Scanner sc = new Scanner(System.in);
+            sc.nextLine();
+
+        } while (on);
     }
 
     public void bossBattleControl(PlayerControl player, MapControl mapControl) {
@@ -205,26 +206,21 @@ public class CombatControl {
                                 
                 """, mapControl.currentLevel.getFinalBoss().getName());
 
-        boolean on = true;
+        player.resetTurningPoints();
+        mapControl.currentLevel.getFinalBoss().resetTurningPoints();
 
-        while (on) {
+        bossBattle(player, mapControl);
+        playerBossBattle(player, mapControl);
 
-            player.resetTurningPoints();
-            mapControl.currentLevel.getFinalBoss().resetTurningPoints();
-
-            bossBattle(player, mapControl);
-            playerBossBattle(player, mapControl);
-
-            if (mapControl.currentLevel.getFinalBoss().isKilled()) {
-                player.levelUp();
-                return;
-            }
-            if (player.checkHealthPoints()) {
-                isPlayerKilled(mapControl);
-                return;
-            }
-
-            playerBossBattleOptions(player, mapControl);
+        if (mapControl.currentLevel.getFinalBoss().isKilled()) {
+            player.levelUp();
+            return;
         }
+        if (player.checkHealthPoints()) {
+            isPlayerKilled(mapControl);
+            return;
+        }
+
+        playerBossBattleOptions(player, mapControl);
     }
 }

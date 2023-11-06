@@ -2,6 +2,7 @@ package com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponClassTwo;
 
 import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponParentModel;
 
+
 public class Spot extends WeaponParentModel {
 
     public Spot(){
@@ -11,5 +12,7 @@ public class Spot extends WeaponParentModel {
         this.setTurnPoints(2);
         this.setMinimumLevel(3);
         this.setCost(20);
+        this.setSoundOfAttack("Sniff sniff, growl growl, skweek skweek");
     }
+
 }

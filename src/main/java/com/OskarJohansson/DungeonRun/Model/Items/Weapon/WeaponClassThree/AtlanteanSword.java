@@ -11,5 +11,6 @@ public class AtlanteanSword extends WeaponParentModel {
         this.setTurnPoints(3);
         this.setMinimumLevel(5);
         this.setCost(50);
+        this.setSoundOfAttack("TASTE THE POWER OF CONAN!");
     }
 }

@@ -2,7 +2,7 @@ package com.OskarJohansson.DungeonRun.Model.Items.Weapon;
 
 import java.io.Serializable;
 
-public class WeaponParentModel implements Serializable {
+public class WeaponParentModel implements Serializable  {
 
     private String name;
     private String weaponClass;
@@ -10,6 +10,7 @@ public class WeaponParentModel implements Serializable {
     private int turnPoints;
     private int minimumLevel;
     private int cost;
+    private String soundOfAttack;
 
     public String getName() {return name;}
 
@@ -45,4 +46,12 @@ public class WeaponParentModel implements Serializable {
     public int getCost() {return cost;}
 
     public void setCost(int cost) {this.cost = cost;}
+
+    public String getSoundOfAttack() {
+        return soundOfAttack;
+    }
+
+    public void setSoundOfAttack(String soundOfAttack) {
+        this.soundOfAttack = soundOfAttack;
+    }
 }

@@ -21,41 +21,6 @@ public class PlayerControl implements CombatInterface {
         this.hero = hero;
     }
 
-    public void setNameAndCharacter() {
-        setCharacter();
-        System.out.printf("You have chosen to play as a %s\n", this.hero.getHeroClass());
-        System.out.println("Chose a name for your Hero: ");
-        this.hero.setName(new Scanner(System.in).nextLine());
-        System.out.printf("Welcome %s the %s ", this.hero.getName(), this.hero.getHeroClass());
-    }
-
-    public void setCharacter() {
-
-        boolean on = true;
-        do {
-            System.out.printf("""
-                              
-                    ++++|                 \033[0;92m    Pick a Hero \033[0m               |++++
-                    _________________________________________________________              
-                          |   #1 - Barbarian  |   #2 - Code Monkey   |
-                                    
-                    """);
-
-            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
-                case 1 -> {
-                    this.hero = new Barbarian();
-                    on = false;
-                }
-                case 2 -> {
-                    this.hero = new CodeMonkey();
-                    on = false;
-                }
-
-                default -> System.out.println("Input must be 1 - 2!");
-            }
-        } while (on);
-    }
-
     public void getPlayerStats() {
         System.out.printf("""
                 ++++|                                         \033[0;35m    Stats   \033[0m                                                                                 |++++
@@ -70,14 +35,16 @@ public class PlayerControl implements CombatInterface {
         System.out.printf("""
                 ++++|                                           \033[0;35m  Stats   \033[0m                                                                       |++++
                 ______________________________________________________________________________________________________________________________________
-                %s the %s  |   Level   %d  |   Health Points   %d/%d  |   Turning Points  %d/%d  |   Experience Points   %d  |   Gold    %d |
+                %s the %s  |   Kill count   %d  |   Health Points   %d/%d  |   Turning Points  %d/%d  |   Experience Points   %d  |   Gold    %d |
                                 
-                """, this.hero.getName(), this.hero.getHeroClass(), this.hero.getLevel(), this.hero.getHealthPoints(), this.hero.getHealthPointsBase(), this.hero.getTurningPoints(), this.hero.getTurningPointsBase(), this.hero.getExperiencePoints(), this.hero.getGold());
+                """, this.hero.getName(), this.hero.getHeroClass(), this.hero.getKillList(), this.hero.getHealthPoints(), this.hero.getHealthPointsBase(), this.hero.getTurningPoints(), this.hero.getTurningPointsBase(), this.hero.getExperiencePoints(), this.hero.getGold());
     }
 
     @Override
     public int attack() {
         this.hero.setTurningPoints(-this.hero.getWeapon().getTurnPoints());
+        System.out.printf("\033[4;32m%s attacks for %d turningpoints and with %d maximum damage points\033[0m\n", this.hero.getName(), this.hero.getWeapon().getTurnPoints(), this.hero.getWeapon().getDamage());
+        System.out.println(this.hero.getWeapon().getSoundOfAttack());
         return this.hero.getWeapon().getDamage();
     }
 
@@ -129,27 +96,30 @@ public class PlayerControl implements CombatInterface {
     public void drinkHealthPotion() {
         checkPotionList();
 
-        if(this.hero.getPotionStash().size() == 0 ){
+        if (this.hero.getPotionStash().size() == 0) {
             System.out.println("You don't have any potion to drink!");
             return;
         }
 
-        for(HealthPotion potion : this.hero.getPotionStash()){
+        for (HealthPotion potion : this.hero.getPotionStash()) {
             if (!potion.isUsed()) {
-                this.hero.addHealthPoints(potion.drinkHealthPotion());
-                potion.setUsed(true);
-                System.out.println("You added 10 Health points");
-                checkMaxHealthPoints();
-                return;
+                if (this.hero.getHealthPoints() == this.hero.getHealthPointsBase()) {
+                    System.out.println("You have maimum health points!");
+                } else {
+                    this.hero.addHealthPoints(potion.drinkHealthPotion());
+                    potion.setUsed(true);
+                    System.out.printf(">>>>     You added \033[0;34m%d\033[0m Health points. You now have \033[0;34m%d/%d\033[0m health points!     <<<<", potion.gethP(), this.hero.getHealthPoints(), this.hero.getHealthPointsBase());
+                    checkMaxHealthPoints();
+                    return;
+                }
             }
         }
     }
 
     private void checkMaxHealthPoints() {
-        if(this.hero.getHealthPoints() > this.hero.getHealthPointsBase()){
+        if (this.hero.getHealthPoints() > this.hero.getHealthPointsBase()) {
             resetHealthPoints();
         }
-
     }
 
     public int checkPotionList() {
@@ -181,7 +151,7 @@ public class PlayerControl implements CombatInterface {
     }
 
     public void levelUp() {
-        if(this.hero.getExperiencePoints() >= 10 * this.hero.getLevel()){
+        if (this.hero.getExperiencePoints() >= 10 * this.hero.getLevel()) {
             levelUpTraits();
         }
     }

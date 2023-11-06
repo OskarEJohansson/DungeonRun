@@ -1,5 +1,7 @@
 package com.OskarJohansson.DungeonRun.Control;
 
+import com.OskarJohansson.DungeonRun.Model.Characters.Barbarian;
+import com.OskarJohansson.DungeonRun.Model.Characters.CodeMonkey;
 import com.OskarJohansson.DungeonRun.Repository.PlayerManager;
 
 import java.util.Scanner;
@@ -42,7 +44,7 @@ public class MenuControl {
     }
 
     public void createNewPlayer(PlayerControl player){
-        player.setNameAndCharacter();
+        setNameAndCharacter(player);
     }
 
     public void mapMenu(MapControl mapControl, MenuControl mainMenu, PlayerControl player, CombatControl combatControl) {
@@ -121,6 +123,41 @@ public class MenuControl {
                 }
                 default -> System.out.println("Input must be 1 - 3!");
 
+            }
+        } while (on);
+    }
+
+    public void setNameAndCharacter(PlayerControl player) {
+        setCharacter(player);
+        System.out.printf("You have chosen to play as a %s\n", player.getHero().getHeroClass());
+        System.out.println("Chose a name for your Hero: ");
+        player.getHero().setName(new Scanner(System.in).nextLine());
+        System.out.printf("Welcome %s the %s ", player.getHero().getName(), player.getHero().getHeroClass());
+    }
+
+    public void setCharacter(PlayerControl player) {
+
+        boolean on = true;
+        do {
+            System.out.printf("""
+                              
+                    ++++|                 \033[0;92m    Pick a Hero \033[0m               |++++
+                    _________________________________________________________              
+                          |   #1 - Barbarian  |   #2 - Code Monkey   |
+                                    
+                    """);
+
+            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
+                case 1 -> {
+                    player.setHero(new Barbarian());
+                    on = false;
+                }
+                case 2 -> {
+                    player.setHero(new CodeMonkey());
+                    on = false;
+                }
+
+                default -> System.out.println("Input must be 1 - 2!");
             }
         } while (on);
     }

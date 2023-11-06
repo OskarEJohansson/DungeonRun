@@ -11,5 +11,6 @@ public class PredatorDrone extends WeaponParentModel {
         this.setTurnPoints(3);
         this.setMinimumLevel(5);
         this.setCost(50);
+        this.setSoundOfAttack("Hell Fire rockets launching");
     }
 }
