@@ -4,6 +4,8 @@ import com.OskarJohansson.DungeonRun.Model.Characters.Barbarian;
 import com.OskarJohansson.DungeonRun.Model.Characters.CodeMonkey;
 import com.OskarJohansson.DungeonRun.Model.Characters.Hero;
 import com.OskarJohansson.DungeonRun.Model.Items.Potions.HealthPotion;
+import com.OskarJohansson.DungeonRun.Model.Monster.EnemyParentModel;
+import jdk.jshell.tool.JavaShellToolBuilder;
 
 import java.util.*;
 
@@ -125,14 +127,43 @@ public class PlayerControl implements CombatInterface {
     }
 
     public void drinkHealthPotion() {
-        this.hero.getPotionStash().forEach(c -> {
-            if (!c.isUsed()) {
-                this.hero.addHealthPoints(c.drinkHealthPotion());
-                c.setUsed(true);
+        checkPotionList();
+
+        if(this.hero.getPotionStash().size() == 0 ){
+            System.out.println("You don't have any potion to drink!");
+            return;
+        }
+
+        for(HealthPotion potion : this.hero.getPotionStash()){
+            if (!potion.isUsed()) {
+                this.hero.addHealthPoints(potion.drinkHealthPotion());
+                potion.setUsed(true);
+                System.out.println("You added 10 Health points");
+                checkMaxHealthPoints();
                 return;
             }
-        });
+        }
     }
+
+    private void checkMaxHealthPoints() {
+        if(this.hero.getHealthPoints() > this.hero.getHealthPointsBase()){
+            resetHealthPoints();
+        }
+
+    }
+
+    public int checkPotionList() {
+        Iterator<HealthPotion> iterator = this.hero.getPotionStash().iterator();
+
+        while (iterator.hasNext()) {
+            HealthPotion c = iterator.next();
+            if (c.isUsed()) {
+                iterator.remove();
+            }
+        }
+        return this.hero.getPotionStash().size();
+    }
+
 
     public boolean checkHealthPoints() {
         if (this.hero.getHealthPoints() <= 0) {

@@ -52,7 +52,7 @@ public class MenuControl {
             System.out.println("""
                     +++++|                                                  \033[42m   Explore the world of STI!   \033[0m                                                         |+++++
                     _____________________________________________________________________________________________________________________________________________________________________                
-                    #1 - Battle the Minions of ICA  |   #2 - Defeat the PT's of Sats    |   #3 - Challenge the Wizards of Kjell&Co  |   #5 - Drink potion  |   #5 - Return to main menu  |
+                    #1 - Battle the Minions of ICA  |   #2 - Defeat the PT's of Sats    |   #3 - Challenge the Wizards of Kjell&Co  |   #4 - Drink potion  |   #5 - Return to main menu  |
                                     
                     """);
 
@@ -81,7 +81,6 @@ public class MenuControl {
                     mapStructure(mapControl, player, combatControl);
                 }
                 case 4 -> {
-                    System.out.println("Drinking health potion");
                     player.drinkHealthPotion();
                     on = false;
                 }
