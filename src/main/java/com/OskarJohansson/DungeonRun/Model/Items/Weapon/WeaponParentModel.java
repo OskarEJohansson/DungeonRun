@@ -1,6 +1,8 @@
 package com.OskarJohansson.DungeonRun.Model.Items.Weapon;
 
-public class WeaponParentModel {
+import java.io.Serializable;
+
+public class WeaponParentModel implements Serializable {
 
     private String name;
     private String weaponClass;

@@ -3,10 +3,11 @@ package com.OskarJohansson.DungeonRun.Model.Characters;
 import com.OskarJohansson.DungeonRun.Model.Items.Potions.HealthPotion;
 import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponParentModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Hero {
+public class Hero implements Serializable {
 
     private String name;
     private WeaponParentModel weapon;
@@ -19,8 +20,8 @@ public class Hero {
     private int turningPoints = 5;
     private int turningPointsBase = 5;
     private int experiencePoints = 0;
-    private int gold = 100;
-    private int level = 10;
+    private int gold = 0;
+    private int level = 1;
     private int killList = 0;
     private List<HealthPotion> potionStash = new ArrayList<>();
 

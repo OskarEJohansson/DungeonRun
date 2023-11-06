@@ -1,6 +1,8 @@
 package com.OskarJohansson.DungeonRun.Model.Items.Potions;
 
-public class HealthPotion {
+import java.io.Serializable;
+
+public class HealthPotion implements Serializable {
 
     private int hP = 10;
     private boolean isUsed = false;

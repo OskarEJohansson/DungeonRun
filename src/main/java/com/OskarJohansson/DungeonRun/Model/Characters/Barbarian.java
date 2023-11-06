@@ -2,7 +2,7 @@ package com.OskarJohansson.DungeonRun.Model.Characters;
 
 import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponClassOne.Sword;
 
-public class Barbarian extends Hero{
+public class Barbarian extends Hero {
 
     public Barbarian() {
         this.setHeroClass("Barbarian");

@@ -119,7 +119,6 @@ public class CombatControl {
 
             }
             if (player.getHero().getTurningPoints() > 0) {
-                System.out.println("You dont have enough Turning Points!");
 
             } else System.out.println("You are out of Turning Points!");
         }

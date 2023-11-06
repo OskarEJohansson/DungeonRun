@@ -56,12 +56,21 @@ public class PlayerControl implements CombatInterface {
 
     public void getPlayerStats() {
         System.out.printf("""
-                ++++|                                         \033[0;35m    Stats   \033[0m                                        |++++
-                ______________________________________________________________________________________________________             
-                Level  \033[1;33m%d\033[0m   |   Experience Points   \033[1;33m%d\033[0m  |   Strength    \033[1;35m%d\033[0m  |   Intelligence   \033[1;32m%d\033[0m  |   Agility   \033[1;31m%d\033[0m  |     Weapon   \033[4;31m%s\033[0m      |     HealthPotions   \033[0;34m%d\033[0m
+                ++++|                                         \033[0;35m    Stats   \033[0m                                                                                 |++++
+                ________________________________________________________________________________________________________________________________________________             
+                Level  \033[1;33m%d\033[0m   |   Experience Points   \033[1;33m%d\033[0m  |   Strength    \033[1;35m%d\033[0m  |   Intelligence   \033[1;32m%d\033[0m  |   Agility   \033[1;31m%d\033[0m  |   Weapon   \033[4;31m%s\033[0m    |   HealthPotions   \033[0;34m%d\033[0m   |
                                 
                 """, this.hero.getLevel(), this.hero.getExperiencePoints(), this.hero.getStrength(), this.hero.getIntelligence(), this.hero.getAgility(), this.hero.getWeapon().getName(), this.getHero().getPotionStash().size());
+    }
 
+    @Override
+    public void getStatus() {
+        System.out.printf("""
+                ++++|                                           \033[0;35m  Stats   \033[0m                                                                       |++++
+                ______________________________________________________________________________________________________________________________________
+                %s the %s  |   Level   %d  |   Health Points   %d/%d  |   Turning Points  %d/%d  |   Experience Points   %d  |   Gold    %d |
+                                
+                """, this.hero.getName(), this.hero.getHeroClass(), this.hero.getLevel(), this.hero.getHealthPoints(), this.hero.getHealthPointsBase(), this.hero.getTurningPoints(), this.hero.getTurningPointsBase(), this.hero.getExperiencePoints(), this.hero.getGold());
     }
 
     @Override
@@ -107,16 +116,6 @@ public class PlayerControl implements CombatInterface {
     }
 
     @Override
-    public void getStatus() {
-        System.out.printf("""
-                ++++|                                           \033[0;35m  Stats   \033[0m                                                                |++++
-                _____________________________________________________________________________________________________________________________
-                %s the %s  |   Level   %d  |   Health Points   %d/%d  |   Turning Points  %d/%d  |   Experience Points   %d  |   Gold    %d |
-                                
-                """, this.hero.getName(), this.hero.getHeroClass(), this.hero.getLevel(), this.hero.getHealthPoints(), this.hero.getHealthPointsBase(), this.hero.getTurningPoints(), this.hero.getTurningPointsBase(), this.hero.getExperiencePoints(), this.hero.getGold());
-    }
-
-    @Override
     public void resetHealthPoints() {
         this.hero.resetHealthPoinst();
     }
@@ -151,16 +150,7 @@ public class PlayerControl implements CombatInterface {
     }
 
     public void levelUp() {
-        if (this.hero.getExperiencePoints() >= 10 && this.hero.getLevel() < 2) {
-            levelUpTraits();
-        }
-        if (this.hero.getExperiencePoints() >= 20 && this.hero.getLevel() < 3) {
-            levelUpTraits();
-        }
-        if (this.hero.getExperiencePoints() >= 30 && this.hero.getLevel() < 4) {
-            levelUpTraits();
-        }
-        if (this.hero.getExperiencePoints() >= 40 && this.hero.getLevel() < 5) {
+        if(this.hero.getExperiencePoints() >= 10 * this.hero.getLevel()){
             levelUpTraits();
         }
     }

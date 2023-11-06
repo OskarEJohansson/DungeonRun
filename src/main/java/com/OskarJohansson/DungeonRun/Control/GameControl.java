@@ -12,10 +12,6 @@ public class GameControl {
 
 
     public GameControl() {
-        System.out.printf("""
-                                
-                ++++|        Welcome to STI Dungeon Run!        |++++
-                """);
 
         this.player = new PlayerControl();
         this.map = new MapControl();
@@ -25,12 +21,31 @@ public class GameControl {
 
     }
 
-    public void gameFlow(){
+    public void gameFlow() {
 
-        player.setNameAndCharacter();
+        System.out.printf("""
+                                
+                ++++|      \033[42m  Welcome to STI Dungeon Run!  \033[0m      |++++
+                                
+                _____________________________________________________                        
+                #1 - Create a New Player    |   #2 - Load Game      |
+                    
+                """);
 
+        boolean on = true;
+        while (on)
+            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
+                case 1 -> {
+                    mainMenu.createNewPlayer(player);
+                    on = false;
+                }
+                case 2 -> {
+                    mainMenu.loadPlayer(player);
+                    on = false;
+                }
+                default -> System.out.println("Input must be 1 or 2!");
+            }
         mainMenu.mainMenu(player, mainMenu, map, shopControl, combatControl);
-
     }
 }
 
