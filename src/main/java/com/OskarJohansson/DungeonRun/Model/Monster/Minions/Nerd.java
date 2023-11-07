@@ -48,7 +48,6 @@ public class Nerd extends EnemyParentModel implements CombatInterface {
         }
     }
 
-    @Override
     public void resetTurningPoints() {
     }
 }

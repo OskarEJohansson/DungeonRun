@@ -11,5 +11,6 @@ public class Sword extends WeaponParentModel {
         this.setTurnPoints(1);
         this.setMinimumLevel(1);
         this.setSoundOfAttack("Kling kling");
+
     }
 }

@@ -48,7 +48,6 @@ public class Minion extends EnemyParentModel implements CombatInterface {
         }
     }
 
-    @Override
     public void resetTurningPoints() {
     }
 }

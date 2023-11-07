@@ -7,12 +7,12 @@ import java.util.Scanner;
 
 public class CombatControl {
 
-    public void playerMinionBattleOptions(PlayerControl player, MapControl mapControl) {
+    public boolean playerMinionBattleOptions(PlayerControl player, MapControl mapControl) {
         System.out.printf("""
                    
-                   +++++|                                   Actions                                             |+++++
-                   ____________________________________________________________________________________________________                         
-                   #1 - Attack!  |   #2 - Drink Potion |   #3 - Prepare Block for next Round   |   #4 - Flee!  |
+                   +++++|                                   Actions                               |+++++
+                   _______________________________________________________________________________                         
+                   #1 - Attack!  |   #2 - Drink Potion |   #3 - Flee!   |
                                 
                 >>>>    %s's turn! <<<<
                 >>>>  Turning points: %d  <<<<
@@ -23,7 +23,7 @@ public class CombatControl {
 
 
         boolean on = true;
-        do {
+        while (on) {
             switch (new UserInputControl().inputInt(new Scanner(System.in))) {
                 case 1 -> {
                     playerMinionBattle(player, mapControl);
@@ -31,19 +31,16 @@ public class CombatControl {
                 }
                 case 2 -> player.drinkHealthPotion();
                 case 3 -> {
-                    System.out.println("BUILD A BLOCK METHOD");
-                    on = false;
-                }
-                case 4 -> {
                     player.flee();
-                    on = false;
+                    return false;
                 }
-                default -> System.out.println("Input must be 1-4!");
+                default -> System.out.println("Input must be 1-3!");
             }
-        } while (on);
+        }
+        return true;
     }
 
-    public void playerBossBattleOptions(PlayerControl player, MapControl mapControl) {
+    public Boolean playerBossBattleOptions(PlayerControl player, MapControl mapControl) {
         System.out.printf("""
                    
                    +++++|                                   \033[0;32m    Actions      \033[0m                                            |+++++
@@ -57,9 +54,8 @@ public class CombatControl {
                                 
                 """, player.getHero().getName(), player.getHero().getTurningPoints());
 
-
         boolean on = true;
-        do {
+        while (on) {
             switch (new UserInputControl().inputInt(new Scanner(System.in))) {
                 case 1 -> {
                     playerBossBattle(player, mapControl);
@@ -68,11 +64,12 @@ public class CombatControl {
                 case 2 -> player.drinkHealthPotion();
                 case 3 -> {
                     player.flee();
-                    on = false;
+                    return false;
                 }
                 default -> System.out.println("Input must be 1-3!");
             }
-        } while (on);
+        }
+        return true;
     }
 
     private void minionResetTurningPoints(MapControl mapControl) {
@@ -87,13 +84,15 @@ public class CombatControl {
     }
 
     public void minionBattle(PlayerControl player, MapControl mapControl) {
-        outerLoop:
-        mapControl.currentLevel.getMinionMonsterList().forEach(monster -> {
 
+        for (EnemyParentModel monster : mapControl.currentLevel.getMinionMonsterList()) {
             while (monster.getTurningPoints() > 0) {
                 minionAttack(player, monster, mapControl);
+                if (player.getHero().getHealthPoints() <= 0) {
+                    return;
+                }
             }
-        });
+        }
     }
 
 
@@ -143,7 +142,7 @@ public class CombatControl {
     }
 
     public void playerBossBattle(PlayerControl player, MapControl mapControl) {
-        if (player.getHero().getTurningPoints() >= 0) {
+        if (player.getHero().getTurningPoints() > 0) {
             if (mapControl.currentLevel.getFinalBoss().getHealthPoints() > 0 && !mapControl.currentLevel.getFinalBoss().isKilled()) {
                 mapControl.currentLevel.getFinalBoss().getStatus();
                 mapControl.currentLevel.getFinalBoss().takeDamage(mapControl.currentLevel.getFinalBoss().block(), player.attack());
@@ -156,13 +155,18 @@ public class CombatControl {
                 mapControl.currentLevel.getFinalBoss().setKilled(true);
             }
         }
+        if (player.getHero().getTurningPoints() <= 0) {
+            System.out.println("You are out of Turning Points!");
+        }
     }
 
     public void bossBattle(PlayerControl player, MapControl mapControl) {
         while (mapControl.currentLevel.getFinalBoss().getTurningPoints() > 0) {
             System.out.printf(">>>>     \033[4;31m%s attacks!\033[0m     <<<<\n", mapControl.currentLevel.getFinalBoss().getName());
             player.takeDamage(player.block(), mapControl.currentLevel.getFinalBoss().attack());
-            player.getStatus();
+            if (player.getHero().getHealthPoints() <= 0) {
+                return;
+            }
         }
     }
 
@@ -174,7 +178,6 @@ public class CombatControl {
 
         boolean on = true;
         do {
-
 
             player.resetTurningPoints();
             minionResetTurningPoints(mapControl);
@@ -190,7 +193,8 @@ public class CombatControl {
                 return;
             }
 
-            playerMinionBattleOptions(player, mapControl);
+            Boolean flee = playerMinionBattleOptions(player, mapControl);
+            on = flee;
 
             System.out.println("\n \033[42mGet ready for a new round!\033[0m\n \033[42mPress Enter to continue \033[0m\n");
             Scanner sc = new Scanner(System.in);
@@ -205,22 +209,30 @@ public class CombatControl {
                 You are being attacked by %s!
                                 
                 """, mapControl.currentLevel.getFinalBoss().getName());
+        boolean on = true;
+        do {
+            player.resetTurningPoints();
+            mapControl.currentLevel.getFinalBoss().resetTurningPoints();
 
-        player.resetTurningPoints();
-        mapControl.currentLevel.getFinalBoss().resetTurningPoints();
+            bossBattle(player, mapControl);
+            playerBossBattle(player, mapControl);
 
-        bossBattle(player, mapControl);
-        playerBossBattle(player, mapControl);
+            if (mapControl.currentLevel.getFinalBoss().isKilled()) {
+                player.levelUp();
+                return;
+            }
+            if (player.checkHealthPoints()) {
+                isPlayerKilled(mapControl);
+                return;
+            }
 
-        if (mapControl.currentLevel.getFinalBoss().isKilled()) {
-            player.levelUp();
-            return;
-        }
-        if (player.checkHealthPoints()) {
-            isPlayerKilled(mapControl);
-            return;
-        }
+            Boolean flee = playerBossBattleOptions(player, mapControl);
+            on = flee;
 
-        playerBossBattleOptions(player, mapControl);
+            System.out.println("\n \033[42mGet ready for a new round!\033[0m\n \033[42mPress Enter to continue \033[0m\n");
+            Scanner sc = new Scanner(System.in);
+            sc.nextLine();
+
+        } while (on);
     }
 }

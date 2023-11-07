@@ -1,6 +1,5 @@
 package com.OskarJohansson.DungeonRun.Control;
 
-import com.OskarJohansson.DungeonRun.Model.Characters.Barbarian;
 import com.OskarJohansson.DungeonRun.Model.Items.Potions.HealthPotion;
 import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponClassThree.AtlanteanSword;
 import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponClassThree.PredatorDrone;
@@ -8,7 +7,6 @@ import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponClassTwo.Spot;
 import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponClassTwo.TwoHandSword;
 import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponParentModel;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class ShopControl {
@@ -83,7 +81,7 @@ public class ShopControl {
                                     
                     +++++|                                \033[0;32m    Drone Menu   \033[0m                                 |+++++
                     ____________________________________________________________________________________________________
-                    #1 - Buy Spot - The Killer Robot Dog    -   20 Gold     |     #2 - Buy Predator Drone  -  50 gold  |    #2 - Leave Drone menu  |
+                    #1 - Buy Spot - The Killer Robot Dog    -   20 Gold     |     #2 - Buy Predator Drone  -  50 gold  |    #3 - Leave Drone menu  |
                     """);
 
         do {
@@ -110,7 +108,7 @@ public class ShopControl {
                                     
                     +++++|                                \033[0;32m    Sword Menu   \033[0m                                 |+++++
                     ____________________________________________________________________________________________________
-                    #1 - Buy Two-handed Sword    -   20 Gold     |     #2 - Buy Atlantean Sword  -  50 gold  | 
+                    #1 - Buy Two-handed Sword    -   20 Gold     |     #2 - Buy Atlantean Sword  -  50 gold  |    #3 - Leave Drone menu  | 
                     """);
 
         boolean on = true;

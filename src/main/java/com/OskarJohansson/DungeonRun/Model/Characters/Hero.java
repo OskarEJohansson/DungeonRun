@@ -94,7 +94,7 @@ public class Hero implements Serializable {
         this.healthPointsBase += healthPointsBase;
     }
 
-    public void resetHealthPoinst(){
+    public void resetHealthPoints(){
         this.healthPoints = this.healthPointsBase;
     }
 

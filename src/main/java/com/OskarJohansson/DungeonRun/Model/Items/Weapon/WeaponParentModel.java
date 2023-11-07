@@ -52,6 +52,6 @@ public class WeaponParentModel implements Serializable  {
     }
 
     public void setSoundOfAttack(String soundOfAttack) {
-        this.soundOfAttack = soundOfAttack;
+        this.soundOfAttack = "\033[1;95m" + soundOfAttack + "\033[0m";
     }
 }
