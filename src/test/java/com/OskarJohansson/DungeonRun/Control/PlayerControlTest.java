@@ -14,14 +14,14 @@ public class PlayerControlTest extends TestCase {
         player.setHero(new Barbarian());
         player.getHero().setHealthPoints(0);
 
-        assertEquals(player.checkHealthPoints(), true);
+        assertEquals(player.checkHealthPoints(player), true);
 
         player.resetHealthPoints();
-        assertEquals(player.checkHealthPoints(), false);
+        assertEquals(player.checkHealthPoints(player), false);
 
         //Display running low in HP
         player.getHero().setHealthPoints(3);
-        assertEquals(player.checkHealthPoints(), false);
+        assertEquals(player.checkHealthPoints(player), false);
     }
 
     public void testTestBlock() {

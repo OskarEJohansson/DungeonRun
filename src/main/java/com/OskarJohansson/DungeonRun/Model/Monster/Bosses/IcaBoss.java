@@ -49,8 +49,8 @@ public class IcaBoss extends EnemyParentModel implements CombatInterface {
         }
     }
 
-    @Override
-    public void resetTurningPoints() {
-        this.setTurningPoints(this.getTurningPointsBase());
-    }
+//    @Override
+//    public void resetTurningPoints() {
+//        this.setTurningPoints(this.getTurningPointsBase());
+//    }
 }

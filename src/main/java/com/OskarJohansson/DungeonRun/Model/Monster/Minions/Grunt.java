@@ -48,8 +48,4 @@ public class Grunt extends EnemyParentModel implements CombatInterface {
         }
     }
 
-    @Override
-    public void resetHealthPoints() {
-
-    }
 }

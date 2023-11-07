@@ -40,7 +40,7 @@ public class CombatControl {
         return true;
     }
 
-    public void minionBattleControl(PlayerControl player, MapControl mapControl) {
+    public void minionBattleControl(PlayerControl player, MapControl mapControl, MenuControl menuControl) {
         System.out.printf("""
                 You are being attacked by %d monsters!
                                 
@@ -51,14 +51,14 @@ public class CombatControl {
 
             player.resetTurningPoints();
             minionResetTurningPoints(mapControl);
-            minionBattle(player, mapControl);
+            minionBattle(player, mapControl, menuControl);
             if (checkEnemyList(mapControl) == 0) {
 
                 System.out.println("////    \033[0;31m  You have killed all the monsters!   \033[0m   ////\n");
                 player.levelUp();
                 return;
             }
-            if (player.checkHealthPoints()) {
+            if (player.checkHealthPoints(player)) {
                 isPlayerKilled(mapControl);
                 return;
             }
@@ -73,10 +73,10 @@ public class CombatControl {
         } while (on);
     }
 
-    public void minionBattle(PlayerControl player, MapControl mapControl) {
+    public void minionBattle(PlayerControl player, MapControl mapControl, MenuControl menuControl) {
         for (EnemyParentModel monster : mapControl.currentLevel.getMinionMonsterList()) {
             while (monster.getTurningPoints() > 0) {
-                minionAttack(player, monster, mapControl);
+                minionAttack(player, monster, mapControl, menuControl);
                 if (player.getHero().getHealthPoints() <= 0) {
                     return;
                 }
@@ -84,10 +84,10 @@ public class CombatControl {
         }
     }
 
-    public void minionAttack(PlayerControl player, EnemyParentModel monster, MapControl mapControl) {
+    public void minionAttack(PlayerControl player, EnemyParentModel monster, MapControl mapControl, MenuControl menuControl) {
         System.out.printf(">>>>     \033[4;31mMonster %d attacks!\033[0m     <<<<\n", mapControl.currentLevel.getMinionMonsterList().indexOf(monster) + 1);
         player.takeDamage(player.block(), monster.attack());
-        player.getStatus();
+        menuControl.getStatus(player);
     }
 
     private int checkEnemyList(MapControl mapControl) {
@@ -103,7 +103,9 @@ public class CombatControl {
     }
 
     private void minionResetTurningPoints(MapControl mapControl) {
-        mapControl.currentLevel.getMinionMonsterList().forEach(c -> c.resetTurningPoints());
+        for(EnemyParentModel monster : mapControl.currentLevel.getMinionMonsterList() ){
+            monster.resetTurningPoints();
+        }
     }
 
     public void playerMinionBattle(PlayerControl player, MapControl mapControl) {
@@ -176,7 +178,7 @@ public class CombatControl {
                 player.levelUp();
                 return;
             }
-            if (player.checkHealthPoints()) {
+            if (player.checkHealthPoints(player)) {
                 isPlayerKilled(mapControl);
                 return;
             }
@@ -234,6 +236,8 @@ public class CombatControl {
             c.resetTurningPoints();
             c.resetHealthPoints();
         });
+        mapControl.currentLevel.getFinalBoss().resetHealthPoints();
+        mapControl.currentLevel.getFinalBoss().resetTurningPoints();
     }
 
     private boolean ifEnemyIsKilled(PlayerControl player, EnemyParentModel monster) {

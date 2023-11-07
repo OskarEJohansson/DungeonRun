@@ -14,8 +14,8 @@ public class KjellCOBoss extends EnemyParentModel implements CombatInterface {
         this.setHealthPointsBase(10);
         this.setDamage(3);
         this.setAttackCost(2);
-        this.setTurningPoints(5);
-        this.setTurningPointsBase(5);
+        this.setTurningPoints(2);
+        this.setTurningPointsBase(2);
         this.setExperiencePoints(5);
         this.setGold(10);
         this.setLevel(2);

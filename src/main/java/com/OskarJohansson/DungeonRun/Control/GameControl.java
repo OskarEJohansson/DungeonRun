@@ -6,7 +6,7 @@ public class GameControl {
 
     PlayerControl player;
     MapControl map;
-    MenuControl mainMenu;
+    MenuControl menuControl;
     ShopControl shopControl;
     CombatControl combatControl;
 
@@ -15,7 +15,7 @@ public class GameControl {
 
         this.player = new PlayerControl();
         this.map = new MapControl();
-        this.mainMenu = new MenuControl();
+        this.menuControl = new MenuControl();
         this.shopControl = new ShopControl();
         this.combatControl = new CombatControl();
 
@@ -24,7 +24,7 @@ public class GameControl {
     public void gameFlow() {
 
         System.out.printf("""
-                                
+                               
                 ++++|      \033[42m  Welcome to STI Dungeon Run!  \033[0m      |++++
                                 
                 _____________________________________________________                        
@@ -36,16 +36,16 @@ public class GameControl {
         while (on)
             switch (new UserInputControl().inputInt(new Scanner(System.in))) {
                 case 1 -> {
-                    mainMenu.createNewPlayer(player);
+                    menuControl.createNewPlayer(player);
                     on = false;
                 }
                 case 2 -> {
-                    mainMenu.loadPlayer(player);
+                    menuControl.loadPlayer(player);
                     on = false;
                 }
                 default -> System.out.println("Input must be 1 or 2!");
             }
-        mainMenu.mainMenu(player, mainMenu, map, shopControl, combatControl);
+        menuControl.mainMenu(player, menuControl, map, shopControl, combatControl);
     }
 }
 

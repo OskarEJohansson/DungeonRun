@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class MenuControl {
 
 
-    public void mainMenu(PlayerControl player, MenuControl mainMenu, MapControl mapControl, ShopControl shopControl, CombatControl combatControl) {
+    public void mainMenu(PlayerControl player, MenuControl menuControl, MapControl mapControl, ShopControl shopControl, CombatControl combatControl) {
         boolean on = true;
 
         do {
@@ -22,9 +22,9 @@ public class MenuControl {
                      """, player.getHero().getName(), player.getHero().getHeroClass());
 
             switch (new UserInputControl().inputInt(new Scanner(System.in))) {
-                case 1 -> player.getPlayerStats();
-                case 2 -> player.getStatus();
-                case 3 -> mapMenu(mapControl, player, combatControl);
+                case 1 -> getPlayerStats(player);
+                case 2 -> getStatus(player);
+                case 3 -> mapMenu(mapControl, player, combatControl, menuControl);
                 case 4 -> shopControl.shop(player);
                 case 5 -> savePlayer(player);
                 default -> System.out.println("Input must be 1 - 5!");
@@ -32,22 +32,22 @@ public class MenuControl {
         } while (on);
     }
 
-    public void savePlayer(PlayerControl player){
+    public void savePlayer(PlayerControl player) {
         PlayerManager playerManager = new PlayerManager();
         playerManager.saveHeroToFile(player.getHero());
         System.out.println("Game saved!");
     }
 
-    public void loadPlayer(PlayerControl player){
+    public void loadPlayer(PlayerControl player) {
         PlayerManager playerManager = new PlayerManager();
         player.setHero(playerManager.loadHeroFromFile());
     }
 
-    public void createNewPlayer(PlayerControl player){
+    public void createNewPlayer(PlayerControl player) {
         setNameAndCharacter(player);
     }
 
-    public void mapMenu(MapControl mapControl, PlayerControl player, CombatControl combatControl) {
+    public void mapMenu(MapControl mapControl, PlayerControl player, CombatControl combatControl, MenuControl menuControl) {
 
         boolean on = true;
         do {
@@ -63,39 +63,38 @@ public class MenuControl {
                 case 1 -> {
                     mapControl.setMap(1);
                     System.out.println("Entering the Dungeons of Ica");
-                    mapStructure(mapControl, player, combatControl);
+                    mapStructure(mapControl, player, combatControl, menuControl);
                 }
                 case 2 -> {
                     if (player.getHero().getLevel() < 2) {
                         System.out.println("You must be level 2 to enter Sats!");
-                        break;
+                        return;
                     }
                     mapControl.setMap(2);
                     System.out.println("Entering the Dungeons of Sats");
-                    mapStructure(mapControl, player, combatControl);
+                    mapStructure(mapControl, player, combatControl, menuControl);
                 }
                 case 3 -> {
                     if (player.getHero().getLevel() < 3) {
                         System.out.println("You must be level 3 to enter Kjell & Co !");
-                        break;
+                        return;
                     }
                     mapControl.setMap(3);
                     System.out.println("Entering the Dungeons of Kjell & Co");
-                    mapStructure(mapControl, player, combatControl);
+                    mapStructure(mapControl, player, combatControl, menuControl);
 
                 }
                 case 4 -> {
-                    if (player.getHero().getLevel() < 4 ) {
+                    if (player.getHero().getLevel() < 4) {
                         System.out.println("You must be level 5 to enter Teacher Lounge!");
                     }
-                    if (!player.getHero().isCodeBreaker())
-                    {
+                    if (!player.getHero().isCodeBreaker()) {
                         System.out.println("You can't crack the security code to break in to the Tower! Defeat the Nerd Wizard of Kjell & Co to attain the Code Breaker!");
-                        break;
+                        return;
                     }
                     mapControl.setMap(4);
                     System.out.println("Entering the Tower of The Teachers Lounge");
-                    mapStructure(mapControl, player, combatControl);
+                    mapStructure(mapControl, player, combatControl, menuControl);
                 }
                 case 5 -> {
                     player.drinkHealthPotion();
@@ -110,7 +109,7 @@ public class MenuControl {
         } while (on);
     }
 
-    public void mapStructure(MapControl mapControl, PlayerControl player, CombatControl combatControl) {
+    public void mapStructure(MapControl mapControl, PlayerControl player, CombatControl combatControl, MenuControl menuControl) {
 
         boolean on = true;
 
@@ -125,7 +124,7 @@ public class MenuControl {
             switch (new UserInputControl().inputInt(new Scanner(System.in))) {
                 case 1 -> {
                     System.out.println("You are entering the kill zone!");
-                    combatControl.minionBattleControl(player, mapControl);
+                    combatControl.minionBattleControl(player, mapControl, menuControl);
                 }
                 case 2 -> {
                     System.out.println("You are about to challenging the stage Boss!");
@@ -175,6 +174,26 @@ public class MenuControl {
                 default -> System.out.println("Input must be 1 - 2!");
             }
         } while (on);
+    }
+
+    public void getPlayerStats(PlayerControl player) {
+        player.levelUp();
+        System.out.printf("""
+                ++++|                                         \033[0;35m    Stats   \033[0m                                                                                 |++++
+                ________________________________________________________________________________________________________________________________________________             
+                Level  \033[1;33m%d\033[0m   |   Experience Points   \033[1;33m%d/%d\033[0m  |   Strength    \033[1;35m%d\033[0m  |   Intelligence   \033[1;32m%d\033[0m  |   Agility   \033[1;31m%d\033[0m  |   Weapon   \033[4;31m%s\033[0m    |   HealthPotions   \033[0;34m%d\033[0m   |
+                                
+                """, player.getHero().getLevel(), player.getHero().getExperiencePoints(), player.getHero().getLevel() * 10, player.getHero().getStrength(), player.getHero().getIntelligence(), player.getHero().getAgility(), player.getHero().getWeapon().getName(), player.getHero().getPotionStash().size());
+    }
+
+    public void getStatus(PlayerControl player) {
+        player.levelUp();
+        System.out.printf("""
+                ++++|                                           \033[0;35m  Stats   \033[0m                                                                       |++++
+                ______________________________________________________________________________________________________________________________________
+                %s the %s  |   Kill count   \033[0;31m%d\033[0m  |   Health Points   \033[0;34m%d/%d\033[0m  |   Turning Points  \033[1;31m%d/%d\033[0m   |   Gold    \033[1;33m%d\033[0m |
+                                
+                """, player.getHero().getName(), player.getHero().getHeroClass(), player.getHero().getKillList(), player.getHero().getHealthPoints(), player.getHero().getHealthPointsBase(), player.getHero().getTurningPoints(), player.getHero().getTurningPointsBase(), player.getHero().getExperiencePoints(), player.getHero().getGold());
     }
 }
 

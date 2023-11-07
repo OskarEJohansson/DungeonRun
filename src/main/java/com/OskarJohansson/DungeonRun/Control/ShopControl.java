@@ -25,7 +25,7 @@ public class ShopControl {
                     ____________________________________________________________________________________________________
                     #1 - Buy Swords  |   #2 - Buy Drones  |   #3 - Buy Health Potion  |   #4 - Exit SHOP   |
                                     
-                    You have %d gold
+                    You have \033[1;33m%d\033[0m gold
                     """, player.getHero().getGold());
 
             switch (new UserInputControl().inputInt(new Scanner(System.in))) {

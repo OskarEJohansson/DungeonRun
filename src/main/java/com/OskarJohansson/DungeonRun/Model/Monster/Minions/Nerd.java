@@ -47,7 +47,4 @@ public class Nerd extends EnemyParentModel implements CombatInterface {
             this.setHealthPoints(this.getHealthPoints() - damage);
         }
     }
-
-    public void resetTurningPoints() {
-    }
 }

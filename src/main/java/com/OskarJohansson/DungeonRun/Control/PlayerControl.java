@@ -17,27 +17,6 @@ public class PlayerControl implements CombatInterface {
         this.hero = hero;
     }
 
-    public void getPlayerStats() {
-        levelUp();
-        System.out.printf("""
-                ++++|                                         \033[0;35m    Stats   \033[0m                                                                                 |++++
-                ________________________________________________________________________________________________________________________________________________             
-                Level  \033[1;33m%d\033[0m   |   Experience Points   \033[1;33m%d/%d\033[0m  |   Strength    \033[1;35m%d\033[0m  |   Intelligence   \033[1;32m%d\033[0m  |   Agility   \033[1;31m%d\033[0m  |   Weapon   \033[4;31m%s\033[0m    |   HealthPotions   \033[0;34m%d\033[0m   |
-                                
-                """, this.hero.getLevel(), this.hero.getExperiencePoints(),this.hero.getLevel() * 10, this.hero.getStrength(), this.hero.getIntelligence(), this.hero.getAgility(), this.hero.getWeapon().getName(), this.getHero().getPotionStash().size());
-    }
-
-    @Override
-    public void getStatus() {
-        levelUp();
-        System.out.printf("""
-                ++++|                                           \033[0;35m  Stats   \033[0m                                                                       |++++
-                ______________________________________________________________________________________________________________________________________
-                %s the %s  |   Kill count   \033[0;31m%d\033[0m  |   Health Points   \033[0;34m%d/%d\033[0m  |   Turning Points  \033[1;31m%d/%d\033[0m   |   Gold    \033[1;33m%d\033[0m |
-                                
-                """, this.hero.getName(), this.hero.getHeroClass(), this.hero.getKillList(), this.hero.getHealthPoints(), this.hero.getHealthPointsBase(), this.hero.getTurningPoints(), this.hero.getTurningPointsBase(), this.hero.getExperiencePoints(), getHero().getGold());
-    }
-
     @Override
     public int attack() {
         this.hero.setTurningPoints(-this.hero.getWeapon().getTurnPoints());
@@ -46,15 +25,12 @@ public class PlayerControl implements CombatInterface {
         return this.hero.getWeapon().getDamage();
     }
 
-
     public boolean block() {
-
         if (new Random().nextInt(1, 10) > 3) {
             System.out.println(">>>>    \033[0;32m  Player blocked the attack successfully! \033[0m     <<<<\n");
             return true;
         } else
             System.out.println(">>>>    \033[0;31m  Player fails to block the attack!   \033[0m    <<<<\n");
-        checkHealthPoints();
         return false;
     }
 
@@ -132,12 +108,12 @@ public class PlayerControl implements CombatInterface {
         return this.hero.getPotionStash().size();
     }
 
-
-    public boolean checkHealthPoints() {
-        if (this.hero.getHealthPoints() <= 0) {
+    public boolean checkHealthPoints(PlayerControl player) {
+        if (player.getHero().getHealthPoints() <= 0) {
             System.out.println("You have been killed. You dropped all your gold!");
-            getHero().resetGold();
-            System.out.println(this.hero.getGold());
+            player.getHero().resetGold();
+            System.out.println(player.getHero().getGold());
+            player.getHero().setKillList(100);
             resetHealthPoints();
             resetTurningPoints();
             return true;

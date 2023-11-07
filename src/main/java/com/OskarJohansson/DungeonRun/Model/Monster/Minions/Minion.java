@@ -47,7 +47,4 @@ public class Minion extends EnemyParentModel implements CombatInterface {
             this.setHealthPoints(this.getHealthPoints() - damage);
         }
     }
-
-    public void resetTurningPoints() {
-    }
 }

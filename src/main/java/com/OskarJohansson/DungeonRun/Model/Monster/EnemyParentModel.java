@@ -116,7 +116,6 @@ public class EnemyParentModel implements CombatInterface {
         return true;
     }
 
-    @Override
     public void getStatus() {
         System.out.printf("""
                  ++++                    Enemy Stats                     ++++
@@ -130,12 +129,12 @@ public class EnemyParentModel implements CombatInterface {
     public void takeDamage(Boolean takeDamage, int damage) {
     }
 
-    @Override
+
     public void resetTurningPoints() {
-        this.turningPoints = this.turningPointsBase;
+        setTurningPoints(getTurningPointsBase());
     }
 
-    @Override
+
     public void resetHealthPoints() {
         this.healthPoints = this.healthPointsBase;
     }

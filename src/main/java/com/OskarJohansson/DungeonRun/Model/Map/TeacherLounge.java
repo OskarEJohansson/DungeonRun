@@ -18,7 +18,7 @@ public class TeacherLounge extends Level {
         setMinionMonsterList.add(new IcaBoss());
         setMinionMonsterList.add(new SatsBoss());
         setMinionMonsterList.add(new KjellCOBoss());
-        setMinionMonsterList.add(new TechWizOfDoom());
+        setFinalBoss(new TechWizOfDoom());
         this.setMinionMonsterList(setMinionMonsterList);
         this.setLevelNumber("4");
         this.setLevelName("Dungeon of The Teachers Lounge");

@@ -7,7 +7,7 @@ public class Sword extends WeaponParentModel {
 
     public Sword(){
         this.setName("Sword");
-        this.setDamage(3);
+        this.setDamage(1);
         this.setTurnPoints(1);
         this.setMinimumLevel(1);
         this.setSoundOfAttack("Kling kling");

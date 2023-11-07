@@ -11,7 +11,7 @@ public class KjellCO extends Level {
 
     public KjellCO() {
         List<EnemyParentModel> setMinionMonsterList = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 3; i++) {
             setMinionMonsterList.add(new Nerd());
         }
         this.setMinionMonsterList(setMinionMonsterList);
