@@ -111,7 +111,7 @@ public class CombatControl {
     public void playerMinionBattle(PlayerControl player, MapControl mapControl) {
 
         for (EnemyParentModel monster : mapControl.currentLevel.getMinionMonsterList()) {
-            if (player.getHero().getTurningPoints() >= player.getHero().getWeapon().getTurnPoints()) {
+            while (player.getHero().getTurningPoints() >= player.getHero().getWeapon().getTurnPoints()) {
                 if (monster.getHealthPoints() > 0 && !monster.isKilled()) {
                     monster.getStatus();
                     monster.takeDamage(monster.block(), player.attack());
@@ -212,6 +212,7 @@ public class CombatControl {
                     mapControl.currentLevel.getFinalBoss().getStatus();
                     mapControl.currentLevel.getFinalBoss().takeDamage(mapControl.currentLevel.getFinalBoss().block(), player.attack());
                 }
+
                 if (mapControl.currentLevel.getFinalBoss().getHealthPoints() <= 0 && !mapControl.currentLevel.getFinalBoss().isKilled()) {
                     System.out.printf("////     \033[0;31mYou killed %s and gained %d experience points!\033[0m      ////\n", mapControl.currentLevel.getFinalBoss().getName(), mapControl.currentLevel.getFinalBoss().getExperiencePoints());
                     player.getHero().setKillList(1);
@@ -227,6 +228,7 @@ public class CombatControl {
             }
             if (player.getHero().getTurningPoints() <= 0) {
                 System.out.println("You are out of Turning Points!");
+                on = false;
             }
         } while (on);
     }

@@ -11,8 +11,8 @@ public class Barbarian extends Hero {
         this.setAgility(5);
         this.setHealthPoints(5);
         this.setHealthPointsBase(5);
-        this.setTurningPoints(5);
-        this.setTurningPointsBase(5);
+        this.setTurningPoints(3);
+        this.setTurningPointsBase(3);
         this.setWeapon(new Sword());
     }
 }

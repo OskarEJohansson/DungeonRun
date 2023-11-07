@@ -15,13 +15,13 @@ public class Hero implements Serializable {
     private int strength;
     private int intelligence;
     private int agility;
-    private int healthPoints = 100;
-    private int healthPointsBase = 100;
+    private int healthPoints = 5;
+    private int healthPointsBase = 5;
     private int turningPoints = 1;
     private int turningPointsBase = 1;
-    private int experiencePoints = 100;
+    private int experiencePoints = 0;
     private int gold = 0;
-    private int level = 10;
+    private int level = 1;
     private int killList = 0;
     private boolean codeBreaker = false;
     private List<HealthPotion> potionStash = new ArrayList<>();
