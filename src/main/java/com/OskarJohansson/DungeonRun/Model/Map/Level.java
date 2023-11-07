@@ -48,7 +48,6 @@ public class Level {
         for (EnemyParentModel minion : getMinionMonsterList()){
             minion.resetTurningPoints();
         }
-        this.finalBoss.resetTurningPoints();
     }
 
 

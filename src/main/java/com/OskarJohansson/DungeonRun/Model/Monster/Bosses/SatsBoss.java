@@ -19,6 +19,7 @@ public class SatsBoss extends EnemyParentModel implements CombatInterface {
         this.setExperiencePoints(10);
         this.setGold(10);
         this.setLevel(5);
+        this.setKilled(false);
     }
     @Override
     public int attack() {
@@ -50,5 +51,6 @@ public class SatsBoss extends EnemyParentModel implements CombatInterface {
 
     @Override
     public void resetTurningPoints() {
+        this.setTurningPoints(this.getTurningPointsBase());
     }
 }

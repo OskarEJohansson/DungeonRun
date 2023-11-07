@@ -23,6 +23,7 @@ public class Hero implements Serializable {
     private int gold = 0;
     private int level = 3;
     private int killList = 0;
+    private boolean codeBreaker = false;
     private List<HealthPotion> potionStash = new ArrayList<>();
 
 
@@ -151,6 +152,14 @@ public class Hero implements Serializable {
 
     public void setKillList(int killList) {
         this.killList += killList;
+    }
+
+    public boolean isCodeBreaker() {
+        return codeBreaker;
+    }
+
+    public void setCodeBreaker(boolean codeBreaker) {
+        this.codeBreaker = codeBreaker;
     }
 
     public List<HealthPotion> getPotionStash() {

@@ -24,7 +24,7 @@ public class MenuControl {
             switch (new UserInputControl().inputInt(new Scanner(System.in))) {
                 case 1 -> player.getPlayerStats();
                 case 2 -> player.getStatus();
-                case 3 -> mapMenu(mapControl, mainMenu, player, combatControl);
+                case 3 -> mapMenu(mapControl, player, combatControl);
                 case 4 -> shopControl.shop(player);
                 case 5 -> savePlayer(player);
                 default -> System.out.println("Input must be 1 - 5!");
@@ -47,14 +47,15 @@ public class MenuControl {
         setNameAndCharacter(player);
     }
 
-    public void mapMenu(MapControl mapControl, MenuControl mainMenu, PlayerControl player, CombatControl combatControl) {
+    public void mapMenu(MapControl mapControl, PlayerControl player, CombatControl combatControl) {
 
         boolean on = true;
         do {
             System.out.println("""
-                    +++++|                                                  \033[42m   Explore the world of STI!   \033[0m                                                         |+++++
-                    _____________________________________________________________________________________________________________________________________________________________________                
-                    #1 - Battle the Minions of ICA  |   #2 - Defeat the PT's of Sats    |   #3 - Challenge the Wizards of Kjell&Co  |   #4 - Drink potion  |   #5 - Return to main menu  |
+                    +++++|                           \033[42m   Explore the world of STI!   \033[0m                            +++++
+                    ________________________________________________________________________________________________________________             
+                    #1 - Battle the Minions of ICA  |   #2 - Defeat the PT's of Sats    |   #3 - Challenge the Wizards of Kjell&Co  |
+                    #4 - Conquer the Tower of the Teachers Lounge  |   #5 - Drink potion  |   #6 - Return to main menu  |
                                     
                     """);
 
@@ -81,12 +82,26 @@ public class MenuControl {
                     mapControl.setMap(3);
                     System.out.println("Entering the Dungeons of Kjell & Co");
                     mapStructure(mapControl, player, combatControl);
+
                 }
                 case 4 -> {
+                    if (player.getHero().getLevel() < 4 ) {
+                        System.out.println("You must be level 5 to enter Teacher Lounge!");
+                    }
+                    if (!player.getHero().isCodeBreaker())
+                    {
+                        System.out.println("You can't crack the security code to break in to the Tower! Defeat the Nerd Wizard of Kjell & Co to attain the Code Breaker!");
+                        break;
+                    }
+                    mapControl.setMap(4);
+                    System.out.println("Entering the Tower of The Teachers Lounge");
+                    mapStructure(mapControl, player, combatControl);
+                }
+                case 5 -> {
                     player.drinkHealthPotion();
                     on = false;
                 }
-                case 5 -> {
+                case 6 -> {
                     System.out.println("Returning to Main Menu");
                     on = false;
                 }

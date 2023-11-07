@@ -18,6 +18,7 @@ public class TechWizOfDoom extends EnemyParentModel {
         this.setExperiencePoints(100);
         this.setGold(100);
         this.setLevel(5);
+        this.setKilled(false);
     }
     @Override
     public int attack() {
@@ -49,5 +50,6 @@ public class TechWizOfDoom extends EnemyParentModel {
 
     @Override
     public void resetTurningPoints() {
+        this.setTurningPoints(this.getTurningPointsBase());
     }
 }
