@@ -99,7 +99,7 @@ public class MenuControl {
                     mapStructure(mapControl, player, combatControl, menuControl);
                 }
                 case 5 -> {
-                    player.drinkHealthPotion();
+                    player.drinkHealthPotion(player);
                     on = false;
                 }
                 case 6 -> {
@@ -179,7 +179,7 @@ public class MenuControl {
     }
 
     public void getPlayerStats(PlayerControl player) {
-        player.levelUp();
+        player.levelUp(player);
         System.out.printf("""
                 ++++|                                         \033[0;35m    Stats   \033[0m                                                                                 |++++
                 ________________________________________________________________________________________________________________________________________________             
@@ -189,13 +189,13 @@ public class MenuControl {
     }
 
     public void getStatus(PlayerControl player) {
-        player.levelUp();
+        player.levelUp(player);
         System.out.printf("""
                 ++++|                                           \033[0;35m  Stats   \033[0m                                                                       |++++
                 ______________________________________________________________________________________________________________________________________
                 %s the %s   |   Death count   \033[0;31m%d\033[0m    |   Kill count   \033[0;31m%d\033[0m  |   Health Points   \033[0;34m%d/%d\033[0m  |   Turning Points  \033[1;31m%d/%d\033[0m   |   Gold    \033[1;33m%d\033[0m |
                                 
-                """, player.getHero().getName(), player.getHero().getHeroClass(), player.getHero().getDeathCount(), player.getHero().getKillList(), player.getHero().getHealthPoints(), player.getHero().getHealthPointsBase(), player.getHero().getTurningPoints(), player.getHero().getTurningPointsBase(), player.getHero().getExperiencePoints(), player.getHero().getGold());
+                """, player.getHero().getName(), player.getHero().getHeroClass(), player.getHero().getDeathCount(), player.getHero().getKillList(), player.getHero().getHealthPoints(), player.getHero().getHealthPointsBase(), player.getHero().getTurningPoints(), player.getHero().getTurningPointsBase(),  player.getHero().getGold());
     }
 }
 

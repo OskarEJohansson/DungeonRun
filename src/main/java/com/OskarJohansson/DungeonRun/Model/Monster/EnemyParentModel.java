@@ -129,7 +129,6 @@ public class EnemyParentModel implements CombatInterface {
     public void takeDamage(Boolean takeDamage, int damage) {
     }
 
-
     public void resetTurningPoints() {
         setTurningPoints(getTurningPointsBase());
     }

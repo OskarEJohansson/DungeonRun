@@ -29,7 +29,7 @@ public class IcaBoss extends EnemyParentModel implements CombatInterface {
 
     @Override
     public boolean block() {
-        if (new Random().nextInt(1, 10) > 9) {
+        if (new Random().nextInt(1, 10) > 5) {
             System.out.printf(">>>>    \033[0;32m%s blocked the attack successfully!\033[0m    <<<<\n", this.getName());
             return true;
         }
@@ -48,9 +48,4 @@ public class IcaBoss extends EnemyParentModel implements CombatInterface {
             this.setHealthPoints(this.getHealthPoints() - damage);
         }
     }
-
-//    @Override
-//    public void resetTurningPoints() {
-//        this.setTurningPoints(this.getTurningPointsBase());
-//    }
 }

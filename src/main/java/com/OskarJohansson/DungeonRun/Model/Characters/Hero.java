@@ -15,17 +15,34 @@ public class Hero implements Serializable {
     private int strength;
     private int intelligence;
     private int agility;
-    private int healthPoints = 5;
-    private int healthPointsBase = 5;
-    private int turningPoints = 1;
-    private int turningPointsBase = 1;
-    private int experiencePoints = 0;
-    private int gold = 0;
-    private int level = 1;
-    private int killList = 0;
-    private int deathCount = 0;
-    private boolean codeBreaker = false;
-    private List<HealthPotion> potionStash = new ArrayList<>();
+    private int healthPoints;
+    private int healthPointsBase;
+    private int turningPoints;
+    private int turningPointsBase;
+    private int experiencePoints;
+    private int gold;
+    private int goldBase;
+    private int level;
+    private int killList;
+    private int deathCount;
+    private boolean codeBreaker;
+    private List<HealthPotion> potionStash;
+
+    public Hero(){
+        this.healthPoints = 5;
+        this.healthPointsBase = 5;
+        this.turningPoints = 1;
+        this.turningPointsBase = 1;
+        this.experiencePoints = 0;
+        this.gold = 10;
+        this.goldBase = 0;
+        this.level = 1;
+        this.killList = 0;
+        this.deathCount = 0;
+        this.codeBreaker = false;
+        this.potionStash = new ArrayList<>();
+
+    }
 
 
     public String getName() {
@@ -136,7 +153,7 @@ public class Hero implements Serializable {
     }
 
     public void resetGold() {
-        this.gold = 0;
+        this.gold = this.goldBase;
     }
 
     public int getLevel() {

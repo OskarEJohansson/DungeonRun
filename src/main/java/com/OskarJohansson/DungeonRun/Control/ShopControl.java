@@ -47,11 +47,10 @@ public class ShopControl {
         } else {
             System.out.println("You purchased a 10 hp Potion for 5 gold.");
             player.getHero().setGold(-5);
-            player.addHealthPoition(new HealthPotion());
+            player.addHealthPoition(player, new HealthPotion());
         }
     }
 
-    /// ADD STRENGHT REQUIERMENTS!
     public void buyWeapon(PlayerControl player, WeaponParentModel weapon){
         if(weapon.getWeaponClass()=="Barbarian" && player.getHero().getHeroClass() != weapon.getWeaponClass()){
             if(player.getHero().getHeroClass() == "Code Monkey"){System.out.println("You must be a Barbarian to be able to lift this sword!");

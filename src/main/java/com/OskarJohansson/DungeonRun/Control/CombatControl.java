@@ -29,9 +29,9 @@ public class CombatControl {
                     playerAttackMinion(player, mapControl);
                     on = false;
                 }
-                case 2 -> player.drinkHealthPotion();
+                case 2 -> player.drinkHealthPotion(player);
                 case 3 -> {
-                    player.flee();
+                    player.flee(player);
                     return false;
                 }
                 default -> System.out.println("Input must be 1-3!");
@@ -48,13 +48,13 @@ public class CombatControl {
 
         boolean on = true;
         do {
-            player.resetTurningPoints();
+            player.getHero().resetTurningPoints();
             minionResetTurningPoints(mapControl);
             minionBattle(player, mapControl, menuControl);
             if (checkEnemyList(mapControl) == 0) {
 
                 System.out.println("////    \033[0;31m  You have killed all the monsters!   \033[0m   ////\n");
-                player.levelUp();
+                player.levelUp(player);
                 return;
             }
             if (player.checkHealthPoints(player)) {
@@ -84,7 +84,7 @@ public class CombatControl {
 
     public void minionAttackPlayer(PlayerControl player, EnemyParentModel monster, MapControl mapControl, MenuControl menuControl) {
         System.out.printf(">>>>     \033[4;31m%s %d attacks!\033[0m     <<<<\n", monster.getName(), mapControl.currentLevel.getMinionMonsterList().indexOf(monster) + 1);
-        player.takeDamage(player.block(), monster.attack());
+        player.takeDamage(player, player.block(), monster.attack());
         menuControl.getStatus(player);
     }
 
@@ -108,7 +108,7 @@ public class CombatControl {
                 System.out.println(player.getHero().getWeapon().getSoundOfAttack());
 
                 if (monster.getHealthPoints() > 0 && !monster.isKilled()) {
-                    monster.takeDamage(monster.block(), player.attack());
+                    monster.takeDamage(monster.block(), player.attack(player));
                     monster.getStatus();
                 }
                 if (monster.getHealthPoints() <= 0 && !monster.isKilled()) {
@@ -144,12 +144,12 @@ public class CombatControl {
 
             switch (UserInputControl.inputInt()) {
                 case 1 -> {
-                    playerBossBattle(player, mapControl);
+                    playerAttackBoss(player, mapControl);
                     on = false;
                 }
-                case 2 -> player.drinkHealthPotion();
+                case 2 -> player.drinkHealthPotion(player);
                 case 3 -> {
-                    player.flee();
+                    player.flee(player);
                     return false;
                 }
                 default -> System.out.println("Input must be 1-3!");
@@ -166,12 +166,14 @@ public class CombatControl {
 
         boolean on = true;
         do {
-            player.resetTurningPoints();
+            player.getHero().resetTurningPoints();
             mapControl.currentLevel.getFinalBoss().resetTurningPoints();
 
-            bossAttack(player, mapControl, menuControl);
+            if (!mapControl.currentLevel.getFinalBoss().isKilled()) {
+                bossAttack(player, mapControl, menuControl);
+            }
             if (mapControl.currentLevel.getFinalBoss().isKilled()) {
-                player.levelUp();
+                player.levelUp(player);
                 return;
             }
             if (player.checkHealthPoints(player)) {
@@ -191,7 +193,7 @@ public class CombatControl {
     public void bossAttack(PlayerControl player, MapControl mapControl, MenuControl menuControl) {
         while (mapControl.currentLevel.getFinalBoss().getTurningPoints() > 0) {
             System.out.printf(">>>>     \033[4;31m%s attacks!\033[0m     <<<<\n", mapControl.currentLevel.getFinalBoss().getName());
-            player.takeDamage(player.block(), mapControl.currentLevel.getFinalBoss().attack());
+            player.takeDamage(player, player.block(), mapControl.currentLevel.getFinalBoss().attack());
             menuControl.getStatus(player);
             if (player.getHero().getHealthPoints() <= 0) {
                 return;
@@ -199,12 +201,12 @@ public class CombatControl {
         }
     }
 
-    public void playerBossBattle(PlayerControl player, MapControl mapControl) {
+    public void playerAttackBoss(PlayerControl player, MapControl mapControl) {
 
         while (player.getHero().getTurningPoints() > 0) {
             if (mapControl.currentLevel.getFinalBoss().getHealthPoints() > 0 && !mapControl.currentLevel.getFinalBoss().isKilled()) {
                 mapControl.currentLevel.getFinalBoss().getStatus();
-                mapControl.currentLevel.getFinalBoss().takeDamage(mapControl.currentLevel.getFinalBoss().block(), player.attack());
+                mapControl.currentLevel.getFinalBoss().takeDamage(mapControl.currentLevel.getFinalBoss().block(), player.attack(player));
             }
 
             if (mapControl.currentLevel.getFinalBoss().getHealthPoints() <= 0 && !mapControl.currentLevel.getFinalBoss().isKilled()) {

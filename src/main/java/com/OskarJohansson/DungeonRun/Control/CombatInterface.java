@@ -6,6 +6,5 @@ public interface CombatInterface {
     boolean block();
     public boolean flee();
     void takeDamage(Boolean takeDamage, int damage);
-    public void resetTurningPoints();
-    public void resetHealthPoints();
+
 }
