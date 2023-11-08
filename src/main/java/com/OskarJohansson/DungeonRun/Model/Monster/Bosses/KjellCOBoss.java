@@ -12,7 +12,8 @@ public class KjellCOBoss extends EnemyParentModel implements CombatInterface {
         this.setName("Nerd Wizard");
         this.setHealthPoints(10);
         this.setHealthPointsBase(10);
-        this.setDamage(3);
+        this.setDamageMin(3);
+        this.setDamageMax(7);
         this.setAttackCost(2);
         this.setTurningPoints(2);
         this.setTurningPointsBase(2);
@@ -24,7 +25,7 @@ public class KjellCOBoss extends EnemyParentModel implements CombatInterface {
     @Override
     public int attack() {
         this.setTurningPoints(this.getTurningPoints() - this.getAttackCost());
-        return this.getDamage();
+        return this.getDamageMin();
     }
 
     @Override

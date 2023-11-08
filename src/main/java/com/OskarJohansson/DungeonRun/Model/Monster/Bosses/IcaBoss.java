@@ -12,7 +12,8 @@ public class IcaBoss extends EnemyParentModel implements CombatInterface {
         this.setName("The Meat Cleaver Maniac");
         this.setHealthPoints(10);
         this.setHealthPointsBase(10);
-        this.setDamage(3);
+        this.setDamageMin(2);
+        this.setDamageMax(3);
         this.setAttackCost(2);
         this.setTurningPoints(5);
         this.setTurningPointsBase(5);
@@ -24,7 +25,7 @@ public class IcaBoss extends EnemyParentModel implements CombatInterface {
     @Override
     public int attack() {
         this.setTurningPoints(this.getTurningPoints() - this.getAttackCost());
-        return this.getDamage();
+        return this.getDamageMin();
     }
 
     @Override

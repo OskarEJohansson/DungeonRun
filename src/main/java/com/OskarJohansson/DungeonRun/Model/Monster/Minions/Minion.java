@@ -11,7 +11,8 @@ public class Minion extends EnemyParentModel implements CombatInterface {
         this.setName("Minion");
         this.setHealthPoints(3);
         this.setHealthPointsBase(3);
-        this.setDamage(1);
+        this.setDamageMin(1);
+        this.setDamageMax(2);
         this.setAttackCost(1);
         this.setTurningPoints(1);
         this.setTurningPointsBase(1);
@@ -20,11 +21,11 @@ public class Minion extends EnemyParentModel implements CombatInterface {
         this.setLevel(1);
     }
 
-    @Override
-    public int attack() {
-        this.setTurningPoints(this.getTurningPoints() - this.getAttackCost());
-        return this.getDamage();
-    }
+//    @Override
+//    public int attack() {
+//        this.setTurningPoints(this.getTurningPoints() - this.getAttackCost());
+//        return new Random().nextInt();
+//    }
 
     @Override
     public boolean block() {
@@ -32,7 +33,7 @@ public class Minion extends EnemyParentModel implements CombatInterface {
             System.out.printf(">>>>    \033[0;32m %s blocked the attack successfully!\033[0m    <<<<\n", this.getName());
             return true;
         }
-        System.out.printf(">>>>    \033[0;31m%s fails to block the attack\033[0m    <<<<\n", this.getName());
+        System.out.printf(">>>>    \033[0;31m%s fails to block the attack!\033[0m    <<<<\n", this.getName());
         return false;
     }
 
@@ -45,6 +46,8 @@ public class Minion extends EnemyParentModel implements CombatInterface {
     public void takeDamage(Boolean takeDamage, int damage) {
         if (!takeDamage) {
             this.setHealthPoints(this.getHealthPoints() - damage);
+            System.out.printf(">>>>    \033[0;31m%s takes %d in damage!\033[0m    <<<<\n",this.getName(), damage );
+
         }
     }
 }

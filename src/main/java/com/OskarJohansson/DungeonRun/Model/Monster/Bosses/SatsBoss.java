@@ -12,7 +12,8 @@ public class SatsBoss extends EnemyParentModel implements CombatInterface {
         this.setName("PT Super Grunt");
         this.setHealthPoints(15);
         this.setHealthPointsBase(15);
-        this.setDamage(5);
+        this.setDamageMin(3);
+        this.setDamageMax(5);
         this.setAttackCost(3);
         this.setTurningPoints(12);
         this.setTurningPointsBase(12);
@@ -24,7 +25,7 @@ public class SatsBoss extends EnemyParentModel implements CombatInterface {
     @Override
     public int attack() {
         this.setTurningPoints(this.getTurningPoints() - this.getAttackCost());
-        return this.getDamage();
+        return this.getDamageMin();
     }
 
     @Override

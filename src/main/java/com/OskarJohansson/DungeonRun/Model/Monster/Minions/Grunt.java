@@ -12,7 +12,8 @@ public class Grunt extends EnemyParentModel implements CombatInterface {
         this.setName("Grunt");
         this.setHealthPoints(5);
         this.setHealthPointsBase(5);
-        this.setDamage(2);
+        this.setDamageMin(1);
+        this.setDamageMax(3);
         this.setAttackCost(1);
         this.setTurningPoints(2);
         this.setTurningPointsBase(2);
@@ -23,7 +24,7 @@ public class Grunt extends EnemyParentModel implements CombatInterface {
     @Override
     public int attack() {
         this.setTurningPoints(this.getTurningPoints() - this.getAttackCost());
-        return this.getDamage();
+        return this.getDamageMin();
     }
 
     @Override

@@ -6,7 +6,8 @@ public class WeaponParentModel implements Serializable  {
 
     private String name;
     private String weaponClass;
-    private int damage;
+    private int damageMin;
+    private int damageMax;
     private int turnPoints;
     private int minimumLevel;
     private int cost;
@@ -23,12 +24,25 @@ public class WeaponParentModel implements Serializable  {
         this.weaponClass = weaponClass;
     }
 
-    public int getDamage() {
-        return damage;
+    public int getDamageMin() {
+        return damageMin;
     }
 
     public void setDamage(int damage) {
-        this.damage = damage;
+        this.damageMin = damage;
+    }
+
+
+    public void setDamageMin(int damageMin) {
+        this.damageMin = damageMin;
+    }
+
+    public int getDamageMax() {
+        return damageMax;
+    }
+
+    public void setDamageMax(int damageMax) {
+        this.damageMax = damageMax;
     }
 
     public int getTurnPoints() {

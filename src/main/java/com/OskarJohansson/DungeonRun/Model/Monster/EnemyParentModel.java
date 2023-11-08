@@ -2,12 +2,15 @@ package com.OskarJohansson.DungeonRun.Model.Monster;
 
 import com.OskarJohansson.DungeonRun.Control.CombatInterface;
 
+import java.util.Random;
+
 public class EnemyParentModel implements CombatInterface {
 
     private String name;
     private int healthPoints;
     private int healthPointsBase;
-    private int damage;
+    private int damageMin;
+    private int damageMax;
     private int turningPoints;
     private int turningPointsBase;
     private int attackCost;
@@ -36,12 +39,20 @@ public class EnemyParentModel implements CombatInterface {
 
     public void setHealthPointsBase(int healthPointsBase) {this.healthPointsBase = healthPointsBase;}
 
-    public int getDamage() {
-        return damage;
+    public int getDamageMin() {
+        return damageMin;
     }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
+    public void setDamageMin(int damageMin) {
+        this.damageMin = damageMin;
+    }
+
+    public int getDamageMax() {
+        return damageMax;
+    }
+
+    public void setDamageMax(int damageMax) {
+        this.damageMax = damageMax;
     }
 
     public int getTurningPoints() {
@@ -100,9 +111,10 @@ public class EnemyParentModel implements CombatInterface {
         this.killed = killed;
     }
 
-    @Override
+
     public int attack() {
-        return 0;
+        this.setTurningPoints(this.getTurningPoints() - this.getAttackCost());
+        return new Random().nextInt(getDamageMin(), getDamageMax());
     }
 
     @Override

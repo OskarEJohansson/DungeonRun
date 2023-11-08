@@ -52,7 +52,6 @@ public class CombatControl {
             minionResetTurningPoints(mapControl);
             minionBattle(player, mapControl, menuControl);
             if (checkEnemyList(mapControl) == 0) {
-
                 System.out.println("////    \033[0;31m  You have killed all the monsters!   \033[0m   ////\n");
                 player.levelUp(player);
                 return;
@@ -84,7 +83,7 @@ public class CombatControl {
 
     public void minionAttackPlayer(PlayerControl player, EnemyParentModel monster, MapControl mapControl, MenuControl menuControl) {
         System.out.printf(">>>>     \033[4;31m%s %d attacks!\033[0m     <<<<\n", monster.getName(), mapControl.currentLevel.getMinionMonsterList().indexOf(monster) + 1);
-        player.takeDamage(player, player.block(), monster.attack());
+        player.takeDamage(player, player.block(player), monster.attack());
         menuControl.getStatus(player);
     }
 
@@ -104,7 +103,7 @@ public class CombatControl {
         for (EnemyParentModel monster : mapControl.currentLevel.getMinionMonsterList()) {
             while (player.getHero().getTurningPoints() >= player.getHero().getWeapon().getTurnPoints()) {
 
-                System.out.printf("\033[4;32m%s attacks for %d turningpoints and with %d maximum damage points\033[0m\n", player.getHero().getName(), player.getHero().getWeapon().getTurnPoints(), player.getHero().getWeapon().getDamage());
+                System.out.printf("\033[4;32m%s attacks for %d turningpoints and with %d maximum damage points\033[0m\n", player.getHero().getName(), player.getHero().getWeapon().getTurnPoints(), player.getHero().getWeapon().getDamageMax());
                 System.out.println(player.getHero().getWeapon().getSoundOfAttack());
 
                 if (monster.getHealthPoints() > 0 && !monster.isKilled()) {
@@ -117,6 +116,7 @@ public class CombatControl {
                     return;
                 }
             }
+
             if (player.getHero().getTurningPoints() <= 0) {
                 System.out.println("You are out of Turning Points!");
                 return;
@@ -193,7 +193,7 @@ public class CombatControl {
     public void bossAttack(PlayerControl player, MapControl mapControl, MenuControl menuControl) {
         while (mapControl.currentLevel.getFinalBoss().getTurningPoints() > 0) {
             System.out.printf(">>>>     \033[4;31m%s attacks!\033[0m     <<<<\n", mapControl.currentLevel.getFinalBoss().getName());
-            player.takeDamage(player, player.block(), mapControl.currentLevel.getFinalBoss().attack());
+            player.takeDamage(player, player.block(player), mapControl.currentLevel.getFinalBoss().attack());
             menuControl.getStatus(player);
             if (player.getHero().getHealthPoints() <= 0) {
                 return;
@@ -238,7 +238,7 @@ public class CombatControl {
     }
 
     public boolean ifEnemyIsKilled(PlayerControl player, EnemyParentModel monster) {
-        System.out.printf("////     You killed the monster and gained %d experience points!     //// \n", monster.getExperiencePoints());
+        System.out.printf("////     You killed the monster and gained %d experience points!    //// \n", monster.getExperiencePoints());
         player.getHero().setKillList(1);
         player.getHero().setExperiencePoints(monster.getExperiencePoints());
         player.getHero().setGold(monster.getGold());

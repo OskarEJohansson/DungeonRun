@@ -34,7 +34,7 @@ public class Hero implements Serializable {
         this.turningPoints = 1;
         this.turningPointsBase = 1;
         this.experiencePoints = 0;
-        this.gold = 10;
+        this.gold = 0;
         this.goldBase = 0;
         this.level = 1;
         this.killList = 0;

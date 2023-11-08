@@ -12,7 +12,8 @@ public class Nerd extends EnemyParentModel implements CombatInterface {
         this.setName("Nerd");
         this.setHealthPoints(7);
         this.setHealthPointsBase(7);
-        this.setDamage(3);
+        this.setDamageMin(2);
+        this.setDamageMax(4);
         this.setAttackCost(1);
         this.setTurningPoints(3);
         this.setTurningPointsBase(3);
@@ -23,7 +24,7 @@ public class Nerd extends EnemyParentModel implements CombatInterface {
     @Override
     public int attack() {
         this.setTurningPoints(this.getTurningPoints() - this.getAttackCost());
-        return this.getDamage();
+        return this.getDamageMin();
     }
 
     @Override

@@ -11,7 +11,8 @@ public class TechWizOfDoom extends EnemyParentModel {
         this.setName("Kris The TechWiz of Doom");
         this.setHealthPoints(30);
         this.setHealthPointsBase(30);
-        this.setDamage(10);
+        this.setDamageMin(5);
+        this.setDamageMax(10);
         this.setAttackCost(3);
         this.setTurningPoints(12);
         this.setTurningPointsBase(12);
@@ -23,7 +24,7 @@ public class TechWizOfDoom extends EnemyParentModel {
     @Override
     public int attack() {
         this.setTurningPoints(this.getTurningPoints() - this.getAttackCost());
-        return this.getDamage();
+        return this.getDamageMin();
     }
 
     @Override

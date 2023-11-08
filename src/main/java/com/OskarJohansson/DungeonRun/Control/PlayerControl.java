@@ -20,22 +20,23 @@ public class PlayerControl {
 
     public int attack(PlayerControl player) {
         player.getHero().setTurningPoints(-player.getHero().getWeapon().getTurnPoints());
-        return player.getHero().getWeapon().getDamage();
+
+        return new Random().nextInt(getHero().getWeapon().getDamageMin(), getHero().getWeapon().getDamageMax()+1);
     }
 
-    public boolean block() {
+    public boolean block(PlayerControl player) {
         if (new Random().nextInt(1, 10) > 5) {
-            System.out.println(">>>>    \033[0;32mPlayer blocked the attack successfully!\033[0m    <<<<\n");
+            System.out.printf(">>>>    \033[0;32m%s blocked the attack successfully!\033[0m    <<<<\n", player.getHero().getName());
             return true;
         } else
-            System.out.println(">>>>    \033[0;31mPlayer fails to block the attack!\033[0m    <<<<\n");
+            System.out.printf(">>>>    \033[0;31m%s fails to block the attack!\033[0m    <<<<\n", player.getHero().getName());
         return false;
     }
 
     public void takeDamage(PlayerControl player, Boolean block, int damage) {
         if (!block) {
             player.getHero().setHealthPoints(-damage);
-            System.out.printf("Player takes %d damage!", damage);
+            System.out.printf(">>>>     %s takes \033[0;31m%d\033[0m damage    <<<<!\n",player.getHero().getName(), damage);
         }
     }
 

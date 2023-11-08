@@ -6,7 +6,8 @@ public class Drone extends WeaponParentModel {
 
     public Drone(){
         this.setName("Drone");
-        this.setDamage(3);
+        this.setDamageMin(1);
+        this.setDamageMax(3);
         this.setTurnPoints(1);
         this.setMinimumLevel(1);
         this.setSoundOfAttack("Pew pew");
