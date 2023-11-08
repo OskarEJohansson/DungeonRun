@@ -32,7 +32,7 @@ public class Minion extends EnemyParentModel implements CombatInterface {
             System.out.printf(">>>>    \033[0;32m %s blocked the attack successfully!\033[0m    <<<<\n", this.getName());
             return true;
         }
-        System.out.printf(">>>>    \033[0;31m %s fails to block the attack\033[0m    <<<<\n", this.getName());
+        System.out.printf(">>>>    \033[0;31m%s fails to block the attack\033[0m    <<<<\n", this.getName());
         return false;
     }
 

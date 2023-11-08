@@ -20,8 +20,6 @@ public class PlayerControl implements CombatInterface {
     @Override
     public int attack() {
         this.hero.setTurningPoints(-this.hero.getWeapon().getTurnPoints());
-        System.out.printf("\033[4;32m%s attacks for %d turningpoints and with %d maximum damage points\033[0m\n", this.hero.getName(), this.hero.getWeapon().getTurnPoints(), this.hero.getWeapon().getDamage());
-        System.out.println(this.hero.getWeapon().getSoundOfAttack());
         return this.hero.getWeapon().getDamage();
     }
 
@@ -43,11 +41,6 @@ public class PlayerControl implements CombatInterface {
     }
 
     @Override
-    public void resetTurningPoints() {
-        this.hero.resetTurningPoints();
-    }
-
-    @Override
     public boolean flee() {
         if (this.hero.getTurningPoints() > 2) {
             System.out.println("You are fleeing like a coward");
@@ -62,6 +55,11 @@ public class PlayerControl implements CombatInterface {
     public void resetHealthPoints() {
         this.hero.resetHealthPoints();
     }
+    @Override
+    public void resetTurningPoints() {
+        this.hero.resetTurningPoints();
+    }
+
 
     public void addHealthPoition(HealthPotion healthPotion) {
         this.hero.addPotionStash(healthPotion);
@@ -113,8 +111,11 @@ public class PlayerControl implements CombatInterface {
         if (player.getHero().getHealthPoints() <= 0) {
             System.out.println("You have been killed. You dropped all your gold!");
             player.getHero().resetGold();
-            resetHealthPoints();
-            resetTurningPoints();
+            player.getHero().resetHealthPoints();
+            player.getHero().resetTurningPoints();
+//            resetHealthPoints();
+//            resetTurningPoints();
+            player.getHero().setDeathCount(1);
             return true;
         }
 

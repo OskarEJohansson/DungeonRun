@@ -26,7 +26,7 @@ public class CombatControl {
 
             switch (new UserInputControl().inputInt(new Scanner(System.in))) {
                 case 1 -> {
-                    playerMinionAttack(player, mapControl);
+                    playerAttackMinion(player, mapControl);
                     on = false;
                 }
                 case 2 -> player.drinkHealthPotion();
@@ -74,7 +74,7 @@ public class CombatControl {
     public void minionBattle(PlayerControl player, MapControl mapControl, MenuControl menuControl) {
         for (EnemyParentModel monster : mapControl.currentLevel.getMinionMonsterList()) {
             while (monster.getTurningPoints() > 0) {
-                minionAttack(player, monster, mapControl, menuControl);
+                minionAttackPlayer(player, monster, mapControl, menuControl);
                 if (player.getHero().getHealthPoints() <= 0) {
                     return;
                 }
@@ -82,7 +82,7 @@ public class CombatControl {
         }
     }
 
-    public void minionAttack(PlayerControl player, EnemyParentModel monster, MapControl mapControl, MenuControl menuControl) {
+    public void minionAttackPlayer(PlayerControl player, EnemyParentModel monster, MapControl mapControl, MenuControl menuControl) {
         System.out.printf(">>>>     \033[4;31m%s %d attacks!\033[0m     <<<<\n", monster.getName(), mapControl.currentLevel.getMinionMonsterList().indexOf(monster) + 1);
         player.takeDamage(player.block(), monster.attack());
         menuControl.getStatus(player);
@@ -99,13 +99,17 @@ public class CombatControl {
         }
     }
 
-    public void playerMinionAttack(PlayerControl player, MapControl mapControl) {
+    public void playerAttackMinion(PlayerControl player, MapControl mapControl) {
 
         for (EnemyParentModel monster : mapControl.currentLevel.getMinionMonsterList()) {
             while (player.getHero().getTurningPoints() >= player.getHero().getWeapon().getTurnPoints()) {
+
+                System.out.printf("\033[4;32m%s attacks for %d turningpoints and with %d maximum damage points\033[0m\n", player.getHero().getName(), player.getHero().getWeapon().getTurnPoints(), player.getHero().getWeapon().getDamage());
+                System.out.println(player.getHero().getWeapon().getSoundOfAttack());
+
                 if (monster.getHealthPoints() > 0 && !monster.isKilled()) {
-                    monster.getStatus();
                     monster.takeDamage(monster.block(), player.attack());
+                    monster.getStatus();
                 }
                 if (monster.getHealthPoints() <= 0 && !monster.isKilled()) {
                     ifEnemyIsKilled(player, monster);
