@@ -28,7 +28,7 @@ public class ShopControl {
                     You have \033[1;33m%d\033[0m gold
                     """, player.getHero().getGold());
 
-            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
+            switch (UserInputControl.inputInt()) {
                 case 1 -> buySwords(player);
                 case 2 -> buyDrone(player);
                 case 3 -> buyPotion(player);
@@ -85,7 +85,7 @@ public class ShopControl {
                     """);
 
         do {
-            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
+            switch (UserInputControl.inputInt()) {
                 case 1 -> {
                     buyWeapon(player, new Spot());
                     on = false;
@@ -113,7 +113,7 @@ public class ShopControl {
 
         boolean on = true;
         do {
-            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
+            switch (UserInputControl.inputInt()) {
                 case 1 -> {
                     System.out.println("Buy Two-handed Sword for 20 gold");
                     buyWeapon(player, new TwoHandSword());

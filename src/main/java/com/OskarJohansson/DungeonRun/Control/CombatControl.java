@@ -24,7 +24,7 @@ public class CombatControl {
                                     
                     """, player.getHero().getName(), player.getHero().getTurningPoints());
 
-            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
+            switch (UserInputControl.inputInt()) {
                 case 1 -> {
                     playerAttackMinion(player, mapControl);
                     on = false;
@@ -142,7 +142,7 @@ public class CombatControl {
                     """, player.getHero().getName(), player.getHero().getTurningPoints());
 
 
-            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
+            switch (UserInputControl.inputInt()) {
                 case 1 -> {
                     playerBossBattle(player, mapControl);
                     on = false;

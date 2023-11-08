@@ -6,6 +6,8 @@ import com.OskarJohansson.DungeonRun.Repository.PlayerManager;
 
 import java.util.Scanner;
 
+import static com.OskarJohansson.DungeonRun.Control.UserInputControl.inputInt;
+
 public class MenuControl {
 
 
@@ -21,7 +23,7 @@ public class MenuControl {
                                          
                      """, player.getHero().getName(), player.getHero().getHeroClass());
 
-            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
+            switch (UserInputControl.inputInt()) {
                 case 1 -> getPlayerStats(player);
                 case 2 -> getStatus(player);
                 case 3 -> mapMenu(mapControl, player, combatControl, menuControl);
@@ -59,7 +61,7 @@ public class MenuControl {
                                     
                     """);
 
-            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
+            switch (UserInputControl.inputInt()) {
                 case 1 -> {
                     mapControl.setMap(1);
                     System.out.println("Entering the Dungeons of Ica");
@@ -121,7 +123,7 @@ public class MenuControl {
                     #1 - Enter Kill Zone!    |   #2 - Enter Boss Zone!    |   #3 - Leave Level! |
                     """, mapControl.currentLevel.getLevelNumber(), mapControl.currentLevel.getLevelName());
 
-            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
+            switch (UserInputControl.inputInt()) {
                 case 1 -> {
                     System.out.println("You are entering the kill zone!");
                     combatControl.minionBattleControl(player, mapControl, menuControl);
@@ -161,7 +163,7 @@ public class MenuControl {
                                     
                     """);
 
-            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
+            switch (UserInputControl.inputInt()) {
                 case 1 -> {
                     player.setHero(new Barbarian());
                     on = false;

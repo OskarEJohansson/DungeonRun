@@ -34,7 +34,7 @@ public class GameControl {
 
         boolean on = true;
         while (on)
-            switch (new UserInputControl().inputInt(new Scanner(System.in))) {
+            switch (UserInputControl.inputInt()) {
                 case 1 -> {
                     menuControl.createNewPlayer(player);
                     on = false;

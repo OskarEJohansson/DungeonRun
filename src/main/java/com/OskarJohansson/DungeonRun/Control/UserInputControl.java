@@ -5,7 +5,9 @@ import java.util.Scanner;
 
 public class UserInputControl {
 
-    public int inputInt(Scanner scanner) {
+    static Scanner scanner = new Scanner(System.in);
+
+    static int inputInt(){
         boolean invalidInput = true;
         int result = 0;
 
@@ -19,7 +21,7 @@ public class UserInputControl {
         return result;
     }
 
-    public int checkInputForInvalidInputs(String inputValue) {
+    static int checkInputForInvalidInputs(String inputValue) {
         int intValue = 0;
 
         if (inputValue.isBlank()) {
@@ -38,7 +40,7 @@ public class UserInputControl {
         return intValue;
     }
 
-    public int inputMustBeAPositiveNumber(int intValue) {
+    static int inputMustBeAPositiveNumber(int intValue) {
 
         if (intValue < 0) {
             System.out.println("Input must be a positive number! Try Again!");
