@@ -2,31 +2,31 @@ package com.OskarJohansson.DungeonRun.Control;
 
 import com.OskarJohansson.DungeonRun.Model.Monster.EnemyParentModel;
 
-import java.util.Iterator;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class CombatControl {
 
     public boolean playerMinionBattleOptions(PlayerControl player, MapControl mapControl) {
-        System.out.printf("""
-                   
-                   +++++|                                   Actions                               |+++++
-                   _______________________________________________________________________________                         
-                   #1 - Attack!  |   #2 - Drink Potion |   #3 - Flee!   |
-                                
-                >>>>    %s's turn! <<<<
-                >>>>  Turning points: %d  <<<<
-                                
-                Choose Action: 
-                                
-                """, player.getHero().getName(), player.getHero().getTurningPoints());
-
-
         boolean on = true;
         while (on) {
+
+            System.out.printf("""
+                       
+                       +++++|                                   Actions                               |+++++
+                       _______________________________________________________________________________\s
+                       #1 - Attack!  |   #2 - Drink Potion |   #3 - Flee!   |
+                                    
+                    >>>>    %s's turn! <<<<
+                    >>>>  Turning points: %d  <<<<
+                                    
+                    Choose Action:\s
+                                    
+                    """, player.getHero().getName(), player.getHero().getTurningPoints());
+
             switch (new UserInputControl().inputInt(new Scanner(System.in))) {
                 case 1 -> {
-                    playerMinionBattle(player, mapControl);
+                    playerMinionAttack(player, mapControl);
                     on = false;
                 }
                 case 2 -> player.drinkHealthPotion();
@@ -48,7 +48,6 @@ public class CombatControl {
 
         boolean on = true;
         do {
-
             player.resetTurningPoints();
             minionResetTurningPoints(mapControl);
             minionBattle(player, mapControl, menuControl);
@@ -63,8 +62,7 @@ public class CombatControl {
                 return;
             }
 
-            Boolean flee = playerMinionBattleOptions(player, mapControl);
-            on = flee;
+            if (player.getHero().getTurningPoints() > 0) on = playerMinionBattleOptions(player, mapControl);
 
             System.out.println("\n \033[42mGet ready for a new round!\033[0m\n \033[42mPress Enter to continue \033[0m\n");
             Scanner sc = new Scanner(System.in);
@@ -85,30 +83,23 @@ public class CombatControl {
     }
 
     public void minionAttack(PlayerControl player, EnemyParentModel monster, MapControl mapControl, MenuControl menuControl) {
-        System.out.printf(">>>>     \033[4;31mMonster %d attacks!\033[0m     <<<<\n", mapControl.currentLevel.getMinionMonsterList().indexOf(monster) + 1);
+        System.out.printf(">>>>     \033[4;31m%s %d attacks!\033[0m     <<<<\n", monster.getName(), mapControl.currentLevel.getMinionMonsterList().indexOf(monster) + 1);
         player.takeDamage(player.block(), monster.attack());
         menuControl.getStatus(player);
     }
 
     private int checkEnemyList(MapControl mapControl) {
-        Iterator<EnemyParentModel> iterator = mapControl.currentLevel.getMinionMonsterList().iterator();
-
-        while (iterator.hasNext()) {
-            EnemyParentModel c = iterator.next();
-            if (c.getHealthPoints() <= 0) {
-                iterator.remove();
-            }
-        }
+        mapControl.currentLevel.getMinionMonsterList().removeIf(c -> c.getHealthPoints() <= 0);
         return mapControl.currentLevel.getMinionMonsterList().size();
     }
 
     private void minionResetTurningPoints(MapControl mapControl) {
-        for(EnemyParentModel monster : mapControl.currentLevel.getMinionMonsterList() ){
+        for (EnemyParentModel monster : mapControl.currentLevel.getMinionMonsterList()) {
             monster.resetTurningPoints();
         }
     }
 
-    public void playerMinionBattle(PlayerControl player, MapControl mapControl) {
+    public void playerMinionAttack(PlayerControl player, MapControl mapControl) {
 
         for (EnemyParentModel monster : mapControl.currentLevel.getMinionMonsterList()) {
             while (player.getHero().getTurningPoints() >= player.getHero().getWeapon().getTurnPoints()) {
@@ -119,30 +110,34 @@ public class CombatControl {
                 if (monster.getHealthPoints() <= 0 && !monster.isKilled()) {
                     ifEnemyIsKilled(player, monster);
                     monster.setKilled(true);
+                    return;
                 }
             }
             if (player.getHero().getTurningPoints() <= 0) {
                 System.out.println("You are out of Turning Points!");
+                return;
             }
         }
     }
 
     public Boolean playerBossBattleOptions(PlayerControl player, MapControl mapControl) {
-        System.out.printf("""
-                   
-                   +++++|                                   \033[0;32m    Actions      \033[0m                                            |+++++
-                   ____________________________________________________________________________________________________                         
-                   #1   -   Attack!   |   #2   -   Drink Potion   |   #3   -   Flee!  |
-                                
-                >>>>    %s's turn! <<<<
-                >>>>  Turning points: %d  <<<<
-                                
-                Choose Action: 
-                                
-                """, player.getHero().getName(), player.getHero().getTurningPoints());
-
         boolean on = true;
         while (on) {
+
+            System.out.printf("""
+                       
+                       +++++|                                   \033[0;32m    Actions      \033[0m                                            |+++++
+                       ____________________________________________________________________________________________________\s
+                       #1   -   Attack!   |   #2   -   Drink Potion   |   #3   -   Flee!  |
+                                    
+                    >>>>    %s's turn! <<<<
+                    >>>>  Turning points: %d  <<<<
+                                    
+                    Choose Action:\s
+                                    
+                    """, player.getHero().getName(), player.getHero().getTurningPoints());
+
+
             switch (new UserInputControl().inputInt(new Scanner(System.in))) {
                 case 1 -> {
                     playerBossBattle(player, mapControl);
@@ -159,21 +154,18 @@ public class CombatControl {
         return true;
     }
 
-    public void bossBattleControl(PlayerControl player, MapControl mapControl) {
-
+    public void bossBattleControl(PlayerControl player, MapControl mapControl, MenuControl menuControl) {
         System.out.printf("""
                 You are being attacked by %s!
                                 
                 """, mapControl.currentLevel.getFinalBoss().getName());
+
         boolean on = true;
         do {
             player.resetTurningPoints();
             mapControl.currentLevel.getFinalBoss().resetTurningPoints();
-            System.out.println(mapControl.currentLevel.getFinalBoss().getTurningPoints());
 
-            bossAttack(player, mapControl);
-            playerBossBattle(player, mapControl);
-
+            bossAttack(player, mapControl, menuControl);
             if (mapControl.currentLevel.getFinalBoss().isKilled()) {
                 player.levelUp();
                 return;
@@ -183,8 +175,7 @@ public class CombatControl {
                 return;
             }
 
-            Boolean flee = playerBossBattleOptions(player, mapControl);
-            on = flee;
+            if (player.getHero().getTurningPoints() > 0) on = playerBossBattleOptions(player, mapControl);
 
             System.out.println("\n \033[42mGet ready for a new round!\033[0m\n \033[42mPress Enter to continue \033[0m\n");
             Scanner sc = new Scanner(System.in);
@@ -193,10 +184,11 @@ public class CombatControl {
         } while (on);
     }
 
-    public void bossAttack(PlayerControl player, MapControl mapControl) {
+    public void bossAttack(PlayerControl player, MapControl mapControl, MenuControl menuControl) {
         while (mapControl.currentLevel.getFinalBoss().getTurningPoints() > 0) {
             System.out.printf(">>>>     \033[4;31m%s attacks!\033[0m     <<<<\n", mapControl.currentLevel.getFinalBoss().getName());
             player.takeDamage(player.block(), mapControl.currentLevel.getFinalBoss().attack());
+            menuControl.getStatus(player);
             if (player.getHero().getHealthPoints() <= 0) {
                 return;
             }
@@ -205,32 +197,29 @@ public class CombatControl {
 
     public void playerBossBattle(PlayerControl player, MapControl mapControl) {
 
-        boolean on = true;
-        do {
-            if (player.getHero().getTurningPoints() > 0) {
-                if (mapControl.currentLevel.getFinalBoss().getHealthPoints() > 0 && !mapControl.currentLevel.getFinalBoss().isKilled()) {
-                    mapControl.currentLevel.getFinalBoss().getStatus();
-                    mapControl.currentLevel.getFinalBoss().takeDamage(mapControl.currentLevel.getFinalBoss().block(), player.attack());
-                }
+        while (player.getHero().getTurningPoints() > 0) {
+            if (mapControl.currentLevel.getFinalBoss().getHealthPoints() > 0 && !mapControl.currentLevel.getFinalBoss().isKilled()) {
+                mapControl.currentLevel.getFinalBoss().getStatus();
+                mapControl.currentLevel.getFinalBoss().takeDamage(mapControl.currentLevel.getFinalBoss().block(), player.attack());
+            }
 
-                if (mapControl.currentLevel.getFinalBoss().getHealthPoints() <= 0 && !mapControl.currentLevel.getFinalBoss().isKilled()) {
-                    System.out.printf("////     \033[0;31mYou killed %s and gained %d experience points!\033[0m      ////\n", mapControl.currentLevel.getFinalBoss().getName(), mapControl.currentLevel.getFinalBoss().getExperiencePoints());
-                    player.getHero().setKillList(1);
-                    player.getHero().setExperiencePoints(mapControl.currentLevel.getFinalBoss().getExperiencePoints());
-                    player.getHero().setGold(mapControl.currentLevel.getFinalBoss().getGold());
-                    mapControl.currentLevel.getFinalBoss().setKilled(true);
-                    on = false;
+            if (mapControl.currentLevel.getFinalBoss().getHealthPoints() <= 0 && !mapControl.currentLevel.getFinalBoss().isKilled()) {
+                System.out.printf("////     \033[0;31mYou killed %s and gained %d experience points!\033[0m     ////\n", mapControl.currentLevel.getFinalBoss().getName(), mapControl.currentLevel.getFinalBoss().getExperiencePoints());
+                player.getHero().setKillList(1);
+                player.getHero().setExperiencePoints(mapControl.currentLevel.getFinalBoss().getExperiencePoints());
+                player.getHero().setGold(mapControl.currentLevel.getFinalBoss().getGold());
+                mapControl.currentLevel.getFinalBoss().setKilled(true);
 
-                    if(mapControl.currentLevel.getFinalBoss().getName() == "Nerd Wizard"){
-                        player.getHero().setCodeBreaker(true);
-                    }
+                if (Objects.equals(mapControl.currentLevel.getFinalBoss().getName(), "Nerd Wizard")) {
+                    player.getHero().setCodeBreaker(true);
                 }
+                return;
             }
             if (player.getHero().getTurningPoints() <= 0) {
                 System.out.println("You are out of Turning Points!");
-                on = false;
+                return;
             }
-        } while (on);
+        }
     }
 
     public void isPlayerKilled(MapControl mapControl) {
@@ -242,7 +231,7 @@ public class CombatControl {
         mapControl.currentLevel.getFinalBoss().resetTurningPoints();
     }
 
-    private boolean ifEnemyIsKilled(PlayerControl player, EnemyParentModel monster) {
+    public boolean ifEnemyIsKilled(PlayerControl player, EnemyParentModel monster) {
         System.out.printf("////     You killed the monster and gained %d experience points!     //// \n", monster.getExperiencePoints());
         player.getHero().setKillList(1);
         player.getHero().setExperiencePoints(monster.getExperiencePoints());

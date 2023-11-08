@@ -27,10 +27,10 @@ public class PlayerControl implements CombatInterface {
 
     public boolean block() {
         if (new Random().nextInt(1, 10) > 3) {
-            System.out.println(">>>>    \033[0;32m  Player blocked the attack successfully! \033[0m     <<<<\n");
+            System.out.println(">>>>    \033[0;32mPlayer blocked the attack successfully!\033[0m    <<<<\n");
             return true;
         } else
-            System.out.println(">>>>    \033[0;31m  Player fails to block the attack!   \033[0m    <<<<\n");
+            System.out.println(">>>>    \033[0;31mPlayer fails to block the attack!\033[0m    <<<<\n");
         return false;
     }
 
@@ -82,8 +82,9 @@ public class PlayerControl implements CombatInterface {
                 } else {
                     this.hero.addHealthPoints(potion.drinkHealthPotion());
                     potion.setUsed(true);
-                    System.out.printf(">>>>     You added \033[0;34m%d\033[0m Health points. You now have \033[0;34m%d/%d\033[0m health points!     <<<<", potion.gethP(), this.hero.getHealthPoints(), this.hero.getHealthPointsBase());
                     checkMaxHealthPoints();
+                    System.out.printf(">>>>     You added \033[0;34m%d\033[0m Health points. You now have \033[0;34m%d/%d\033[0m health points!     <<<<", potion.gethP(), this.hero.getHealthPoints(), this.hero.getHealthPointsBase());
+                    getHero().setTurningPoints(-1);
                     return;
                 }
             }
@@ -112,8 +113,6 @@ public class PlayerControl implements CombatInterface {
         if (player.getHero().getHealthPoints() <= 0) {
             System.out.println("You have been killed. You dropped all your gold!");
             player.getHero().resetGold();
-            System.out.println(player.getHero().getGold());
-            player.getHero().setKillList(100);
             resetHealthPoints();
             resetTurningPoints();
             return true;
@@ -143,8 +142,8 @@ public class PlayerControl implements CombatInterface {
         this.hero.setIntelligence(1);
         this.hero.setAgility(1);
         this.hero.setHealthPointsBase(3);
-        this.hero.setTurningPoints(2);
-        this.hero.setTurningPointsBase(2);
+        this.hero.setTurningPoints(1);
+        this.hero.setTurningPointsBase(1);
 
         this.hero.resetHealthPoints();
 

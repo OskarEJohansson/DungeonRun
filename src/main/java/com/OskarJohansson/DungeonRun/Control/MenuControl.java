@@ -128,7 +128,7 @@ public class MenuControl {
                 }
                 case 2 -> {
                     System.out.println("You are about to challenging the stage Boss!");
-                    combatControl.bossBattleControl(player, mapControl);
+                    combatControl.bossBattleControl(player, mapControl, menuControl);
                     on = false;
                 }
                 case 3 -> {
