@@ -1,7 +1,10 @@
 package com.OskarJohansson.DungeonRun.Control;
 
 import com.OskarJohansson.DungeonRun.Model.Characters.Barbarian;
+import com.OskarJohansson.DungeonRun.Model.Characters.CodeMonkey;
+import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponClassTwo.Spot;
 import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponClassTwo.TwoHandSword;
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,28 +15,61 @@ import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
 class PlayerControlTest {
 
+    private  PlayerControl player;
+    private  PlayerControl player2;
+
     @BeforeEach
     void setUp() {
+        player = new PlayerControl();
+        player.setHero(new Barbarian());
+        player.getHero().setWeapon(new TwoHandSword());
+
+        player2 = new PlayerControl();
+        player2.setHero(new CodeMonkey());
+        player2.getHero().setWeapon(new Spot());
 
     }
 
     @Test
     void attack() {
-        PlayerControl player = new PlayerControl();
-        player.setHero(new Barbarian());
-        player.getHero().setWeapon(new TwoHandSword());
 
-        assertThat(player.attack(player), greaterThanOrEqualTo(player.getHero().getWeapon().getDamageMin()));
-        assertThat(player.attack(player), lessThanOrEqualTo(player.getHero().getWeapon().getDamageMax()));
+        int playerAttack = player.attack(player);
+        System.out.println(playerAttack);
+
+        int player2Attack = player2.attack(player2);
+        System.out.println(player2Attack);
+
+        assertThat(playerAttack, greaterThanOrEqualTo(player.getHero().getWeapon().getDamageMin()));
+        assertThat(playerAttack, lessThanOrEqualTo(player.getHero().getWeapon().getDamageMax()));
+
+        assertThat(player2Attack, greaterThanOrEqualTo(player2.getHero().getWeapon().getDamageMin()));
+        assertThat(player2Attack, lessThanOrEqualTo(player2.getHero().getWeapon().getDamageMax()));
     }
 
 
     @Test
     void block() {
+
     }
 
     @Test
     void takeDamage() {
+        // Player is fails to block
+        System.out.println("Player health: " + player.getHero().getHealthPoints());
+        player.takeDamage(player, false, 10);
+
+        // PLayer is killed
+        Assert.assertEquals(0, player.getHero().getHealthPoints());
+        Assert.assertTrue(player.isPlayerKilledInCombat(player));
+
+
+        // Player 2 blocks successfully
+        System.out.println("Player health: " + player2.getHero().getHealthPoints());
+        player.takeDamage(player2, true, 10);
+
+        // Player 2 is not killed
+        Assert.assertEquals(10, player2.getHero().getHealthPoints());
+        Assert.assertFalse(player2.isPlayerKilledInCombat(player2));
     }
 
     @Test

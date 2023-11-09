@@ -32,13 +32,13 @@ public class PlayerControl {
         return false;
     }
 
-    public boolean takeDamage(PlayerControl player, Boolean block, int damage) {
+    public int takeDamage(PlayerControl player, Boolean block, int damage) {
         if (!block) {
             player.getHero().setHealthPoints(-damage);
             System.out.printf(">>>>     %s takes \033[0;31m%d\033[0m damage    <<<<!\n",player.getHero().getName(), damage);
-            return true;
+            return player.getHero().getHealthPoints();
         }
-        return false;
+        return player.getHero().getHealthPoints();
     }
 
     public boolean flee(PlayerControl player) {
@@ -101,7 +101,7 @@ public class PlayerControl {
         return this.hero.getPotionStash().size();
     }
 
-    public boolean checkPlayerHealthPointsInCombat(PlayerControl player) {
+    public boolean isPlayerKilledInCombat(PlayerControl player) {
         if (player.getHero().getHealthPoints() <= 0) {
             System.out.println("You have been killed. You dropped all your gold!");
             player.getHero().resetGold();

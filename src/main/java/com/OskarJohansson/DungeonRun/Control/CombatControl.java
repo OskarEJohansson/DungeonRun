@@ -26,7 +26,7 @@ public class CombatControl {
 
             switch (UserInputControl.inputInt()) {
                 case 1 -> {
-                    playerAttackMinion(player, mapControl);
+                    iterateMinionMonsterListAndAttackMonster(player, mapControl);
                     on = false;
                 }
                 case 2 -> player.drinkHealthPotion(player);
@@ -56,7 +56,7 @@ public class CombatControl {
                 player.levelUp(player);
                 return;
             }
-            if (player.checkPlayerHealthPointsInCombat(player)) {
+            if (player.isPlayerKilledInCombat(player)) {
                 isPlayerKilled(mapControl);
                 return;
             }
@@ -98,28 +98,47 @@ public class CombatControl {
         }
     }
 
-    public void playerAttackMinion(PlayerControl player, MapControl mapControl) {
+    public void playerAttackCurrantMinion(EnemyParentModel currantMonster, PlayerControl player) {
+        if (currantMonster.getHealthPoints() > 0 && !currantMonster.isKilled()) {
+            currantMonster.takeDamage(currantMonster.block(), player.attack(player));
+            currantMonster.getStatus();
+        }
+    }
 
-        for (EnemyParentModel monster : mapControl.currentLevel.getMinionMonsterList()) {
+    public boolean checkIfPlayerHasKilledCurrantMinion(EnemyParentModel currantMonster, PlayerControl player) {
+        if (currantMonster.getHealthPoints() <= 0 && !currantMonster.isKilled()) {
+            ifPlayerHasKilledTheCurrantEnemy(player, currantMonster);
+            currantMonster.setKilled(true);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkIfPlayerIsOutOfTurningPoints(PlayerControl player) {
+        if (player.getHero().getTurningPoints() <= 0) {
+            System.out.println("You are out of Turning Points!");
+            return true;
+        }
+        return false;
+    }
+
+    public void iterateMinionMonsterListAndAttackMonster(PlayerControl player, MapControl mapControl) {
+
+        for (EnemyParentModel currantMonster : mapControl.currentLevel.getMinionMonsterList()) {
+            if (checkIfPlayerIsOutOfTurningPoints(player)) {
+                return;
+            }
+
             while (player.getHero().getTurningPoints() >= player.getHero().getWeapon().getTurnPoints()) {
 
                 System.out.printf("\033[4;32m%s attacks for %d turningpoints and with %d maximum damage points\033[0m\n", player.getHero().getName(), player.getHero().getWeapon().getTurnPoints(), player.getHero().getWeapon().getDamageMax());
                 System.out.println(player.getHero().getWeapon().getSoundOfAttack());
 
-                if (monster.getHealthPoints() > 0 && !monster.isKilled()) {
-                    monster.takeDamage(monster.block(), player.attack(player));
-                    monster.getStatus();
-                }
-                if (monster.getHealthPoints() <= 0 && !monster.isKilled()) {
-                    ifEnemyIsKilled(player, monster);
-                    monster.setKilled(true);
-                    return;
-                }
-            }
+                playerAttackCurrantMinion(currantMonster, player);
 
-            if (player.getHero().getTurningPoints() <= 0) {
-                System.out.println("You are out of Turning Points!");
-                return;
+                if (checkIfPlayerHasKilledCurrantMinion(currantMonster, player)) {
+                    break;
+                }
             }
         }
     }
@@ -176,7 +195,7 @@ public class CombatControl {
                 player.levelUp(player);
                 return;
             }
-            if (player.checkPlayerHealthPointsInCombat(player)) {
+            if (player.isPlayerKilledInCombat(player)) {
                 isPlayerKilled(mapControl);
                 return;
             }
@@ -237,7 +256,7 @@ public class CombatControl {
         mapControl.currentLevel.getFinalBoss().resetTurningPoints();
     }
 
-    public boolean ifEnemyIsKilled(PlayerControl player, EnemyParentModel monster) {
+    public boolean ifPlayerHasKilledTheCurrantEnemy(PlayerControl player, EnemyParentModel monster) {
         System.out.printf("////     You killed the monster and gained %d experience points!    //// \n", monster.getExperiencePoints());
         player.getHero().setKillList(1);
         player.getHero().setExperiencePoints(monster.getExperiencePoints());
