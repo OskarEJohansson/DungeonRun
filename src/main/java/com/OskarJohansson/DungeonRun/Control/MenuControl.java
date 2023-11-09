@@ -6,12 +6,10 @@ import com.OskarJohansson.DungeonRun.Repository.PlayerManager;
 
 import java.util.Scanner;
 
-import static com.OskarJohansson.DungeonRun.Control.UserInputControl.inputInt;
-
 public class MenuControl {
 
 
-    public void mainMenu(PlayerControl player, MenuControl menuControl, MapControl mapControl, ShopControl shopControl, CombatControl combatControl) {
+    public void mainMenu(PlayerControl player, MenuControl menuControl, MapControl mapControl, ShopControl shopControl, BossCombatControl combatControl, NewCombatControl newCombatControl) {
         boolean on = true;
 
         do {
@@ -26,7 +24,7 @@ public class MenuControl {
             switch (UserInputControl.inputInt()) {
                 case 1 -> getPlayerStats(player);
                 case 2 -> getStatus(player);
-                case 3 -> mapMenu(mapControl, player, combatControl, menuControl);
+                case 3 -> mapMenu(mapControl, player, combatControl, menuControl, newCombatControl);
                 case 4 -> shopControl.shop(player);
                 case 5 -> savePlayer(player);
                 default -> System.out.println("Input must be 1 - 5!");
@@ -49,7 +47,7 @@ public class MenuControl {
         setNameAndCharacter(player);
     }
 
-    public void mapMenu(MapControl mapControl, PlayerControl player, CombatControl combatControl, MenuControl menuControl) {
+    public void mapMenu(MapControl mapControl, PlayerControl player, BossCombatControl combatControl, MenuControl menuControl, NewCombatControl newCombatControl) {
 
         boolean on = true;
         do {
@@ -65,7 +63,7 @@ public class MenuControl {
                 case 1 -> {
                     mapControl.setMap(1);
                     System.out.println("Entering the Dungeons of Ica");
-                    mapStructure(mapControl, player, combatControl, menuControl);
+                    mapStructure(mapControl, player, combatControl, menuControl, newCombatControl);
                 }
                 case 2 -> {
                     if (player.getHero().getLevel() < 2) {
@@ -74,7 +72,7 @@ public class MenuControl {
                     }
                     mapControl.setMap(2);
                     System.out.println("Entering the Dungeons of Sats");
-                    mapStructure(mapControl, player, combatControl, menuControl);
+                    mapStructure(mapControl, player, combatControl, menuControl, newCombatControl);
                 }
                 case 3 -> {
                     if (player.getHero().getLevel() < 3) {
@@ -83,7 +81,7 @@ public class MenuControl {
                     }
                     mapControl.setMap(3);
                     System.out.println("Entering the Dungeons of Kjell & Co");
-                    mapStructure(mapControl, player, combatControl, menuControl);
+                    mapStructure(mapControl, player, combatControl, menuControl, newCombatControl);
 
                 }
                 case 4 -> {
@@ -96,7 +94,7 @@ public class MenuControl {
                     }
                     mapControl.setMap(4);
                     System.out.println("Entering the Tower of The Teachers Lounge");
-                    mapStructure(mapControl, player, combatControl, menuControl);
+                    mapStructure(mapControl, player, combatControl, menuControl, newCombatControl);
                 }
                 case 5 -> {
                     player.drinkHealthPotion(player);
@@ -111,7 +109,7 @@ public class MenuControl {
         } while (on);
     }
 
-    public void mapStructure(MapControl mapControl, PlayerControl player, CombatControl combatControl, MenuControl menuControl) {
+    public void mapStructure(MapControl mapControl, PlayerControl player, BossCombatControl combatControl, MenuControl menuControl, NewCombatControl newCombatControl) {
 
         boolean on = true;
 
@@ -126,7 +124,7 @@ public class MenuControl {
             switch (UserInputControl.inputInt()) {
                 case 1 -> {
                     System.out.println("You are entering the kill zone!");
-                    combatControl.minionBattleControl(player, mapControl, menuControl);
+                    newCombatControl.minionBattleControl(player, mapControl, menuControl, newCombatControl);
                 }
                 case 2 -> {
                     System.out.println("You are about to challenging the stage Boss!");
@@ -196,6 +194,39 @@ public class MenuControl {
                 %s the %s   |   Death count   \033[0;31m%d\033[0m    |   Kill count   \033[0;31m%d\033[0m  |   Health Points   \033[0;34m%d/%d\033[0m  |   Turning Points  \033[1;31m%d/%d\033[0m   |   Gold    \033[1;33m%d\033[0m |
                                 
                 """, player.getHero().getName(), player.getHero().getHeroClass(), player.getHero().getDeathCount(), player.getHero().getKillList(), player.getHero().getHealthPoints(), player.getHero().getHealthPointsBase(), player.getHero().getTurningPoints(), player.getHero().getTurningPointsBase(),  player.getHero().getGold());
+    }
+
+    public boolean playerMinionBattleOptions(PlayerControl player, MapControl mapControl, NewCombatControl newCombatControl) {
+        boolean on = true;
+        while (on) {
+
+            System.out.printf("""
+                       
+                       +++++|                                   Actions                               |+++++
+                       _______________________________________________________________________________\s
+                       #1 - Attack!  |   #2 - Drink Potion |   #3 - Flee!   |
+                                    
+                    >>>>    %s's turn! <<<<
+                    >>>>  Turning points: %d  <<<<
+                                    
+                    Choose Action:\s
+                                    
+                    """, player.getHero().getName(), player.getHero().getTurningPoints());
+
+            switch (UserInputControl.inputInt()) {
+                case 1 -> {
+                    newCombatControl.iterateMinionMonsterListAndAttackMonster(player, mapControl);
+                    on = false;
+                }
+                case 2 -> player.drinkHealthPotion(player);
+                case 3 -> {
+                    player.flee(player);
+                    return false;
+                }
+                default -> System.out.println("Input must be 1-3!");
+            }
+        }
+        return true;
     }
 }
 

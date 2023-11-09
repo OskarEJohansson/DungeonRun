@@ -19,7 +19,8 @@ public class PlayerControl {
 
     public int attack(PlayerControl player) {
         player.getHero().setTurningPoints(-player.getHero().getWeapon().getTurnPoints());
-
+        System.out.printf("\033[4;32m%s attacks for %d turningpoints and with %d maximum damage points\033[0m\n", player.getHero().getName(), player.getHero().getWeapon().getTurnPoints(), player.getHero().getWeapon().getDamageMax());
+        System.out.println(player.getHero().getWeapon().getSoundOfAttack());
         return new Random().nextInt(getHero().getWeapon().getDamageMin(), getHero().getWeapon().getDamageMax()+1);
     }
 
