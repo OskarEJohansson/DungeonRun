@@ -7,8 +7,6 @@ import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponClassTwo.Spot;
 import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponClassTwo.TwoHandSword;
 import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponParentModel;
 
-import java.util.Scanner;
-
 public class ShopControl {
 
 
@@ -47,7 +45,7 @@ public class ShopControl {
         } else {
             System.out.println("You purchased a 10 hp Potion for 5 gold.");
             player.getHero().setGold(-5);
-            player.addHealthPoition(player, new HealthPotion());
+            player.addHealthPotionToStash(player, new HealthPotion());
         }
     }
 

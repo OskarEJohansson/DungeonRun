@@ -56,7 +56,7 @@ public class CombatControl {
                 player.levelUp(player);
                 return;
             }
-            if (player.checkHealthPoints(player)) {
+            if (player.checkPlayerHealthPointsInCombat(player)) {
                 isPlayerKilled(mapControl);
                 return;
             }
@@ -176,7 +176,7 @@ public class CombatControl {
                 player.levelUp(player);
                 return;
             }
-            if (player.checkHealthPoints(player)) {
+            if (player.checkPlayerHealthPointsInCombat(player)) {
                 isPlayerKilled(mapControl);
                 return;
             }

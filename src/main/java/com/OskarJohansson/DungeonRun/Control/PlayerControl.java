@@ -3,7 +3,6 @@ package com.OskarJohansson.DungeonRun.Control;
 import com.OskarJohansson.DungeonRun.Model.Characters.Hero;
 import com.OskarJohansson.DungeonRun.Model.Items.Potions.HealthPotion;
 
-import javax.swing.*;
 import java.util.*;
 
 public class PlayerControl {
@@ -33,11 +32,13 @@ public class PlayerControl {
         return false;
     }
 
-    public void takeDamage(PlayerControl player, Boolean block, int damage) {
+    public boolean takeDamage(PlayerControl player, Boolean block, int damage) {
         if (!block) {
             player.getHero().setHealthPoints(-damage);
             System.out.printf(">>>>     %s takes \033[0;31m%d\033[0m damage    <<<<!\n",player.getHero().getName(), damage);
+            return true;
         }
+        return false;
     }
 
     public boolean flee(PlayerControl player) {
@@ -51,16 +52,16 @@ public class PlayerControl {
     }
 
 
-    public void addHealthPoition(PlayerControl player, HealthPotion healthPotion) {
+    public void addHealthPotionToStash(PlayerControl player, HealthPotion healthPotion) {
         player.getHero().addPotionStash(healthPotion);
     }
 
-    public void drinkHealthPotion(PlayerControl player) {
-        checkPotionList();
+    public boolean drinkHealthPotion(PlayerControl player) {
+        removeUsedPotionsFromPotionStash();
 
         if (player.getHero().getPotionStash().size() == 0) {
             System.out.println("You don't have any potion to drink!");
-            return;
+            return false;
         }
 
         for (HealthPotion potion : player.getHero().getPotionStash()) {
@@ -70,22 +71,25 @@ public class PlayerControl {
                 } else {
                     player.getHero().addHealthPoints(potion.drinkHealthPotion());
                     potion.setUsed(true);
-                    checkMaxHealthPoints(player);
+                    isMaxHealthPointsExceeded(player);
                     System.out.printf(">>>>     You added \033[0;34m%d\033[0m Health points. You now have \033[0;34m%d/%d\033[0m health points!     <<<<", potion.gethP(), player.getHero().getHealthPoints(), player.getHero().getHealthPointsBase());
                     getHero().setTurningPoints(-1);
-                    return;
+                    return true;
                 }
             }
         }
+        return false;
     }
 
-    private void checkMaxHealthPoints(PlayerControl player) {
+    private boolean isMaxHealthPointsExceeded(PlayerControl player) {
         if (player.getHero().getHealthPoints() > this.hero.getHealthPointsBase()) {
             player.getHero().resetHealthPoints();
+            return true;
         }
+        return false;
     }
 
-    public int checkPotionList() {
+    public int removeUsedPotionsFromPotionStash() {
         Iterator<HealthPotion> iterator = this.hero.getPotionStash().iterator();
 
         while (iterator.hasNext()) {
@@ -97,7 +101,7 @@ public class PlayerControl {
         return this.hero.getPotionStash().size();
     }
 
-    public boolean checkHealthPoints(PlayerControl player) {
+    public boolean checkPlayerHealthPointsInCombat(PlayerControl player) {
         if (player.getHero().getHealthPoints() <= 0) {
             System.out.println("You have been killed. You dropped all your gold!");
             player.getHero().resetGold();
@@ -113,10 +117,12 @@ public class PlayerControl {
         return false;
     }
 
-    public void levelUp(PlayerControl player) {
+    public boolean levelUp(PlayerControl player) {
         if (player.getHero().getExperiencePoints() >= 10 * this.hero.getLevel()) {
             levelUpTraits(player);
+            return true;
         }
+        return false;
     }
 
     public void levelUpTraits(PlayerControl player) {

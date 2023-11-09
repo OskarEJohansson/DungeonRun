@@ -1,37 +1,50 @@
 package com.OskarJohansson.DungeonRun.Control;
 
 import com.OskarJohansson.DungeonRun.Model.Characters.Barbarian;
-import junit.framework.TestCase;
-import org.junit.Rule;
-import org.junit.Test;
+import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponClassTwo.TwoHandSword;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class PlayerControlTest extends TestCase {
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
+
+
+class PlayerControlTest {
+
+    @BeforeEach
+    void setUp() {
+
+    }
+
+    @Test
+    void attack() {
+        PlayerControl player = new PlayerControl();
+        player.setHero(new Barbarian());
+        player.getHero().setWeapon(new TwoHandSword());
+
+        assertThat(player.attack(player), greaterThanOrEqualTo(player.getHero().getWeapon().getDamageMin()));
+        assertThat(player.attack(player), lessThanOrEqualTo(player.getHero().getWeapon().getDamageMax()));
+    }
 
 
     @Test
-    public void testCheckHealthPoints() {
-        PlayerControl player = new PlayerControl();
-        player.setHero(new Barbarian());
-        player.getHero().setHealthPoints(0);
-
-        assertEquals(player.checkHealthPoints(player), true);
-
-        player.resetHealthPoints();
-        assertEquals(player.checkHealthPoints(player), false);
-
-        //Display running low in HP
-        player.getHero().setHealthPoints(3);
-        assertEquals(player.checkHealthPoints(player), false);
+    void block() {
     }
 
-    public void testTestBlock() {
-        PlayerControl player = new PlayerControl();
-        player.setHero(new Barbarian());
+    @Test
+    void takeDamage() {
     }
 
-    public void testTestTakeDamage() {
+    @Test
+    void flee() {
     }
 
-    public void testTestFlee() {
+    @Test
+    void drinkHealthPotion() {
+    }
+
+    @Test
+    void levelUp() {
     }
 }
