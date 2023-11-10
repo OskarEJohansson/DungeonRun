@@ -22,11 +22,6 @@ public class SatsBoss extends EnemyParentModel implements CombatInterface {
         this.setLevel(5);
         this.setKilled(false);
     }
-    @Override
-    public int attack() {
-        this.setTurningPoints(this.getTurningPoints() - this.getAttackCost());
-        return this.getDamageMin();
-    }
 
     @Override
     public boolean block() {

@@ -82,6 +82,8 @@ public class MonsterCombatControl {
     }
 
     public void playerAttackCurrantMonster(EnemyParentModel currantMonster, PlayerControl player) {
+        System.out.printf("\033[4;32m%s attacks for %d turningpoints and with %d maximum damage points\033[0m\n", player.getHero().getName(), player.getHero().getWeapon().getTurnPoints(), player.getHero().getWeapon().getDamageMax());
+        System.out.println(player.getHero().getWeapon().getSoundOfAttack());
         if (currantMonster.getHealthPoints() > 0 && !currantMonster.isKilled()) {
             currantMonster.takeDamage(currantMonster.block(), player.attack(player));
             currantMonster.getStatus();

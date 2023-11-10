@@ -137,8 +137,12 @@ public class EnemyParentModel implements CombatInterface {
                  """, this.getName(), this.getHealthPoints(), this.getTurningPoints());
     }
 
-    @Override
     public void takeDamage(Boolean takeDamage, int damage) {
+        if (!takeDamage) {
+            this.setHealthPoints(this.getHealthPoints() - damage);
+            System.out.printf(">>>>    \033[0;91m%s takes %d in damage!\033[0m    <<<<\n",this.getName(), damage );
+
+        }
     }
 
     public void resetTurningPoints() {

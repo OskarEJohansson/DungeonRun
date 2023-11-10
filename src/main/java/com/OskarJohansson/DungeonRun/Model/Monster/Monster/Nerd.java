@@ -21,11 +21,6 @@ public class Nerd extends EnemyParentModel implements CombatInterface {
         this.setGold(5);
         this.setLevel(3);
     }
-    @Override
-    public int attack() {
-        this.setTurningPoints(this.getTurningPoints() - this.getAttackCost());
-        return this.getDamageMin();
-    }
 
     @Override
     public boolean block() {
