@@ -23,7 +23,7 @@ public class HealthPotion implements Serializable {
         isUsed = used;
     }
 
-    public int drinkHealthPotion() {
+    public int useHealthPotion() {
         this.isUsed = true;
         return this.hP;
     }

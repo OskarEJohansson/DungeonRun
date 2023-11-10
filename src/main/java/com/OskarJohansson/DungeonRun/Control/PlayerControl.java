@@ -19,7 +19,7 @@ public class PlayerControl {
 
     public int attack(PlayerControl player) {
         player.getHero().setTurningPoints(-player.getHero().getWeapon().getTurnPoints());
-        return new Random().nextInt(getHero().getWeapon().getDamageMin(), getHero().getWeapon().getDamageMax()+1);
+        return new Random().nextInt(getHero().getWeapon().getDamageMin(), getHero().getWeapon().getDamageMax() + 1);
     }
 
     public boolean block(PlayerControl player) {
@@ -34,7 +34,7 @@ public class PlayerControl {
     public int takeDamage(PlayerControl player, Boolean block, int damage) {
         if (!block) {
             player.getHero().setHealthPoints(-damage);
-            System.out.printf(">>>>     %s takes \033[0;31m%d\033[0m damage    <<<<!\n",player.getHero().getName(), damage);
+            System.out.printf(">>>>     %s takes \033[0;31m%d\033[0m damage    <<<<!\n", player.getHero().getName(), damage);
             return player.getHero().getHealthPoints();
         }
         return player.getHero().getHealthPoints();
@@ -55,49 +55,71 @@ public class PlayerControl {
         player.getHero().addPotionStash(healthPotion);
     }
 
-    public boolean drinkHealthPotion(PlayerControl player) {
-        removeUsedPotionsFromPotionStash();
+    public boolean drinkHealthPotionOptions(PlayerControl player) {
 
-        if (player.getHero().getPotionStash().size() == 0) {
-            System.out.println("You don't have any potion to drink!");
+        removeUsedPotionsFromPotionStash(player);
+
+        if (playerHasNoHealthPotions(player)) {
             return false;
         }
+        if (iterateThroughHealthPotionStash(player)) {
+            return true;
+        }
 
+        return false;
+    }
+
+    public boolean iterateThroughHealthPotionStash(PlayerControl player) {
         for (HealthPotion potion : player.getHero().getPotionStash()) {
             if (!potion.isUsed()) {
-                if (player.getHero().getHealthPoints() == player.getHero().getHealthPointsBase()) {
-                    System.out.println("You have maimum health points!");
-                } else {
-                    player.getHero().addHealthPoints(potion.drinkHealthPotion());
-                    potion.setUsed(true);
-                    isMaxHealthPointsExceeded(player);
-                    System.out.printf(">>>>     You added \033[0;34m%d\033[0m Health points. You now have \033[0;34m%d/%d\033[0m health points!     <<<<", potion.gethP(), player.getHero().getHealthPoints(), player.getHero().getHealthPointsBase());
-                    getHero().setTurningPoints(-1);
-                    return true;
-                }
+                drinkHealtPotion(player, potion);
+                return true;
             }
         }
         return false;
     }
 
+    public boolean playerHasNoHealthPotions(PlayerControl player) {
+        if (player.getHero().getPotionStash().size() == 0) {
+            System.out.println("You don't have any potion to drink!");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean playerHasMaxHealthPoints(PlayerControl player) {
+        if (player.getHero().getHealthPoints() == player.getHero().getHealthPointsBase()) {
+            System.out.println("You already have maimum health points!");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean drinkHealtPotion(PlayerControl player, HealthPotion potion) {
+
+        if (playerHasMaxHealthPoints(player)) {
+            return false;
+        }
+        player.getHero().addHealthPoints(potion.useHealthPotion());
+        potion.setUsed(true);
+        isMaxHealthPointsExceeded(player);
+        System.out.printf(">>>>     You added \033[0;34m%d\033[0m Health points. You now have \033[0;34m%d/%d\033[0m health points!     <<<<", potion.gethP(), player.getHero().getHealthPoints(), player.getHero().getHealthPointsBase());
+        getHero().setTurningPoints(-1);
+        return true;
+    }
+
+
     private boolean isMaxHealthPointsExceeded(PlayerControl player) {
-        if (player.getHero().getHealthPoints() > this.hero.getHealthPointsBase()) {
+        if (player.getHero().getHealthPoints() > player.getHero().getHealthPointsBase()) {
             player.getHero().resetHealthPoints();
             return true;
         }
         return false;
     }
 
-    public int removeUsedPotionsFromPotionStash() {
-        Iterator<HealthPotion> iterator = this.hero.getPotionStash().iterator();
-
-        while (iterator.hasNext()) {
-            HealthPotion c = iterator.next();
-            if (c.isUsed()) {
-                iterator.remove();
-            }
-        }
-        return this.hero.getPotionStash().size();
+    public int removeUsedPotionsFromPotionStash(PlayerControl player) {
+        player.getHero().getPotionStash().removeIf(c -> c.isUsed());
+        return getHero().getPotionStash().size();
     }
 
     public boolean isPlayerKilledInCombat(PlayerControl player) {

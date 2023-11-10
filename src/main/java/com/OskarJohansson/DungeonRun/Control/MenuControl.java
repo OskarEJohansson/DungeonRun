@@ -97,7 +97,7 @@ public class MenuControl {
                     mapStructure(mapControl, player, bossCombatControl, menuControl, monsterCombatControl);
                 }
                 case 5 -> {
-                    player.drinkHealthPotion(player);
+                    player.drinkHealthPotionOptions(player);
                     on = false;
                 }
                 case 6 -> {
@@ -227,7 +227,7 @@ public class MenuControl {
                     monsterCombatControl.iterateMinionMonsterListAndAttackMonster(player, mapControl);
                     on = false;
                 }
-                case 2 -> player.drinkHealthPotion(player);
+                case 2 -> player.drinkHealthPotionOptions(player);
                 case 3 -> {
                     player.flee(player);
                     return false;
@@ -249,7 +249,7 @@ public class MenuControl {
                     bossCombatControl.playerAttackBoss(player, mapControl);
                     on = false;
                 }
-                case 2 -> player.drinkHealthPotion(player);
+                case 2 -> player.drinkHealthPotionOptions(player);
                 case 3 -> {
                     player.flee(player);
                     return false;

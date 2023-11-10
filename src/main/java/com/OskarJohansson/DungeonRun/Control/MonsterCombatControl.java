@@ -36,7 +36,7 @@ public class MonsterCombatControl {
     }
 
     public boolean hasPlayerKilledAllTheEnemies(MapControl mapControl, PlayerControl player) {
-        if (checkEnemyList(mapControl) == 0) {
+        if (removeKilledEnemiesFromMonsterList(mapControl) == 0) {
             System.out.println("////    \033[0;31m  You have killed all the monsters!   \033[0m   ////\n");
             player.levelUp(player);
             return true;
@@ -44,7 +44,7 @@ public class MonsterCombatControl {
         return false;
     }
 
-    public void displayHowManyMonstersInCombat(MapControl mapControl){
+    public void displayHowManyMonstersInCombat(MapControl mapControl) {
         System.out.printf("""
                 You are being attacked by %d monsters!
                                 
@@ -68,7 +68,7 @@ public class MonsterCombatControl {
         menuControl.getStatus(player);
     }
 
-    private int checkEnemyList(MapControl mapControl) {
+    private int removeKilledEnemiesFromMonsterList(MapControl mapControl) {
         mapControl.currentLevel.getMonsterList().removeIf(c -> c.getHealthPoints() <= 0);
         return mapControl.currentLevel.getMonsterList().size();
     }
@@ -135,7 +135,6 @@ public class MonsterCombatControl {
         monster.setKilled(true);
         return true;
     }
-
 
 
 }

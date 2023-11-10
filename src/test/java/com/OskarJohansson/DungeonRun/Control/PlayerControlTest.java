@@ -2,9 +2,11 @@ package com.OskarJohansson.DungeonRun.Control;
 
 import com.OskarJohansson.DungeonRun.Model.Characters.Barbarian;
 import com.OskarJohansson.DungeonRun.Model.Characters.CodeMonkey;
+import com.OskarJohansson.DungeonRun.Model.Items.Potions.HealthPotion;
 import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponClassTwo.Spot;
 import com.OskarJohansson.DungeonRun.Model.Items.Weapon.WeaponClassTwo.TwoHandSword;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +29,7 @@ class PlayerControlTest {
         player2 = new PlayerControl();
         player2.setHero(new CodeMonkey());
         player2.getHero().setWeapon(new Spot());
+
 
     }
 
@@ -83,4 +86,25 @@ class PlayerControlTest {
     @Test
     void levelUp() {
     }
+
+    @Test
+    void drinkHealthPotionOptions() {
+
+        Assertions.assertTrue(player.playerHasNoHealthPotions(player));
+
+        player.getHero().addPotionStash(new HealthPotion());
+        Assert.assertEquals(player.getHero().getPotionStash().size(), 1);
+
+        for (HealthPotion potion : player.getHero().getPotionStash()) {
+            Assert.assertTrue(player.playerHasMaxHealthPoints(player));
+            player.getHero().setHealthPoints(-1);
+            Assert.assertTrue(player.drinkHealtPotion(player, potion));
+        }
+
+        player.removeUsedPotionsFromPotionStash(player);
+        Assert.assertEquals(player.getHero().getPotionStash().size(), 0);
+
+
+    }
+
 }
