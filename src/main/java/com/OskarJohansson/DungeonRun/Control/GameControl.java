@@ -1,14 +1,13 @@
 package com.OskarJohansson.DungeonRun.Control;
 
-import java.util.Scanner;
-
 public class GameControl {
 
     PlayerControl player;
     MapControl map;
     MenuControl menuControl;
     ShopControl shopControl;
-    CombatControl combatControl;
+    BossCombatControl combatControl;
+    MonsterCombatControl monsterCombatControl;
 
 
     public GameControl() {
@@ -17,7 +16,8 @@ public class GameControl {
         this.map = new MapControl();
         this.menuControl = new MenuControl();
         this.shopControl = new ShopControl();
-        this.combatControl = new CombatControl();
+        this.combatControl = new BossCombatControl();
+        this.monsterCombatControl = new MonsterCombatControl();
 
     }
 
@@ -45,7 +45,7 @@ public class GameControl {
                 }
                 default -> System.out.println("Input must be 1 or 2!");
             }
-        menuControl.mainMenu(player, menuControl, map, shopControl, combatControl);
+        menuControl.mainMenu(player, menuControl, map, shopControl, combatControl, monsterCombatControl);
     }
 }
 
