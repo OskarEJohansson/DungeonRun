@@ -66,8 +66,8 @@ public class MenuControl {
                     mapStructure(mapControl, player, bossCombatControl, menuControl, monsterCombatControl);
                 }
                 case 2 -> {
-                    if (player.getHero().getLevel() < 2) {
-                        System.out.println("You must be level 2 to enter Sats!");
+                    if (player.getHero().getLevel() < 3) {
+                        System.out.println("You must be level 3 to enter Sats!");
                         return;
                     }
                     mapControl.setMap(2);
@@ -75,8 +75,8 @@ public class MenuControl {
                     mapStructure(mapControl, player, bossCombatControl, menuControl, monsterCombatControl);
                 }
                 case 3 -> {
-                    if (player.getHero().getLevel() < 3) {
-                        System.out.println("You must be level 3 to enter Kjell & Co !");
+                    if (player.getHero().getLevel() < 5) {
+                        System.out.println("You must be level 5 to enter Kjell & Co !");
                         return;
                     }
                     mapControl.setMap(3);
@@ -85,8 +85,8 @@ public class MenuControl {
 
                 }
                 case 4 -> {
-                    if (player.getHero().getLevel() < 4) {
-                        System.out.println("You must be level 5 to enter Teacher Lounge!");
+                    if (player.getHero().getLevel() < 7) {
+                        System.out.println("You must be level 7 to enter Teacher Lounge!");
                     }
                     if (!player.getHero().isCodeBreaker()) {
                         System.out.println("You can't crack the security code to break in to the Tower! Defeat the Nerd Wizard of Kjell & Co to attain the Code Breaker!");
