@@ -23,7 +23,7 @@ public class PlayerControl {
     }
 
     public boolean block(PlayerControl player) {
-        if (new Random().nextInt(1, 10) > 5) {
+        if (new Random().nextInt(1, 10) < 5) {
             System.out.printf(">>>>    \033[0;32m%s blocked the attack successfully!\033[0m    <<<<\n", player.getHero().getName());
             return true;
         } else
@@ -31,22 +31,22 @@ public class PlayerControl {
         return false;
     }
 
-    public int takeDamage(PlayerControl player, Boolean block, int damage) {
+    public boolean takeDamage(PlayerControl player, Boolean block, int damage) {
         if (!block) {
             player.getHero().setHealthPoints(-damage);
             System.out.printf(">>>>     %s takes \033[0;31m%d\033[0m damage    <<<<!\n", player.getHero().getName(), damage);
-            return player.getHero().getHealthPoints();
+            return false;
         }
-        return player.getHero().getHealthPoints();
+        return true;
     }
 
     public boolean flee(PlayerControl player) {
         if (player.getHero().getTurningPoints() > 2) {
-            System.out.println("You are fleeing like a coward");
+            System.out.println(">>>>    \033[0;33mYou are fleeing like a coward\033[0m   <<<<");
             player.getHero().setTurningPoints(-2);
             return true;
         }
-        System.out.println("You are to tired to flee!");
+        System.out.println(">>>>    \033[0;35mYou are to tired to flee!\033[0m    <<<<");
         return false;
     }
 
@@ -56,16 +56,11 @@ public class PlayerControl {
     }
 
     public boolean drinkHealthPotionOptions(PlayerControl player) {
-
         removeUsedPotionsFromPotionStash(player);
-
-        if (playerHasNoHealthPotions(player)) {
-            return false;
-        }
-        if (iterateThroughHealthPotionStash(player)) {
-            return true;
-        }
-
+        if(playerHasNoHealthPotions(player)){return false;}
+        if (playerHasNoHealthPotions(player)) {return false;}
+        if (playerHasMaxHealthPoints(player)) {return false;}
+        if (iterateThroughHealthPotionStash(player)) {return true;}
         return false;
     }
 
@@ -96,10 +91,6 @@ public class PlayerControl {
     }
 
     public boolean drinkHealtPotion(PlayerControl player, HealthPotion potion) {
-
-        if (playerHasMaxHealthPoints(player)) {
-            return false;
-        }
         player.getHero().addHealthPoints(potion.useHealthPotion());
         potion.setUsed(true);
         isMaxHealthPointsExceeded(player);

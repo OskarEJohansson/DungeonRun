@@ -30,7 +30,6 @@ class PlayerControlTest {
         player2.setHero(new CodeMonkey());
         player2.getHero().setWeapon(new Spot());
 
-
     }
 
     @Test
@@ -103,7 +102,6 @@ class PlayerControlTest {
 
         player.removeUsedPotionsFromPotionStash(player);
         Assert.assertEquals(player.getHero().getPotionStash().size(), 0);
-
 
     }
 
