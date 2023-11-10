@@ -7,7 +7,7 @@ public class GameControl {
     MenuControl menuControl;
     ShopControl shopControl;
     BossCombatControl combatControl;
-    NewCombatControl newCombatControl;
+    MonsterCombatControl monsterCombatControl;
 
 
     public GameControl() {
@@ -17,7 +17,7 @@ public class GameControl {
         this.menuControl = new MenuControl();
         this.shopControl = new ShopControl();
         this.combatControl = new BossCombatControl();
-        this.newCombatControl = new NewCombatControl();
+        this.monsterCombatControl = new MonsterCombatControl();
 
     }
 
@@ -45,7 +45,7 @@ public class GameControl {
                 }
                 default -> System.out.println("Input must be 1 or 2!");
             }
-        menuControl.mainMenu(player, menuControl, map, shopControl, combatControl, newCombatControl);
+        menuControl.mainMenu(player, menuControl, map, shopControl, combatControl, monsterCombatControl);
     }
 }
 

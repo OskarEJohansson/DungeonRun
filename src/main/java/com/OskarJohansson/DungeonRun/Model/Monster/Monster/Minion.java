@@ -1,4 +1,4 @@
-package com.OskarJohansson.DungeonRun.Model.Monster.Minions;
+package com.OskarJohansson.DungeonRun.Model.Monster.Monster;
 
 import com.OskarJohansson.DungeonRun.Control.CombatInterface;
 import com.OskarJohansson.DungeonRun.Model.Monster.EnemyParentModel;

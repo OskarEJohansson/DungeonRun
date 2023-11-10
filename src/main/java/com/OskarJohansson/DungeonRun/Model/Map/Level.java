@@ -9,7 +9,7 @@ public class Level {
 
     private String levelName;
     private String levelNumber;
-    private List<EnemyParentModel> minionMonsterList;
+    private List<EnemyParentModel> monsterList;
     private EnemyParentModel finalBoss;
 
     public String getLevelName() {
@@ -28,12 +28,12 @@ public class Level {
         this.levelNumber = levelNumber;
     }
 
-    public List<EnemyParentModel> getMinionMonsterList() {
-        return minionMonsterList;
+    public List<EnemyParentModel> getMonsterList() {
+        return monsterList;
     }
 
-    public void setMinionMonsterList(List<EnemyParentModel> minionMonsterList) {
-        this.minionMonsterList = minionMonsterList;
+    public void setMonsterList(List<EnemyParentModel> monsterList) {
+        this.monsterList = monsterList;
     }
 
     public EnemyParentModel getFinalBoss() {
@@ -44,11 +44,5 @@ public class Level {
         this.finalBoss = finalBoss;
     }
 
-    public void resetTurningPoints(){
-        for (EnemyParentModel minion : getMinionMonsterList()){
-            minion.resetTurningPoints();
-        }
-    }
-
-
 }
+

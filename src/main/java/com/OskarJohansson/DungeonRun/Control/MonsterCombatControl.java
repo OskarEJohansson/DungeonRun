@@ -4,27 +4,29 @@ import com.OskarJohansson.DungeonRun.Model.Monster.EnemyParentModel;
 
 import java.util.Scanner;
 
-public class NewCombatControl {
+import static com.OskarJohansson.DungeonRun.Control.UserInputControl.pressEnterToContinue;
 
-    public void minionBattleControl(PlayerControl player, MapControl mapControl, MenuControl menuControl, NewCombatControl newCombatControl) {
+public class MonsterCombatControl {
 
-        System.out.printf("""
-                You are being attacked by %d monsters!
-                                
-                """, mapControl.currentLevel.getMinionMonsterList().size());
+    public void monsterBattleControl(PlayerControl player, MapControl mapControl, MenuControl menuControl, MonsterCombatControl newCombatControl) {
+
+        displayHowManyMonstersInCombat(mapControl);
 
         boolean on = true;
-        do {
-            player.getHero().resetTurningPoints();
 
-            minionResetTurningPoints(mapControl);
-            minionBattle(player, mapControl, menuControl);
+        do {
 
             if (hasPlayerKilledAllTheEnemies(mapControl, player)) {
                 return;
             }
+
+            player.getHero().resetTurningPoints();
+            monsterResetTurningPoints(mapControl);
+
+            monsterBattle(player, mapControl, menuControl);
+
             if (player.isPlayerKilledInCombat(player)) {
-                resetMinionAndBossHealthAndTurningPointsWhenPlayerIsKilled(mapControl);
+                resetMonsterAndBossHealthAndTurningPointsWhenPlayerIsKilled(mapControl);
                 return;
             }
             if (player.getHero().getTurningPoints() > 0)
@@ -44,10 +46,17 @@ public class NewCombatControl {
         return false;
     }
 
-    public void minionBattle(PlayerControl player, MapControl mapControl, MenuControl menuControl) {
-        for (EnemyParentModel monster : mapControl.currentLevel.getMinionMonsterList()) {
+    public void displayHowManyMonstersInCombat(MapControl mapControl){
+        System.out.printf("""
+                You are being attacked by %d monsters!
+                                
+                """, mapControl.currentLevel.getMonsterList().size());
+    }
+
+    public void monsterBattle(PlayerControl player, MapControl mapControl, MenuControl menuControl) {
+        for (EnemyParentModel monster : mapControl.currentLevel.getMonsterList()) {
             while (monster.getTurningPoints() > 0) {
-                minionAttackPlayer(player, monster, mapControl, menuControl);
+                monsterAttackPlayer(player, monster, mapControl, menuControl);
                 if (player.getHero().getHealthPoints() <= 0) {
                     return;
                 }
@@ -55,31 +64,31 @@ public class NewCombatControl {
         }
     }
 
-    public void minionAttackPlayer(PlayerControl player, EnemyParentModel monster, MapControl mapControl, MenuControl menuControl) {
-        System.out.printf(">>>>     \033[4;31m%s %d attacks!\033[0m     <<<<\n", monster.getName(), mapControl.currentLevel.getMinionMonsterList().indexOf(monster) + 1);
+    public void monsterAttackPlayer(PlayerControl player, EnemyParentModel monster, MapControl mapControl, MenuControl menuControl) {
+        System.out.printf(">>>>     \033[4;31m%s %d attacks!\033[0m     <<<<\n", monster.getName(), mapControl.currentLevel.getMonsterList().indexOf(monster) + 1);
         player.takeDamage(player, player.block(player), monster.attack());
         menuControl.getStatus(player);
     }
 
     private int checkEnemyList(MapControl mapControl) {
-        mapControl.currentLevel.getMinionMonsterList().removeIf(c -> c.getHealthPoints() <= 0);
-        return mapControl.currentLevel.getMinionMonsterList().size();
+        mapControl.currentLevel.getMonsterList().removeIf(c -> c.getHealthPoints() <= 0);
+        return mapControl.currentLevel.getMonsterList().size();
     }
 
-    private void minionResetTurningPoints(MapControl mapControl) {
-        for (EnemyParentModel monster : mapControl.currentLevel.getMinionMonsterList()) {
+    private void monsterResetTurningPoints(MapControl mapControl) {
+        for (EnemyParentModel monster : mapControl.currentLevel.getMonsterList()) {
             monster.resetTurningPoints();
         }
     }
 
-    public void playerAttackCurrantMinion(EnemyParentModel currantMonster, PlayerControl player) {
+    public void playerAttackCurrantMonster(EnemyParentModel currantMonster, PlayerControl player) {
         if (currantMonster.getHealthPoints() > 0 && !currantMonster.isKilled()) {
             currantMonster.takeDamage(currantMonster.block(), player.attack(player));
             currantMonster.getStatus();
         }
     }
 
-    public boolean checkIfPlayerHasKilledCurrantMinion(EnemyParentModel currantMonster, PlayerControl player) {
+    public boolean checkIfPlayerHasKilledCurrantMonster(EnemyParentModel currantMonster, PlayerControl player) {
         if (currantMonster.getHealthPoints() <= 0 && !currantMonster.isKilled()) {
             ifPlayerHasKilledTheCurrantEnemy(player, currantMonster);
             return true;
@@ -97,23 +106,21 @@ public class NewCombatControl {
 
     public void iterateMinionMonsterListAndAttackMonster(PlayerControl player, MapControl mapControl) {
 
-        for (EnemyParentModel currantMonster : mapControl.currentLevel.getMinionMonsterList()) {
+        for (EnemyParentModel currantMonster : mapControl.currentLevel.getMonsterList()) {
             if (checkIfPlayerIsOutOfTurningPoints(player)) {
                 return;
             }
-
             while (player.getHero().getTurningPoints() >= player.getHero().getWeapon().getTurnPoints()) {
-                playerAttackCurrantMinion(currantMonster, player);
-
-                if (checkIfPlayerHasKilledCurrantMinion(currantMonster, player)) {
+                playerAttackCurrantMonster(currantMonster, player);
+                if (checkIfPlayerHasKilledCurrantMonster(currantMonster, player)) {
                     break;
                 }
             }
         }
     }
 
-    public void resetMinionAndBossHealthAndTurningPointsWhenPlayerIsKilled(MapControl mapControl) {
-        mapControl.currentLevel.getMinionMonsterList().forEach(c -> {
+    public void resetMonsterAndBossHealthAndTurningPointsWhenPlayerIsKilled(MapControl mapControl) {
+        mapControl.currentLevel.getMonsterList().forEach(c -> {
             c.resetTurningPoints();
             c.resetHealthPoints();
         });
@@ -130,10 +137,6 @@ public class NewCombatControl {
         return true;
     }
 
-    public void pressEnterToContinue(){
-        System.out.println("\n \033[42mGet ready for a new round!\033[0m\n \033[42mPress Enter to continue \033[0m\n");
-        Scanner sc = new Scanner(System.in);
-        sc.nextLine();
-    }
+
 
 }
