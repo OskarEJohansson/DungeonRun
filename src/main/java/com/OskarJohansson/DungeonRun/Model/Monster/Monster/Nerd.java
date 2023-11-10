@@ -1,11 +1,10 @@
 package com.OskarJohansson.DungeonRun.Model.Monster.Monster;
 
-import com.OskarJohansson.DungeonRun.Control.CombatInterface;
 import com.OskarJohansson.DungeonRun.Model.Monster.EnemyParentModel;
 
 import java.util.Random;
 
-public class Nerd extends EnemyParentModel implements CombatInterface {
+public class Nerd extends EnemyParentModel {
 
     public Nerd() {
         super();
@@ -20,27 +19,6 @@ public class Nerd extends EnemyParentModel implements CombatInterface {
         this.setExperiencePoints(5);
         this.setGold(5);
         this.setLevel(3);
-    }
-
-    @Override
-    public boolean block() {
-        if (new Random().nextInt(1, 10) > 7) {
-            System.out.printf(">>>>    \033[0;32m%s blocked the attack successfully!\033[0m    <<<<\n", this.getName());
-            return true;
-        }
-        System.out.printf(">>>>    \033[0;31m%s fails to block the attack\033[0m    <<<<\n", this.getName());
-        return false;
-    }
-
-    @Override
-    public boolean flee() {
-        return true;
-    }
-
-    @Override
-    public void takeDamage(Boolean takeDamage, int damage) {
-        if (!takeDamage) {
-            this.setHealthPoints(this.getHealthPoints() - damage);
-        }
+        this.setBlockLevel(3);
     }
 }

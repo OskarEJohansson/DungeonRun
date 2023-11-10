@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 
+import static com.OskarJohansson.DungeonRun.Control.UserInputControl.pressEnterToContinue;
+
 public class BossCombatControl {
 
     public void bossBattleControl(PlayerControl player, MapControl mapControl, MenuControl menuControl, BossCombatControl bossCombatControl) {
@@ -32,9 +34,7 @@ public class BossCombatControl {
             if (player.getHero().getTurningPoints() > 0)
                 on = menuControl.playerBossBattleOptions(player, mapControl, bossCombatControl);
 
-            System.out.println("\n \033[42mGet ready for a new round!\033[0m\n \033[42mPress Enter to continue \033[0m\n");
-            Scanner sc = new Scanner(System.in);
-            sc.nextLine();
+            pressEnterToContinue();
 
         } while (on);
     }
@@ -59,12 +59,10 @@ public class BossCombatControl {
 
     public void playerAttackBoss(PlayerControl player, MapControl mapControl) {
 
-        System.out.printf("\033[4;32m%s attacks for %d turningpoints and with %d maximum damage points\033[0m\n", player.getHero().getName(), player.getHero().getWeapon().getTurnPoints(), player.getHero().getWeapon().getDamageMax());
-        System.out.println(player.getHero().getWeapon().getSoundOfAttack());
-
         while (player.getHero().getTurningPoints() > 0) {
+            System.out.printf("\033[4;32m%s attacks for %d turningpoints and with %d maximum damage points\033[0m\n", player.getHero().getName(), player.getHero().getWeapon().getTurnPoints(), player.getHero().getWeapon().getDamageMax());
+            System.out.println(player.getHero().getWeapon().getSoundOfAttack());
             if (mapControl.currentLevel.getFinalBoss().getHealthPoints() > 0 && !mapControl.currentLevel.getFinalBoss().isKilled()) {
-                mapControl.currentLevel.getFinalBoss().getStatus();
                 mapControl.currentLevel.getFinalBoss().takeDamage(mapControl.currentLevel.getFinalBoss().block(), player.attack(player));
             }
             if (isBossKilled(mapControl, player)) {

@@ -2,8 +2,6 @@ package com.OskarJohansson.DungeonRun.Control;
 
 import com.OskarJohansson.DungeonRun.Model.Monster.EnemyParentModel;
 
-import java.util.Scanner;
-
 import static com.OskarJohansson.DungeonRun.Control.UserInputControl.pressEnterToContinue;
 
 public class MonsterCombatControl {
@@ -86,7 +84,6 @@ public class MonsterCombatControl {
         System.out.println(player.getHero().getWeapon().getSoundOfAttack());
         if (currantMonster.getHealthPoints() > 0 && !currantMonster.isKilled()) {
             currantMonster.takeDamage(currantMonster.block(), player.attack(player));
-            currantMonster.getStatus();
         }
     }
 

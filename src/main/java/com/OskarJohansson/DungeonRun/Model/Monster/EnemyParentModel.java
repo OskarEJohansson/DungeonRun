@@ -1,10 +1,8 @@
 package com.OskarJohansson.DungeonRun.Model.Monster;
 
-import com.OskarJohansson.DungeonRun.Control.CombatInterface;
-
 import java.util.Random;
 
-public class EnemyParentModel implements CombatInterface {
+public class EnemyParentModel {
 
     private String name;
     private int healthPoints;
@@ -18,6 +16,7 @@ public class EnemyParentModel implements CombatInterface {
     private int gold;
     private int level;
     private boolean killed;
+    private int blockLevel;
 
     public String getName() {
         return name;
@@ -35,9 +34,13 @@ public class EnemyParentModel implements CombatInterface {
         this.healthPoints = healthPoints;
     }
 
-    public int getHealthPointsBase() {return healthPointsBase;}
+    public int getHealthPointsBase() {
+        return healthPointsBase;
+    }
 
-    public void setHealthPointsBase(int healthPointsBase) {this.healthPointsBase = healthPointsBase;}
+    public void setHealthPointsBase(int healthPointsBase) {
+        this.healthPointsBase = healthPointsBase;
+    }
 
     public int getDamageMin() {
         return damageMin;
@@ -111,47 +114,50 @@ public class EnemyParentModel implements CombatInterface {
         this.killed = killed;
     }
 
-
-    public int attack() {
-        this.setTurningPoints(this.getTurningPoints() - this.getAttackCost());
-        return new Random().nextInt(getDamageMin(), getDamageMax());
+    public int getBlockLevel() {
+        return blockLevel;
     }
 
-    @Override
-    public boolean block() {
-
-        return false;
-    }
-
-    @Override
-    public boolean flee() {
-        return true;
-    }
-
-    public void getStatus() {
-        System.out.printf("""
-                 ++++                    Enemy Stats                     ++++
-                 ____________________________________________________________                
-                 Enemy   %s  |   Health Points   %d  |   Turning Points  %d  |
-                                 
-                 """, this.getName(), this.getHealthPoints(), this.getTurningPoints());
-    }
-
-    public void takeDamage(Boolean takeDamage, int damage) {
-        if (!takeDamage) {
-            this.setHealthPoints(this.getHealthPoints() - damage);
-            System.out.printf(">>>>    \033[0;91m%s takes %d in damage!\033[0m    <<<<\n",this.getName(), damage );
-
-        }
+    public void setBlockLevel(int blockLevel) {
+        this.blockLevel = blockLevel;
     }
 
     public void resetTurningPoints() {
         setTurningPoints(getTurningPointsBase());
     }
 
-
     public void resetHealthPoints() {
         this.healthPoints = this.healthPointsBase;
     }
 
+    public int attack() {
+        this.setTurningPoints(this.getTurningPoints() - this.getAttackCost());
+        return new Random().nextInt(getDamageMin(), getDamageMax());
+    }
+
+    public boolean block() {
+        if (new Random().nextInt(1, 10) < this.blockLevel) {
+            System.out.printf(">>>>    \033[0;32m %s blocked the attack successfully!\033[0m    <<<<\n", this.getName());
+            return true;
+        }
+        System.out.printf(">>>>    \033[0;31m%s fails to block the attack!\033[0m    <<<<\n", this.getName());
+        return false;
+    }
+
+    public void displayEnemyStatus() {
+        System.out.printf("""
+                ++++                    Enemy Stats                     ++++
+                ____________________________________________________________                
+                Enemy   %s  |   Health Points   %d/%d  |   Turning Points  %d  |
+                                
+                """, this.getName(), this.getHealthPoints(),getHealthPointsBase(), this.getTurningPoints());
+    }
+
+    public void takeDamage(Boolean takeDamage, int damage) {
+        if (!takeDamage) {
+            this.setHealthPoints(this.getHealthPoints() - damage);
+            System.out.printf(">>>>    \033[0;91m%s takes %d in damage!\033[0m    <<<<\n", this.getName(), damage);
+            displayEnemyStatus();
+        }
+    }
 }

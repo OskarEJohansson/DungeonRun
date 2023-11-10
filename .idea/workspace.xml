@@ -7,8 +7,7 @@
     <list default="true" id="6cfcacef-708c-4a26-9b0d-6b924cdbfcfb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/BossCombatControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/BossCombatControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/MonsterCombatControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/MonsterCombatControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/PlayerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/PlayerControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/CombatInterface.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Monster/Bosses/IcaBoss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Monster/Bosses/IcaBoss.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Monster/Bosses/KjellCOBoss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Monster/Bosses/KjellCOBoss.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Monster/Bosses/SatsBoss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Model/Monster/Bosses/SatsBoss.java" afterDir="false" />

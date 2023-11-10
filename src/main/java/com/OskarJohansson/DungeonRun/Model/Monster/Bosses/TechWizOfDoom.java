@@ -20,32 +20,6 @@ public class TechWizOfDoom extends EnemyParentModel {
         this.setGold(100);
         this.setLevel(5);
         this.setKilled(false);
-    }
-
-    @Override
-    public boolean block() {
-        if (new Random().nextInt(1, 10) > 5) {
-            System.out.printf(">>>>    \033[0;32m %s blocked the attack successfully!\033[0m    <<<<\n", this.getName());
-            return true;
-        }
-        System.out.printf(">>>>    \033[0;31m %s fails to block the attack\033[0m    <<<<\n", this.getName());
-        return false;
-    }
-
-    @Override
-    public boolean flee() {
-        return true;
-    }
-
-    @Override
-    public void takeDamage(Boolean takeDamage, int damage) {
-        if (!takeDamage) {
-            this.setHealthPoints(this.getHealthPoints() - damage);
-        }
-    }
-
-    @Override
-    public void resetTurningPoints() {
-        this.setTurningPoints(this.getTurningPointsBase());
+        this.setBlockLevel(5);
     }
 }
