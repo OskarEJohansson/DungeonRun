@@ -90,7 +90,11 @@ public class CombatControl {
     private int checkEnemyList(MapControl mapControl) {
         mapControl.currentLevel.getMinionMonsterList().removeIf(c -> c.getHealthPoints() <= 0);
         return mapControl.currentLevel.getMinionMonsterList().size();
+
+
     }
+
+
 
     private void minionResetTurningPoints(MapControl mapControl) {
         for (EnemyParentModel monster : mapControl.currentLevel.getMinionMonsterList()) {
