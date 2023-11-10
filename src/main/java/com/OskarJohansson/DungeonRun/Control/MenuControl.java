@@ -118,7 +118,7 @@ public class MenuControl {
                     +++++|                          \033[42m   Level %s   \033[0m                           |+++++
                     +++++|                      \033[42m    %s  \033[0m                       |+++++
                     _____________________________________________________________________________
-                    #1 - Enter Kill Zone!    |   #2 - Enter Boss Zone!    |   #3 - Leave Level! |
+                    #1 - Enter Kill Zone!    |   #2 - Enter Boss Zone!    |    #3 - Reset Level!    |    #4 - Leave Level! |
                     """, mapControl.currentLevel.getLevelNumber(), mapControl.currentLevel.getLevelName());
 
             switch (UserInputControl.inputInt()) {
@@ -132,10 +132,15 @@ public class MenuControl {
                     on = false;
                 }
                 case 3 -> {
+                    System.out.println("You are resetting the Level!");
+                    mapControl.resetLevel(mapControl);
+                    on = false;
+                }
+                case 4 -> {
                     System.out.println("You are leaving the Level!");
                     on = false;
                 }
-                default -> System.out.println("Input must be 1 - 3!");
+                default -> System.out.println("Input must be 1 - 4!");
 
             }
         } while (on);
