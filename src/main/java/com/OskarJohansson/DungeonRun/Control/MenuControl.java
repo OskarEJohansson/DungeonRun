@@ -15,8 +15,8 @@ public class MenuControl {
         do {
             System.out.printf("""
                                          
-                    +++++|                                          \033[42m   Main Menu   \033[0m                                                         |+++++
-                    ______________________________________________________________________________________________________________________________                         
+                    +++++|                                          \033[42m   Main Menu   \033[0m                                                       |+++++
+                    ____________________________________________________________________________________________________________________________                         
                     #1 - Show %s the %s's Level  |   #2 - Show Stats  |   #3 - Show MAP   |   #4 - Enter SHOP   |   #5 - Save Game   |
                                          
                      """, player.getHero().getName(), player.getHero().getHeroClass());
@@ -160,9 +160,9 @@ public class MenuControl {
         do {
             System.out.printf("""
                               
-                    ++++|                 \033[0;92m    Pick a Hero \033[0m               |++++
-                    _________________________________________________________              
-                          |   #1 - Barbarian  |   #2 - Code Monkey   |
+                    ++++|         \033[0;92mPick a Hero\033[0m        |++++
+                    __________________________________________________              
+                       #1 - Barbarian      |      #2 - Code Monkey    |
                                     
                     """);
 
@@ -184,8 +184,8 @@ public class MenuControl {
     public void getPlayerStats(PlayerControl player) {
         player.levelUp(player);
         System.out.printf("""
-                ++++|                                         \033[0;35m    Stats   \033[0m                                                                                 |++++
-                ________________________________________________________________________________________________________________________________________________             
+                ++++|                                                                       \033[0;35m    Stats   \033[0m                                                      |++++
+                ___________________________________________________________________________________________________________________________________________________            
                 Level  \033[1;33m%d\033[0m   |   Experience Points   \033[1;33m%d/%d\033[0m  |   Strength    \033[1;35m%d\033[0m  |   Intelligence   \033[1;32m%d\033[0m  |   Agility   \033[1;31m%d\033[0m  |   Weapon   \033[4;31m%s\033[0m    |   HealthPotions   \033[0;34m%d\033[0m   |
                                 
                 """, player.getHero().getLevel(), player.getHero().getExperiencePoints(), player.getHero().getLevel() * 10, player.getHero().getStrength(), player.getHero().getIntelligence(), player.getHero().getAgility(), player.getHero().getWeapon().getName(), player.getHero().getPotionStash().size());
@@ -194,7 +194,7 @@ public class MenuControl {
     public void getStatus(PlayerControl player) {
         player.levelUp(player);
         System.out.printf("""
-                ++++|                                           \033[0;35m  Stats   \033[0m                                                                       |++++
+                ++++|                                                                  \033[0;35m  Stats   \033[0m                                                |++++
                 ______________________________________________________________________________________________________________________________________
                 %s the %s   |   Death count   \033[0;31m%d\033[0m    |   Kill count   \033[0;31m%d\033[0m  |   Health Points   \033[0;34m%d/%d\033[0m  |   Turning Points  \033[1;31m%d/%d\033[0m   |   Gold    \033[1;33m%d\033[0m |
                                 
@@ -204,8 +204,8 @@ public class MenuControl {
     public void displayPlayerOptionsInBattleOptions(PlayerControl player) {
         System.out.printf("""
                    
-                   +++++|                                   Actions                               |+++++
-                   _______________________________________________________________________________\s
+                   +++++|                  Actions                 |+++++
+                   ______________________________________________________\s
                    #1 - Attack!  |   #2 - Drink Potion |   #3 - Flee!   |
                                 
                 >>>>    %s's turn! <<<<

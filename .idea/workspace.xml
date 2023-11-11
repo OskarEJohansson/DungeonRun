@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6cfcacef-708c-4a26-9b0d-6b924cdbfcfb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/save/hero.dat" beforeDir="false" afterPath="$PROJECT_DIR$/save/hero.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/PlayerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/PlayerControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/OskarJohansson/DungeonRun/Control/PlayerControlTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/OskarJohansson/DungeonRun/Control/PlayerControlTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/MenuControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/MenuControl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,10 +55,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "main",
-    "node.js.selected.package.tslint": "(autodetect)"
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -173,7 +175,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c7d1dfb9-99e4-4db1-b4d6-e7ef04fd8683" name="Changes" comment="" />
+      <changelist id="6cfcacef-708c-4a26-9b0d-6b924cdbfcfb" name="Changes" comment="" />
       <created>1698058406600</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -181,26 +183,12 @@
       <workItem from="1698058407756" duration="33112000" />
       <workItem from="1698311575040" duration="6249000" />
       <workItem from="1699605504132" duration="3273000" />
+      <workItem from="1699631390969" duration="845000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/PlayerControl.java</url>
-          <line>57</line>
-          <properties class="com.OskarJohansson.DungeonRun.Control.PlayerControl" method="drinkHealthPotionOptions">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
