@@ -2,7 +2,7 @@ package com.OskarJohansson.DungeonRun.Control;
 
 import com.OskarJohansson.DungeonRun.Model.Monster.EnemyParentModel;
 
-import static com.OskarJohansson.DungeonRun.Control.UserInputControl.pressEnterToContinue;
+import static com.OskarJohansson.DungeonRun.Control.UserInputControl.PRESS_ENTER_TO_CONTINUE;
 
 public class MonsterCombatControl {
 
@@ -20,7 +20,6 @@ public class MonsterCombatControl {
 
             player.getHero().resetTurningPoints();
             monsterResetTurningPoints(mapControl);
-
             monsterBattle(player, mapControl, menuControl);
 
             if (player.isPlayerKilledInCombat(player)) {
@@ -30,7 +29,7 @@ public class MonsterCombatControl {
             if (player.getHero().getTurningPoints() > 0)
                 on = menuControl.playerMinionBattleOptions(player, mapControl, newCombatControl);
 
-            pressEnterToContinue();
+            PRESS_ENTER_TO_CONTINUE();
 
         } while (on);
     }
@@ -44,11 +43,13 @@ public class MonsterCombatControl {
         return false;
     }
 
-    public void displayHowManyMonstersInCombat(MapControl mapControl) {
+    public int displayHowManyMonstersInCombat(MapControl mapControl) {
         System.out.printf("""
                 You are being attacked by %d monsters!
                                 
                 """, mapControl.currentLevel.getMonsterList().size());
+
+        return mapControl.currentLevel.getMonsterList().size();
     }
 
     public void monsterBattle(PlayerControl player, MapControl mapControl, MenuControl menuControl) {

@@ -9,6 +9,80 @@ import java.util.Scanner;
 public class MenuControl {
 
 
+    PlayerControl player;
+    MapControl map;
+    MenuControl menuControl;
+    ShopControl shopControl;
+    BossCombatControl combatControl;
+    MonsterCombatControl monsterCombatControl;
+
+
+    public MenuControl() {
+
+        this.player = new PlayerControl();
+        this.map = new MapControl();
+        this.shopControl = new ShopControl();
+        this.combatControl = new BossCombatControl();
+        this.monsterCombatControl = new MonsterCombatControl();
+    }
+
+    public void startGame(MenuControl menuControl) {
+
+        this.menuControl = menuControl;
+
+        System.out.printf("""
+                               
+                ++++|      \033[42mWelcome to STI Dungeon Run!\033[0m      |++++
+                                
+                _____________________________________________________                        
+                #1 - Create a New Player    |   #2 - Load Game      |
+                    
+                """);
+
+        boolean on = true;
+        while (on)
+            switch (UserInputControl.inputInt()) {
+                case 1 -> {
+                    menuControl.createNewPlayer(player);
+                    on = false;
+                }
+                case 2 -> {
+                    menuControl.loadPlayer(player);
+                    on = false;
+                }
+                default -> System.out.println("Input must be 1 or 2!");
+            }
+        menuControl.mainMenu(player, menuControl, map, shopControl, combatControl, monsterCombatControl);
+    }
+
+    public void setCharacter(PlayerControl player) {
+
+        boolean on = true;
+        do {
+            System.out.printf("""
+                              
+                    ++++|         \033[0;92mPick a Hero\033[0m        |++++
+                    __________________________________________________              
+                       #1 - Barbarian      |      #2 - Code Monkey    |
+                                    
+                    """);
+
+            switch (UserInputControl.inputInt()) {
+                case 1 -> {
+                    player.setHero(new Barbarian());
+                    on = false;
+                }
+                case 2 -> {
+                    player.setHero(new CodeMonkey());
+                    on = false;
+                }
+
+                default -> System.out.println("Input must be 1 - 2!");
+            }
+        } while (on);
+    }
+
+
     public void mainMenu(PlayerControl player, MenuControl menuControl, MapControl mapControl, ShopControl shopControl, BossCombatControl bossCombatControl, MonsterCombatControl monsterCombatControl) {
         boolean on = true;
 
@@ -30,21 +104,6 @@ public class MenuControl {
                 default -> System.out.println("Input must be 1 - 5!");
             }
         } while (on);
-    }
-
-    public void savePlayer(PlayerControl player) {
-        PlayerManager playerManager = new PlayerManager();
-        playerManager.saveHeroToFile(player.getHero());
-        System.out.println("Game saved!");
-    }
-
-    public void loadPlayer(PlayerControl player) {
-        PlayerManager playerManager = new PlayerManager();
-        player.setHero(playerManager.loadHeroFromFile());
-    }
-
-    public void createNewPlayer(PlayerControl player) {
-        setNameAndCharacter(player);
     }
 
     public void mapMenu(MapControl mapControl, PlayerControl player, BossCombatControl bossCombatControl, MenuControl menuControl, MonsterCombatControl monsterCombatControl) {
@@ -146,76 +205,6 @@ public class MenuControl {
         } while (on);
     }
 
-    public void setNameAndCharacter(PlayerControl player) {
-        setCharacter(player);
-        System.out.printf("You have chosen to play as a %s\n", player.getHero().getHeroClass());
-        System.out.println("Chose a name for your Hero: ");
-        player.getHero().setName(new Scanner(System.in).nextLine());
-        System.out.printf("Welcome %s the %s ", player.getHero().getName(), player.getHero().getHeroClass());
-    }
-
-    public void setCharacter(PlayerControl player) {
-
-        boolean on = true;
-        do {
-            System.out.printf("""
-                              
-                    ++++|         \033[0;92mPick a Hero\033[0m        |++++
-                    __________________________________________________              
-                       #1 - Barbarian      |      #2 - Code Monkey    |
-                                    
-                    """);
-
-            switch (UserInputControl.inputInt()) {
-                case 1 -> {
-                    player.setHero(new Barbarian());
-                    on = false;
-                }
-                case 2 -> {
-                    player.setHero(new CodeMonkey());
-                    on = false;
-                }
-
-                default -> System.out.println("Input must be 1 - 2!");
-            }
-        } while (on);
-    }
-
-    public void getPlayerStats(PlayerControl player) {
-        player.levelUp(player);
-        System.out.printf("""
-                ++++|                                                                       \033[0;35m    Stats   \033[0m                                                      |++++
-                ___________________________________________________________________________________________________________________________________________________            
-                Level  \033[1;33m%d\033[0m   |   Experience Points   \033[1;33m%d/%d\033[0m  |   Strength    \033[1;35m%d\033[0m  |   Intelligence   \033[1;32m%d\033[0m  |   Agility   \033[1;31m%d\033[0m  |   Weapon   \033[4;31m%s\033[0m    |   HealthPotions   \033[0;34m%d\033[0m   |
-                                
-                """, player.getHero().getLevel(), player.getHero().getExperiencePoints(), player.getHero().getLevel() * 10, player.getHero().getStrength(), player.getHero().getIntelligence(), player.getHero().getAgility(), player.getHero().getWeapon().getName(), player.getHero().getPotionStash().size());
-    }
-
-    public void getStatus(PlayerControl player) {
-        player.levelUp(player);
-        System.out.printf("""
-                ++++|                                                                  \033[0;35m  Stats   \033[0m                                                |++++
-                ______________________________________________________________________________________________________________________________________
-                %s the %s   |   Death count   \033[0;31m%d\033[0m    |   Kill count   \033[0;31m%d\033[0m  |   Health Points   \033[0;34m%d/%d\033[0m  |   Turning Points  \033[1;31m%d/%d\033[0m   |   Gold    \033[1;33m%d\033[0m |
-                                
-                """, player.getHero().getName(), player.getHero().getHeroClass(), player.getHero().getDeathCount(), player.getHero().getKillList(), player.getHero().getHealthPoints(), player.getHero().getHealthPointsBase(), player.getHero().getTurningPoints(), player.getHero().getTurningPointsBase(), player.getHero().getGold());
-    }
-
-    public void displayPlayerOptionsInBattleOptions(PlayerControl player) {
-        System.out.printf("""
-                   
-                   +++++|                  Actions                 |+++++
-                   ______________________________________________________\s
-                   #1 - Attack!  |   #2 - Drink Potion |   #3 - Flee!   |
-                                
-                >>>>    %s's turn! <<<<
-                >>>>  Turning points: %d  <<<<
-                                
-                Choose Action:\s
-                                
-                """, player.getHero().getName(), player.getHero().getTurningPoints());
-    }
-
     public boolean playerMinionBattleOptions(PlayerControl player, MapControl mapControl, MonsterCombatControl monsterCombatControl) {
         boolean on = true;
         while (on) {
@@ -258,6 +247,64 @@ public class MenuControl {
             }
         }
         return true;
+    }
+
+    public void setNameAndCharacter(PlayerControl player) {
+        setCharacter(player);
+        System.out.printf("You have chosen to play as a %s\n", player.getHero().getHeroClass());
+        System.out.println("Chose a name for your Hero: ");
+        player.getHero().setName(new Scanner(System.in).nextLine());
+        System.out.printf("Welcome %s the %s ", player.getHero().getName(), player.getHero().getHeroClass());
+    }
+
+    public void getPlayerStats(PlayerControl player) {
+        player.levelUp(player);
+        System.out.printf("""
+                ++++|                                                                       \033[0;35m    Stats   \033[0m                                                      |++++
+                ___________________________________________________________________________________________________________________________________________________            
+                Level  \033[1;33m%d\033[0m   |   Experience Points   \033[1;33m%d/%d\033[0m  |   Strength    \033[1;35m%d\033[0m  |   Intelligence   \033[1;32m%d\033[0m  |   Agility   \033[1;31m%d\033[0m  |   Weapon   \033[4;31m%s\033[0m    |   HealthPotions   \033[0;34m%d\033[0m   |
+                                
+                """, player.getHero().getLevel(), player.getHero().getExperiencePoints(), player.getHero().getLevel() * 10, player.getHero().getStrength(), player.getHero().getIntelligence(), player.getHero().getAgility(), player.getHero().getWeapon().getName(), player.getHero().getPotionStash().size());
+    }
+
+    public void getStatus(PlayerControl player) {
+        player.levelUp(player);
+        System.out.printf("""
+                ++++|                                                                  \033[0;35m  Stats   \033[0m                                                |++++
+                ______________________________________________________________________________________________________________________________________
+                %s the %s   |   Death count   \033[0;31m%d\033[0m    |   Kill count   \033[0;31m%d\033[0m  |   Health Points   \033[0;34m%d/%d\033[0m  |   Turning Points  \033[1;31m%d/%d\033[0m   |   Gold    \033[1;33m%d\033[0m |
+                                
+                """, player.getHero().getName(), player.getHero().getHeroClass(), player.getHero().getDeathCount(), player.getHero().getKillList(), player.getHero().getHealthPoints(), player.getHero().getHealthPointsBase(), player.getHero().getTurningPoints(), player.getHero().getTurningPointsBase(), player.getHero().getGold());
+    }
+
+    public void displayPlayerOptionsInBattleOptions(PlayerControl player) {
+        System.out.printf("""
+                   
+                   +++++|                  Actions                 |+++++
+                   ______________________________________________________\s
+                   #1 - Attack!  |   #2 - Drink Potion |   #3 - Flee!   |
+                                
+                >>>>    %s's turn! <<<<
+                >>>>  Turning points: %d  <<<<
+                                
+                Choose Action:\s
+                                
+                """, player.getHero().getName(), player.getHero().getTurningPoints());
+    }
+
+    public void savePlayer(PlayerControl player) {
+        PlayerManager playerManager = new PlayerManager();
+        playerManager.saveHeroToFile(player.getHero());
+        System.out.println("Game saved!");
+    }
+
+    public void loadPlayer(PlayerControl player) {
+        PlayerManager playerManager = new PlayerManager();
+        player.setHero(playerManager.loadHeroFromFile());
+    }
+
+    public void createNewPlayer(PlayerControl player) {
+        setNameAndCharacter(player);
     }
 }
 

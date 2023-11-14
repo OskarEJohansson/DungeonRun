@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cfcacef-708c-4a26-9b0d-6b924cdbfcfb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/OskarJohansson/DungeonRun/Control/MonsterCombatControlTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/BossCombatControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/BossCombatControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/GameControl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/MenuControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/MenuControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/MonsterCombatControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/MonsterCombatControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/PlayerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/PlayerControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/UserInputControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/UserInputControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/OskarJohansson/DungeonRun/Control/PlayerControlTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/OskarJohansson/DungeonRun/Control/PlayerControlTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +27,8 @@
         <option value="Enum" />
         <option value="JUnit3 Test Class" />
         <option value="Interface" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -62,6 +70,7 @@
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -85,21 +94,8 @@
       <recent name="com.OskarJohansson.DungeonRun.Control" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.OskarJohansson.DungeonRun.Main" />
-      <module name="DungeonRun" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.OskarJohansson.DungeonRun.Control.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PlayerControlTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.MonsterCombatControlTest.resetMonsterAndBossHealthAndTurningPointsWhenPlayerIsKilled">
+    <configuration name="MonsterCombatControlTest.displayHowManyMonstersInCombat" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DungeonRun" />
       <extension name="coverage">
         <pattern>
@@ -108,29 +104,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.OskarJohansson.DungeonRun.Control" />
-      <option name="MAIN_CLASS_NAME" value="com.OskarJohansson.DungeonRun.Control.PlayerControlTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PlayerControlTest.attack" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="DungeonRun" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.OskarJohansson.DungeonRun.Control.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.OskarJohansson.DungeonRun.Control" />
-      <option name="MAIN_CLASS_NAME" value="com.OskarJohansson.DungeonRun.Control.PlayerControlTest" />
-      <option name="METHOD_NAME" value="attack" />
+      <option name="MAIN_CLASS_NAME" value="com.OskarJohansson.DungeonRun.Control.MonsterCombatControlTest" />
+      <option name="METHOD_NAME" value="displayHowManyMonstersInCombat" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PlayerControlTest.drinkHealthPotionOptions" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MonsterCombatControlTest.hasPlayerKilledAllTheEnemies" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DungeonRun" />
       <extension name="coverage">
         <pattern>
@@ -139,14 +120,62 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.OskarJohansson.DungeonRun.Control" />
-      <option name="MAIN_CLASS_NAME" value="com.OskarJohansson.DungeonRun.Control.PlayerControlTest" />
-      <option name="METHOD_NAME" value="drinkHealthPotionOptions" />
+      <option name="MAIN_CLASS_NAME" value="com.OskarJohansson.DungeonRun.Control.MonsterCombatControlTest" />
+      <option name="METHOD_NAME" value="hasPlayerKilledAllTheEnemies" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PlayerControlTest.takeDamage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MonsterCombatControlTest.playerAttackCurrantMonster" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DungeonRun" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.OskarJohansson.DungeonRun.Control.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.OskarJohansson.DungeonRun.Control" />
+      <option name="MAIN_CLASS_NAME" value="com.OskarJohansson.DungeonRun.Control.MonsterCombatControlTest" />
+      <option name="METHOD_NAME" value="playerAttackCurrantMonster" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MonsterCombatControlTest.resetMonsterAndBossHealthAndTurningPointsWhenPlayerIsKilled" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DungeonRun" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.OskarJohansson.DungeonRun.Control.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.OskarJohansson.DungeonRun.Control" />
+      <option name="MAIN_CLASS_NAME" value="com.OskarJohansson.DungeonRun.Control.MonsterCombatControlTest" />
+      <option name="METHOD_NAME" value="resetMonsterAndBossHealthAndTurningPointsWhenPlayerIsKilled" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MonsterCombatControlTest.testHasPlayerKilledAllTheEnemies" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DungeonRun" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.OskarJohansson.DungeonRun.Control.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.OskarJohansson.DungeonRun.Control" />
+      <option name="MAIN_CLASS_NAME" value="com.OskarJohansson.DungeonRun.Control.MonsterCombatControlTest" />
+      <option name="METHOD_NAME" value="testHasPlayerKilledAllTheEnemies" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlayerControlTest.levelUp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DungeonRun" />
       <extension name="coverage">
         <pattern>
@@ -156,7 +185,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.OskarJohansson.DungeonRun.Control" />
       <option name="MAIN_CLASS_NAME" value="com.OskarJohansson.DungeonRun.Control.PlayerControlTest" />
-      <option name="METHOD_NAME" value="takeDamage" />
+      <option name="METHOD_NAME" value="levelUp" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -164,11 +193,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.PlayerControlTest.drinkHealthPotionOptions" />
-        <item itemvalue="JUnit.PlayerControlTest.attack" />
-        <item itemvalue="JUnit.PlayerControlTest.takeDamage" />
-        <item itemvalue="JUnit.PlayerControlTest" />
+        <item itemvalue="JUnit.MonsterCombatControlTest.resetMonsterAndBossHealthAndTurningPointsWhenPlayerIsKilled" />
+        <item itemvalue="JUnit.MonsterCombatControlTest.testHasPlayerKilledAllTheEnemies" />
+        <item itemvalue="JUnit.MonsterCombatControlTest.playerAttackCurrantMonster" />
+        <item itemvalue="JUnit.MonsterCombatControlTest.hasPlayerKilledAllTheEnemies" />
+        <item itemvalue="JUnit.MonsterCombatControlTest.displayHowManyMonstersInCombat" />
       </list>
     </recent_temporary>
   </component>
@@ -183,7 +212,7 @@
       <workItem from="1698058407756" duration="33112000" />
       <workItem from="1698311575040" duration="6249000" />
       <workItem from="1699605504132" duration="3273000" />
-      <workItem from="1699631390969" duration="845000" />
+      <workItem from="1699631390969" duration="9614000" />
     </task>
     <servers />
   </component>

@@ -49,7 +49,7 @@ public class UserInputControl {
         return intValue;
     }
 
-    public static void pressEnterToContinue() {
+    public static void PRESS_ENTER_TO_CONTINUE() {
         System.out.println("\n \033[42mGet ready for a new round!\033[0m\n \033[42mPress Enter to continue \033[0m\n");
         Scanner sc = new Scanner(System.in);
         sc.nextLine();

@@ -1,12 +1,8 @@
 package com.OskarJohansson.DungeonRun.Control;
 
-import com.OskarJohansson.DungeonRun.Model.Monster.EnemyParentModel;
-
-import java.util.Map;
 import java.util.Objects;
-import java.util.Scanner;
 
-import static com.OskarJohansson.DungeonRun.Control.UserInputControl.pressEnterToContinue;
+import static com.OskarJohansson.DungeonRun.Control.UserInputControl.PRESS_ENTER_TO_CONTINUE;
 
 public class BossCombatControl {
 
@@ -34,7 +30,7 @@ public class BossCombatControl {
             if (player.getHero().getTurningPoints() > 0)
                 on = menuControl.playerBossBattleOptions(player, mapControl, bossCombatControl);
 
-            pressEnterToContinue();
+            PRESS_ENTER_TO_CONTINUE();
 
         } while (on);
     }

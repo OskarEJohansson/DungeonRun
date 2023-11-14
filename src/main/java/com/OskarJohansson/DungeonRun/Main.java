@@ -1,13 +1,13 @@
 package com.OskarJohansson.DungeonRun;
 
-import com.OskarJohansson.DungeonRun.Control.GameControl;
+import com.OskarJohansson.DungeonRun.Control.MenuControl;
 
 public class Main {
     public static void main(String[] args) {
 
-        GameControl game = new GameControl();
+        MenuControl menuControl = new MenuControl();
 
-        game.gameFlow();
+        menuControl.startGame(menuControl);
 
     }
 }

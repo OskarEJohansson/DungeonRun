@@ -76,14 +76,26 @@ class PlayerControlTest {
 
     @Test
     void flee() {
+        Assert.assertTrue(player.flee(player));
+        player.getHero().setTurningPoints(-4);
+        Assert.assertFalse(player.flee(player));
     }
 
     @Test
     void drinkHealthPotion() {
+        player.getHero().addPotionStash(new HealthPotion());
+        Assert.assertFalse(player.drinkHealthPotionOptions(player));
+        player.getHero().setHealthPoints(-1);
+        Assert.assertTrue(player.drinkHealthPotionOptions(player));
+        Assert.assertFalse(player.drinkHealthPotionOptions(player));
     }
 
     @Test
     void levelUp() {
+        player.getHero().setExperiencePoints(9);
+        Assert.assertFalse(player.levelUp(player));
+        player.getHero().setExperiencePoints(2);
+        Assert.assertTrue(player.levelUp(player));
     }
 
     @Test

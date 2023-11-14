@@ -5,6 +5,9 @@ import com.OskarJohansson.DungeonRun.Model.Items.Potions.HealthPotion;
 
 import java.util.*;
 
+import static com.OskarJohansson.DungeonRun.Control.ColorsControl.Colors.BLUE_UNDERLINED;
+import static com.OskarJohansson.DungeonRun.Control.ColorsControl.Colors.RESET;
+
 public class PlayerControl {
 
     private Hero hero;
@@ -139,10 +142,8 @@ public class PlayerControl {
 
     public void levelUpTraits(PlayerControl player) {
         System.out.printf("""
-                //////////
-                Level Up!|
-                //////////
-                """);
+                >>>>    %sLevel Up!|%s    <<<<
+                """,BLUE_UNDERLINED, RESET);
 
         player.getHero().setLevel(1);
         player.getHero().setStrength(1);
