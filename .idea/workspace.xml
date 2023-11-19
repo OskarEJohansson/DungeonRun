@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cfcacef-708c-4a26-9b0d-6b924cdbfcfb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/OskarJohansson/DungeonRun/Control/MonsterCombatControlTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/BossCombatControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/BossCombatControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/GameControl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/MenuControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/MenuControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/MonsterCombatControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/MonsterCombatControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/PlayerControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/PlayerControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/UserInputControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Control/UserInputControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/OskarJohansson/DungeonRun/Control/PlayerControlTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/OskarJohansson/DungeonRun/Control/PlayerControlTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/View/TerminalDisplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/OskarJohansson/DungeonRun/View/TerminalDisplay.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +18,8 @@
         <option value="Enum" />
         <option value="JUnit3 Test Class" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -61,19 +52,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;terminalDisplay&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.OskarJohansson.DungeonRun.Control" />
@@ -94,7 +85,7 @@
       <recent name="com.OskarJohansson.DungeonRun.Control" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.MonsterCombatControlTest.resetMonsterAndBossHealthAndTurningPointsWhenPlayerIsKilled">
+  <component name="RunManager">
     <configuration name="MonsterCombatControlTest.displayHowManyMonstersInCombat" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DungeonRun" />
       <extension name="coverage">
@@ -212,7 +203,7 @@
       <workItem from="1698058407756" duration="33112000" />
       <workItem from="1698311575040" duration="6249000" />
       <workItem from="1699605504132" duration="3273000" />
-      <workItem from="1699631390969" duration="9614000" />
+      <workItem from="1699631390969" duration="13408000" />
     </task>
     <servers />
   </component>
